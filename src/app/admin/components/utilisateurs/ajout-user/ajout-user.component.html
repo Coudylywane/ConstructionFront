@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <div class="forms">
+    <a
+      class="return d-flex"
+      routerLink="'/admin/listUser'"
+      style="cursor: pointer; text-decoration: none; color: #00a388"
+      class="d-flex"
+    >
+      <span class="material-icons"> arrow_back_ios_new </span>
+      <span class="ml-2"> Liste User </span>
+    </a>
+    <form formGroup="userForm">
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <h3 class="register-heading text-center">Nouveau user</h3>
+          <div class="row register-form">
+            <div class="col-md-6">
+              <div class="form-group">
+                Nom
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Entrer Nom *"
+                  name="nom"
+                  formControlName="nom"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                Prenom
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Entrer Prenom *"
+                  formControlName="prenom"
+                  name="prenom"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                Email
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Entrer email *"
+                  formControlName="email"
+                  name="email"
+                  value=""
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                Téléphone
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationServer03"
+                  aria-describedby="validationServer03Feedback"
+                  required
+                  placeholder="Entrer Téléphone *"
+                  formControlName="telephone"
+                  name="telephone"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="bt-boutton d-flex">
+            <!--<a class="annuler" href="#">Annuler</a>-->
+            <!--<input type="submit"  class="btnRegister" value="Enregistrer"/>-->
+            <input type="submit" class="btnRegister" value="Enregistrer" />
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="mt-4"></div>
+  </div>
+</div>

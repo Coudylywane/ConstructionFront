@@ -1,0 +1,16 @@
+.m-nav-item:hover, .m-nav-link:hover, .m-nav-icon:hover {
+  color: #2d528c  !important;
+  background-color: whitesmoke!important;
+}
+
+
+.m-nav-item, .m-nav-link, .m-nav-icon {
+  color: white!important;
+}
+.titre
+{
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  margin-left:23px;
+}

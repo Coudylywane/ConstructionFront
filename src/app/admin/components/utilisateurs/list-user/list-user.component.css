@@ -1,0 +1,89 @@
+.add {
+  background-color: #00A388;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  padding: 6px;
+  float: right;
+  width: 166px;
+}
+
+.content-table {
+  padding: 28px;
+}
+
+.table thead {
+  color: #00A388;
+}
+
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 20px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.clear {
+  color: #d92d2d;
+}
+
+.bi {
+  background-color: #00A388;
+  justify-content: center;
+  color: white;
+}
+
+.btn-outline-rechercher {
+  background-color: #fcf258;
+}
+
+.row-mere {
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+
+.cin {
+  width: 82px;
+  color: black;
+  border-color: black;
+}
+
+.btn-outline-primary {
+  --cui-btn-color: #fcf258;
+  --cui-btn-border-color: #fcf258;
+  --cui-btn-hover-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-hover-bg: #fcf258;
+  --cui-btn-hover-border-color: #fcf258;
+  --cui-btn-focus-shadow-rgb: 50, 31, 219;
+  --cui-btn-active-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-active-bg: #fcf258;
+  --cui-btn-active-border-color: #fcf258;
+  --cui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 21, 0.125);
+  --cui-btn-disabled-color: #fcf258;
+  --cui-btn-disabled-bg: transparent;
+  --cui-gradient: none;
+}
+
+.cin .btn-outline {
+  background-color: #fcf258;
+  color: #000;
+}
+
+.passport {
+  margin-left: 7px;
+  color: black;
+  border-color: black;
+}

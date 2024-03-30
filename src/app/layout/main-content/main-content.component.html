@@ -1,0 +1,314 @@
+<div
+  class="sidebar sidebar-dark sidebar-fixed"
+  id="sidebar"
+  style="background-color: #2d528c !important; width: 257px; color: #ffffff"
+>
+  <div class="sidebar-brand d-none d-md-block">
+    <!--<img
+      class="sidebar-brand-full"
+      src="/assets/img/jexiste.png"
+      alt=""
+      style="align-items: center; justify-content: center; margin-left: 104px"
+    />-->
+    <h4 style="text-align: center; font-size: 20px; margin-top: 23px">
+      GESTION COMMANDE
+    </h4>
+    <!-- <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
+      <use href="assets/dist/assets/brand/coreui.svg#full"></use>
+    </svg>
+    <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
+      <use href="assets/dist/assets/brand/coreui.svg#signet"></use>
+    </svg> -->
+  </div>
+  <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+    <!-- <li class="nav-item"><a class="nav-link" href="#">
+        <svg class="nav-icon">
+          <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
+        </svg> Dashboard<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li> -->
+    <li class="nav-title">Gestion Article</li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/gestion-article/listProduit'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">
+          {{ "inventory_2" }}
+        </span>
+        <span class="" style="margin-left: 10px">Produits</span>
+      </a>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/gestion-article/listNaissance'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">
+          {{ "perm_identity" }}
+        </span>
+        <span class="" style="margin-left: 10px">Naissances</span>
+      </a>
+    </li>
+    <li class="nav-title">Gestion Mairie</li>
+    <span class="nav-title titre">Enregistrements /Déclarations</span>
+
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/gestion-article/listNaissance'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">
+          {{ "perm_identity" }}
+        </span>
+        <span class="" style="margin-left: 10px">Naissances</span>
+      </a>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" href="#">
+        <span class="material-icons">
+          {{ "group" }}
+        </span>
+        <span class="" style="margin-left: 10px">Mariages</span>
+      </a>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" href="#">
+        <span class="material-icons">
+          {{ "door_front" }}
+        </span>
+        <span class="" style="margin-left: 10px">Dècés</span>
+      </a>
+    </li>
+
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/mairie/declaration-list'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">
+          {{ "domain" }}
+        </span>
+        <span class="" style="margin-left: 10px">Déclarations</span>
+      </a>
+    </li>
+    <li class="nav-title">Gestion Tribunal</li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/tribunal/hopital-list'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">
+          {{ "group" }}
+        </span>
+        <span class="" style="margin-left: 10px">Gestionaire</span>
+      </a>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/mairie/declaration-list'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">
+          {{ "domain" }}
+        </span>
+        <span class="" style="margin-left: 10px">Mairie</span>
+      </a>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/tribunal/notifications'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">
+          {{ "notifications_active" }}
+        </span>
+        <span class="" style="margin-left: 10px">Notifications</span>
+      </a>
+    </li>
+
+    <li class="nav-title">Administration</li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        routerLink="'/admin/listUser'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">people</span>
+        <span class="" style="margin-left: 10px">Utilisateurs</span>
+      </a>
+    </li>
+  </ul>
+  <button
+    class="sidebar-toggler"
+    type="button"
+    data-coreui-toggle="unfoldable"
+  ></button>
+</div>
+
+<div class="wrapper d-flex flex-column min-vh-100">
+  <header class="header header-sticky bg-white">
+    <div class="container-fluid">
+      <button
+        class="header-toggler px-md-0 me-md-3"
+        type="button"
+        onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()"
+      >
+        <svg class="icon icon-lg">
+          <use
+            href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-menu"
+          ></use>
+        </svg>
+      </button>
+      <a class="header-brand d-md-none" href="#">
+        <img class="sidebar-brand-full" src="/assets/img/jexiste.png" alt="" />
+      </a>
+      <ul class="header-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <svg class="icon icon-lg">
+              <use
+                href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-bell"
+              ></use></svg
+          ></a>
+        </li>
+      </ul>
+      <ul class="header-nav ms-3 bg-white">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link py-0"
+            data-coreui-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <div class="avatar avatar-md">
+              <img
+                class="avatar-img"
+                src="assets/dist/assets/img/avatars/8.jpg"
+                alt="user@email.com"
+              />
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end pt-0">
+            <div class="dropdown-header bg-light py-2">
+              <div class="fw-semibold">Account</div>
+            </div>
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-bell"
+                ></use>
+              </svg>
+              Updates <span class="badge badge-sm bg-info ms-2">42</span></a
+            >
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"
+                ></use>
+              </svg>
+              Messages <span class="badge badge-sm bg-success ms-2">42</span></a
+            >
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-task"
+                ></use>
+              </svg>
+              Tasks <span class="badge badge-sm bg-danger ms-2">42</span></a
+            >
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-comment-square"
+                ></use>
+              </svg>
+              Comments <span class="badge badge-sm bg-warning ms-2">42</span></a
+            >
+            <div class="dropdown-header bg-light py-2">
+              <div class="fw-semibold">Settings</div>
+            </div>
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-user"
+                ></use>
+              </svg>
+              Profile
+            </a>
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-settings"
+                ></use>
+              </svg>
+              Settings
+            </a>
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-credit-card"
+                ></use>
+              </svg>
+              Payments
+              <span class="badge badge-sm bg-secondary ms-2">42</span></a
+            >
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-file"
+                ></use>
+              </svg>
+              Projects<span class="badge badge-sm bg-primary ms-2">42</span></a
+            >
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-lock-locked"
+                ></use>
+              </svg>
+              Lock Account</a
+            >
+            <a
+              class="dropdown-item"
+              (click)="logout()"
+              href="javascript:void(0);"
+            >
+              <svg class="icon me-2">
+                <use
+                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-account-logout"
+                ></use>
+              </svg>
+              Logout
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="header-divider"></div>
+    <!-- <div class="container-fluid">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb my-0 ms-2">
+          <li class="breadcrumb-item">
+           <span>Home</span>
+          </li>
+          <li class="breadcrumb-item active"><span>Dashboard</span></li>
+        </ol>
+      </nav>
+    </div> -->
+  </header>
+
+  <div class="body flex-grow-1 px-3 bg-white">
+    <div class="container-lg ml-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

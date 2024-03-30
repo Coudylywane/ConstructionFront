@@ -1,0 +1,196 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.return {
+  /* background-color: #00A388; */
+  color: #00A388;
+  border-radius: 4px;
+  text-decoration: none;
+  width: 160px;
+  margin-left: -7px;
+}
+
+.forms {
+  background: rgb(255, 255, 255);
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  margin-top: 15px;
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+
+.form-group input {
+  color: #000000;
+  width: 80%;
+}
+
+.form-lieu input {
+  width: 94%;
+}
+
+.register-left {
+  text-align: center;
+  color: #fff;
+  margin-top: 4%;
+}
+
+.register-left input {
+  border: none;
+  border-radius: 7px;
+  padding: 1%;
+  width: 40%;
+  background: #dfdfdf;
+  font-family: montserrat;
+  font-weight: bold;
+  color: #383d41;
+  margin-top: 30%;
+  margin-bottom: 3%;
+  cursor: pointer;
+}
+
+.register-right {
+  background: #f8f9fa;
+  border-top-left-radius: 10% 50%;
+  border-bottom-left-radius: 10% 50%;
+}
+
+.register-left img {
+  margin-top: 15%;
+  margin-bottom: 5%;
+  width: 25%;
+  animation: mover 1s infinite alternate;
+}
+@keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+.register-left p {
+  font-weight: lighter;
+  padding: 12%;
+  margin-top: -9%;
+}
+
+.register .register-form {
+  padding: 10%;
+  margin-top: 10%;
+}
+
+.btnRegister {
+  float: left;
+  margin-top: 1%;
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  background: #00A388;
+  color: #fff;
+  width: 35%;
+  cursor: pointer;
+  margin-left: 248px;
+}
+
+.annuler {
+  text-decoration: none;
+  text-align: center;
+  background-color: white;
+  color: #00A388;
+  border: 2px solid;
+  border-radius: 5px;
+  padding: 7px;
+  width: 172px;
+}
+
+.btnRegister:disabled {
+  background: rgba(0, 163, 136, 0.6392156863);
+}
+
+.register .nav-tabs {
+  margin-top: 3%;
+  border: none;
+  background: #0062cc;
+  border-radius: 1.5rem;
+  width: 28%;
+  float: right;
+}
+
+.register .nav-tabs .nav-link {
+  padding: 2%;
+  height: 34px;
+  font-weight: 600;
+  color: #fff;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+}
+
+.register .nav-tabs .nav-link:hover {
+  border: none;
+}
+
+.register .nav-tabs .nav-link.active {
+  width: 100px;
+  color: #0062cc;
+  border: 2px solid #0062cc;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+}
+
+.register-heading {
+  color: #000000;
+  font-size: 20px;
+  margin-left: 38px;
+  margin: 22px;
+}
+
+input.ng-touched.ng-invalid,
+select.ng-touched.ng-invalid {
+  border-width: 1px;
+  border: red solid 3px;
+}
+
+input.ng-touched.ng-valid,
+select.ng-touched.ng-valid {
+  border-width: 1px;
+  border: rgb(20, 140, 4) solid 1px;
+}
+
+.cin {
+  width: 82px;
+  color: black;
+  border-color: black;
+}
+
+.btn-outline-primary:hover {
+  background-color: #fcf258;
+}
+
+.btn-outline-primary {
+  --cui-btn-color: #fcf258;
+  --cui-btn-border-color: #fcf258;
+  --cui-btn-hover-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-hover-bg: #fcf258;
+  --cui-btn-hover-border-color: #fcf258;
+  --cui-btn-focus-shadow-rgb: 50, 31, 219;
+  --cui-btn-active-color: rgba(255, 255, 255, 0.87);
+  --cui-btn-active-bg: #fcf258;
+  --cui-btn-active-border-color: #fcf258;
+  --cui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 21, 0.125);
+  --cui-btn-disabled-color: #fcf258;
+  --cui-btn-disabled-bg: transparent;
+  --cui-gradient: none;
+}
+
+.cin .btn-outline {
+  background-color: #fcf258;
+  color: #000;
+}
+
+.passport {
+  margin-left: 7px;
+  color: black;
+  border-color: black;
+}
+/*# sourceMappingURL=ajout-user.component.css.map */

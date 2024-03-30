@@ -1,0 +1,94 @@
+<!-- <div class="container-fluid login">
+  <section class=" container-fluid gradient-form" style="background-color: rgb(255, 255, 255);">
+      <div class="container-fluid">
+        <div class="row d-flex">
+          <div class="col-xl-12 test">
+            <div class="card rounded-3 text-black">
+              <div class="row row-img">
+                  <div class="col-lg-6">
+                      <div class="card-body p-md-5 mx-md-4" style="margin-top: 57px;justify-content: center;text-align: center;">
+                      <div class="text-center">
+                          <h4 class="mt-1 mb-5 pb-1" style="color: #C23220;">Connectez-vous</h4>
+                      </div>
+                          <form [formGroup]="form" (submit)="login()">
+                            <span style="color: darkred">
+                              {{err}}
+                            </span>
+                              <div class="form-group py-2">
+                                  <div class="input-field"> <span class="fa fa-user p-2"></span>
+                                    <input type="text" formControlName="login" placeholder="Nom utilisateur">
+                                  </div>
+                              </div>
+                              <div class="form-group py-2 pd-2">
+                                  <div class="input-field">
+                                    <span class="fa fa-lock p-2"></span>
+                                    <input type="password" placeholder="Mot de passe" formControlName="password">
+                                    <button class="btn bg-white text-muted">
+                                    <span class="fa fa-eye-slash"></span> </button>
+                                  </div>
+                              </div>
+                              <div class="form-inline"> <input type="checkbox" name="remember" id="remember"> <label for="remember" class="text-muted">Se rappeler de moi!</label> <a href="#" id="forgot" class="font-weight-bold">Mot de passe oublier?</a> </div>
+                              <button type="submit" [disabled]="!form.valid" class="btn btn-block mt-3">Login</button>
+                          </form>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <section>
+      <form [formGroup]="form" (submit)="login()">
+        <span style="color: darkred">
+          {{ err }}
+        </span>
+
+        <h1>Connectez-vous</h1>
+
+        <p class="choose-text">Se connecter a mon compte</p>
+        <div class="inputs">
+          <input
+            type="text"
+            formControlName="login"
+            placeholder="Nom utilisateur"
+          />
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            formControlName="password"
+          />
+        </div>
+
+        <p class="inscription">
+          Je n'ai pas de <span>compte</span>. Je m'en <span>crée</span> un.
+        </p>
+        <div class="form-inline">
+          <input type="checkbox" name="remember" id="remember" />
+          <label for="remember" class="text-muted"> Se rappeler de moi!</label>
+          <a href="#" id="forgot" class="font-weight-bold">
+            Mot de passe oublier?</a
+          >
+        </div>
+        <div align="center">
+          <button
+            type="submit"
+            [disabled]="!form.valid"
+            class="btn btn-block mt-3"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>
