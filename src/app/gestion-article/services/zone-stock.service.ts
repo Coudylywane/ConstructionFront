@@ -20,4 +20,18 @@ export class ZoneStockService {
   addZone(zone: ZoneStockModel): Observable<ZoneStockModel> {
     return this.http.post<ZoneStockModel>('/api/zone', zone);
   }
+
+  getZoneById(zoneId: number): Observable<ZoneStockModel> {
+    return this.http.get<ZoneStockModel>('/api/zone/' + zoneId);
+  }
+
+  updateZone(zoneId: number, zone: ZoneStockModel): Observable<any> {
+    return this.http.put('/api/zone/' + zone.id, zone);
+  }
+
+  deleteZone(zoneId: Number) {
+    return this.http.delete<ZoneStockModel>('/api/zone/' + zoneId);
+  }
+
+
 }
