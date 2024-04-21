@@ -1,0 +1,88 @@
+<body>
+  <div
+    class="page-wrapper"
+    id="main-wrapper"
+    data-layout="vertical"
+    data-navbarbg="skin6"
+    data-sidebartype="full"
+    data-sidebar-position="fixed"
+    data-header-position="fixed"
+  >
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div class="brand-logo d-flex align-items-center justify-content-between">
+        <a href="./index.html" class="text-nowrap logo-img">
+          <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+        </a>
+      </div>
+    </aside>
+    <div class="body-wrapper">
+      <header class="app-header"></header>
+      <div class="container-fluid">
+        <div class="container-fluid">
+            <a class="return d-flex" [routerLink]="'/gestion-article/listZoneStock'">
+                <span class="material-icons"> arrow_back_ios_new </span>
+                <span class="ml-2"><b>Liste Type Articles</b></span>
+            </a>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Forms</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form [formGroup]="typeFrom" (ngSubmit)="addType()">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"
+                        >Designation</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Entrer Designation "
+                        name="designation"
+                        formControlName="designation"
+                        />
+                    <div *ngIf="validDesignation()" class="text-danger">
+                    veuillez remplir ce champ
+                    </div>
+                      
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label"
+                        >Description</label
+                      >
+                     <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Entrer Description "
+                        name="description"
+                        formControlName="description"
+                        />
+                    <div *ngIf="validDescription()" class="text-danger">
+                    veuillez remplir ce champ
+                    </div>
+                    </div>
+                    <div class="bt-boutton d-flex">
+                        <input
+                        type="submit"
+                        class="btnRegister"
+                        [disabled]="!typeFrom.valid"
+                        value="Enregistrer"
+                        />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/sidebarmenu.js"></script>
+  <script src="../assets/js/app.min.js"></script>
+  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+

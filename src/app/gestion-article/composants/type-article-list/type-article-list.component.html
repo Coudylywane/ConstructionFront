@@ -3,7 +3,7 @@
   <div class="mt-4">
     <a
       class="add d-flex"
-      [routerLink]="'/gestion-article/addArticle'"
+      [routerLink]="'/gestion-article/addTypeArticle'"
       style="cursor: pointer; text-decoration: none"
     >
       <span class="material-icons">
@@ -12,7 +12,7 @@
       <span class="ml-2"> Nouveau </span>
     </a>
     <h4 class="justify-content-center text-center" style="margin-left: 16px">
-      Liste des Produits
+      Liste des Unites de Mesures
     </h4>
   </div>
 
@@ -69,74 +69,56 @@
   </div>
 
   <div class="container-fluid content-table">
-    <h2 class="text-center mt-4" *ngIf="!articles || articles.length <= 0">
-      Pas de produit au niveau de la liste
+    <h2 class="text-center mt-4" *ngIf="!typeArticles || typeArticles.length <= 0">
+      Pas d'unite de mesure au niveau de la liste
     </h2>
-    <div class="mt-4" *ngIf="articles.length > 0">
+    <div class="mt-4">
       <table class="table table-hover">
         <thead>
           <tr style="text-align: center">
             <th scope="col">ID</th>
-            <th scope="col">
-              <a
-                style="cursor: pointer; text-decoration: none; color: #eb71ac"
-                class="d-flex"
-              >
-                Code
-              </a>
-            </th>
             <th scope="col">Designation</th>
-            <th scope="col">Prix Achat</th>
-            <th scope="col">Prix Vente</th>
-            <th scope="col">Zone de Stock</th>
-             <th scope="col">Unite de Mesure</th>
+            <th scope="col">Description</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody style="text-align: center">
-          <tr *ngFor="let article of articles">
+          <tr *ngFor="let typeArticle of typeArticles">
             <th style="text-align: center" scope="row">
-              {{ articles.indexOf(article) + 1 }}
+              {{ typeArticles.indexOf(typeArticle) + 1 }}
             </th>
-            <td>{{ article.code }}</td>
-            <td>{{ article.designation }}</td>
-            <td>{{ article.prixAchatUnitaire }}</td>
-            <td>{{ article.prixVenteUnitaire }}</td>
-            <td>{{article.zoneStock?.designation}}</td>
-            <td>{{article.uniteMesure?.nom}}</td>
+            <td>{{ typeArticle.designation}}</td>
+            <td>{{ typeArticle.description }}</td>
             <td>
-              <!-- {# <div
-                class="col-6 col-sm-4 col-md-2 d-flex justify-content-between"
-              >
-                <a class="btn-transparent btn p-2 mr-2">
-                  <span class="material-icons-outlined create">
-                    {{ "create" }}
-                  </span>
-                </a>
-                <a class="btn p-2 mr-2">
-                  <span class="material-icons-outlined folder">
-                    {{ "folder" }}
-                  </span>
-                </a>
-                <a class="btn-transparent btn p-2 mr-2">
-                  <span class="material-icons-outlined clear">
-                    {{ "clear" }}
-                  </span>
-                </a>
-              </div> #} -->
+              <div class="d-flex">
+                <td style="margin-left: 180px">
+                  <a
+                    class="nav-link m-nav-link"
+                    (click)="change(typeArticle?.id)">
+                    <span class="material-icons">mode_edit</span>
+                  </a>
+                </td>
+                <td style="margin-left: 20px">
+                  <a
+                    class="nav-link m-nav-link"
+                    (click)="deleteTypeArticle(typeArticle?.id)"
+                   >
+                    <span class="material-icons">delete</span>
+                  </a>
+                </td>
+              </div>
             </td>
             <td></td>
-            <ng-template #content let-modal>
+          <!--  <ng-template #content let-modal>
               <div class="modal-header">
                 <h4 class="modal-title" id="modal-basic-title">
-                  Souhaitez-vous supprimer ce Profile ?
+                  Souhaitez-vous supprimer cette zone ?
                 </h4>
                 <button
                   type="button"
                   class="btn-close"
                   aria-label="Close"
-                  (click)="modal.dismiss('Cross click')"
-                ></button>
+                  (click)="modal.dismiss('Cross click')"></button>
               </div>
               <div class="modal-body">
                 <form>
@@ -166,9 +148,9 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-outline-dark" [disabled]="!patientForm.valid">Save</button> -->
+             //   <button type="button" class="btn btn-outline-dark" [disabled]="!patientForm.valid">Save</button> 
               </div>
-            </ng-template>
+            </ng-template> -->
           </tr>
         </tbody>
       </table>
@@ -228,3 +210,4 @@
   </div>
   <!--</block-ui>-->
 </div>
+

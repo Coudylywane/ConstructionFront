@@ -98,3 +98,7 @@ color:#65b980;
 .clear {
   color: #d92d2d;
 }
+
+.nav-link {
+  cursor: pointer;
+} 
