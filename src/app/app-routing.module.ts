@@ -12,16 +12,24 @@ const routes: Routes = [
     path: '',
     component: MainContentComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'gestion-article/listArticle',
-      //   pathMatch: 'full',
-      // },
       {
         path: 'gestion-article',
         loadChildren: () =>
           import('./gestion-article/gestion-article.module').then(
             (m) => m.GestionArticleModule
+          ),
+      },
+    ],
+  },
+  {
+    path: '',
+    component: MainContentComponent,
+    children: [
+      {
+        path: 'gestion-fournisseur',
+        loadChildren: () =>
+          import('./gestion-fournisseur/gestion-fournisseur.module').then(
+            (m) => m.GestionFournisseurModule
           ),
       },
     ],

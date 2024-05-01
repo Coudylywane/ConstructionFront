@@ -1,7 +1,7 @@
 <div
   class="sidebar sidebar-dark sidebar-fixed"
   id="sidebar"
-  style="background-color: #2d528c !important; width: 257px; color: #ffffff"
+  style="background-color: #eb7371 !important; width: 257px; color: #ffffff"
 >
   <div class="sidebar-brand d-none d-md-block">
     <!--<img
@@ -29,7 +29,7 @@
     <li class="nav-item m-nav-item">
       <a
         class="nav-link m-nav-link"
-        routerLink="'/gestion-article/listProduit'"
+        [routerLink]="'/gestion-article/listArticle'"
         href="javascript:void(0);"
       >
         <span class="material-icons">
@@ -41,61 +41,65 @@
     <li class="nav-item m-nav-item">
       <a
         class="nav-link m-nav-link"
-        routerLink="'/gestion-article/listNaissance'"
+        [routerLink]="'/gestion-article/listZoneStock'"
         href="javascript:void(0);"
       >
-        <span class="material-icons">
-          {{ "perm_identity" }}
-        </span>
-        <span class="" style="margin-left: 10px">Naissances</span>
+        <span class="material-icons">domain</span>
+        <span class="" style="margin-left: 10px">Zone de Stock</span>
       </a>
     </li>
-    <li class="nav-title">Gestion Mairie</li>
-    <span class="nav-title titre">Enregistrements /Déclarations</span>
-
     <li class="nav-item m-nav-item">
       <a
         class="nav-link m-nav-link"
-        routerLink="'/gestion-article/listNaissance'"
+        [routerLink]="'/gestion-article/listUniteMesure'"
         href="javascript:void(0);"
       >
-        <span class="material-icons">
-          {{ "perm_identity" }}
-        </span>
-        <span class="" style="margin-left: 10px">Naissances</span>
+        <span class="material-icons">panorama_vertical</span>
+        <span class="" style="margin-left: 10px">Unite de Mesure</span>
       </a>
     </li>
-    <li class="nav-item m-nav-item">
-      <a class="nav-link m-nav-link" href="#">
-        <span class="material-icons">
-          {{ "group" }}
-        </span>
-        <span class="" style="margin-left: 10px">Mariages</span>
-      </a>
-    </li>
-    <li class="nav-item m-nav-item">
-      <a class="nav-link m-nav-link" href="#">
-        <span class="material-icons">
-          {{ "door_front" }}
-        </span>
-        <span class="" style="margin-left: 10px">Dècés</span>
-      </a>
-    </li>
-
     <li class="nav-item m-nav-item">
       <a
         class="nav-link m-nav-link"
-        routerLink="'/mairie/declaration-list'"
+        [routerLink]="'/gestion-article/listTypeArticle'"
         href="javascript:void(0);"
       >
-        <span class="material-icons">
-          {{ "domain" }}
-        </span>
-        <span class="" style="margin-left: 10px">Déclarations</span>
+        <span class="material-icons">event_note</span>
+        <span class="" style="margin-left: 10px">Type Article</span>
       </a>
     </li>
-    <li class="nav-title">Gestion Tribunal</li>
+    <li class="nav-title">Gestion Fournisseur</li>
     <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        [routerLink]="'/gestion-article/listTypeArticle'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">local_shipping</span>
+        <span class="" style="margin-left: 10px">Fournisseur</span>
+      </a>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        [routerLink]="'/gestion-fournisseur/listTypeFournisseur'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">event_note</span>
+        <span class="" style="margin-left: 10px">Type Fournisseur</span>
+      </a>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a
+        class="nav-link m-nav-link"
+        [routerLink]="'/gestion-fournisseur/listCategorieFournisseur'"
+        href="javascript:void(0);"
+      >
+        <span class="material-icons">transfer_within_a_station</span>
+        <span class="" style="margin-left: 10px">Categorie Fournisseur</span>
+      </a>
+    </li>
+  <!-- <li class="nav-item m-nav-item">
       <a
         class="nav-link m-nav-link"
         routerLink="'/tribunal/hopital-list'"
@@ -104,21 +108,10 @@
         <span class="material-icons">
           {{ "group" }}
         </span>
-        <span class="" style="margin-left: 10px">Gestionaire</span>
+        <span class="" style="margin-left: 10px">Gestionnaire</span>
       </a>
     </li>
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        routerLink="'/mairie/declaration-list'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons">
-          {{ "domain" }}
-        </span>
-        <span class="" style="margin-left: 10px">Mairie</span>
-      </a>
-    </li>
+
     <li class="nav-item m-nav-item">
       <a
         class="nav-link m-nav-link"
@@ -131,7 +124,7 @@
         <span class="" style="margin-left: 10px">Notifications</span>
       </a>
     </li>
-
+--> 
     <li class="nav-title">Administration</li>
     <li class="nav-item m-nav-item">
       <a

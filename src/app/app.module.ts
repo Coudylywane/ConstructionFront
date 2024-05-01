@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
     SharedModule,
     LayoutModule,
     BrowserAnimationsModule,
-   // ToastrModule.forRoot(),
+    ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
   ],
   providers: [],
