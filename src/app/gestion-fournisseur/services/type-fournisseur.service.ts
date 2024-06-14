@@ -17,6 +17,10 @@ export class TypeFournisseurService {
     return this.http.get<any>(this._api + '/typeFournisseur', options);
   }
 
+  getTypeFournisseurs(): Observable<any> {
+    return this.http.get<any>(this._api + '/type-fournisseur');
+  }
+
   addTypeFournisseur(
     type: TypeFournisseurModel
   ): Observable<TypeFournisseurModel> {

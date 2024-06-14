@@ -1,0 +1,225 @@
+<!--<block-ui>-->
+<div class="container block1-content">
+  <div class="mt-4">
+    <a
+      class="add d-flex"
+      [routerLink]="'/gestion-fournisseur/addFournisseur'"
+      style="cursor: pointer; text-decoration: none"
+    >
+      <span class="material-icons">
+        {{ "add" }}
+      </span>
+      <span class="ml-2"> Nouveau </span>
+    </a>
+    <h4 class="justify-content-center text-center" style="margin-left: 16px">
+      Liste des Fournisseurs
+    </h4>
+  </div>
+
+  <!--Filtre -->
+  <div class="col-md-12 col-lg-12 col-sm-12" style="margin-top: 40px">
+    <form>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="row">
+            <div class="col-md-4 col-lg-4 col-sm-12">
+              <label class="form-label" for="">Filtrer par:</label>
+            </div>
+            <div class="col-md-8 col-lg-8 col-sm-12">
+              <select
+                formControlName="filterType"
+                class="form-select"
+                id="filter"
+              >
+                <option value="code">code</option>
+                <!-- <option value="prenom"></option>
+                <option value="cin">CIN</option>
+                 <option value="prix">Prix</option>
+                          <option value="seuil">Seuil</option> -->
+              </select>
+              <!--<div *ngIf="shouldShowFilterTypeRequiredError()" class="text-danger">
+              Champ obligatoire
+            </div>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <input
+            class="form-control"
+            id="search"
+            formControlName="searchTerm"
+            type="text"
+            placeholder="Tapez votre recherche...."
+          />
+          <!--<div *ngIf="shouldShowSearchTermRequiredError()" class="text-danger">
+          Champ obligatoire
+        </div>-->
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+          <button type="submit" class="btn btn-outline-rechercher">
+            <b>Rechercher</b>
+          </button>
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-outline-secondary text-black">
+            <b>Annuler</b>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container-fluid content-table">
+    <h2 class="text-center mt-4" *ngIf="!fournisseurs || fournisseurs.length <= 0">
+      Pas de Fournisseurs au niveau de la liste
+    </h2>
+    <div class="mt-4">
+      <table class="table table-hover">
+        <thead>
+          <tr style="text-align: center">
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Email</th>
+            <th scope="col">Solde</th>
+            <th scope="col">Total Versé</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Type Fournisseur</th>
+            <th scope="col">Categorie Fournisseur</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center">
+          <tr *ngFor="let fournisseur of fournisseurs">
+            <th style="text-align: center" scope="row">
+              {{ fournisseurs.indexOf(fournisseur) + 1 }}
+            </th>
+            <td>{{ fournisseur.nom}}</td>
+            <td>{{ fournisseur.adresse}}</td>
+            <td>{{ fournisseur.email}}</td>
+            <td>{{ fournisseur.solde}}F</td>
+            <td>{{ fournisseur.totalVersement}}F</td>
+            <td>{{ fournisseur.telephone}}</td>
+            <td>{{ fournisseur.typeFournisseur?.designation}}</td>
+            <td>{{ fournisseur.categorieFournisseur?.designation}}</td>
+            <td>
+              <div class="d-flex">
+                <td >
+                 <a
+                    class="nav-link m-nav-link"
+                    (click)="change(fournisseur.id)">
+                    <span class="material-icons">mode_edit</span>
+                  </a> 
+                </td>
+                <td style="margin-left: 20px">
+                <a
+                    class="nav-link m-nav-link"
+                    (click)="deleteFournisseur(fournisseur?.id)"
+                   >
+                    <span class="material-icons">delete</span>
+                  </a>  
+                </td>
+              </div>
+            </td>
+            <td></td>
+          <!--  <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">
+                  Souhaitez-vous supprimer cette zone ?
+                </h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  aria-label="Close"
+                  (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="Motif"
+                      >Veillez donner le motif de suppression</label
+                    >
+                    <div class="input-group">
+                      <textarea
+                        name="motif"
+                        id="motif"
+                        formControlName="motif"
+                        cols="30"
+                        rows="10"
+                      ></textarea
+                      ><br />
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-outline-secondary bi bi-calendar3"
+                    type="submit"
+                    (click)="modal.close('Save click')"
+                    style="background: #0d1549; color: white"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
+              <div class="modal-footer">
+             //   <button type="button" class="btn btn-outline-dark" [disabled]="!patientForm.valid">Save</button> 
+              </div>
+            </ng-template> -->
+          </tr>
+        </tbody>
+      </table>
+      <!--Pagination-->
+      <div class="row mt-4">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <nav aria-label="Page navigation example ">
+            <ul class="pagination">
+              <li class="page-item">
+                <button
+                  class="text-bg2"
+                  [disabled]="disablePrevious || totalPage === 1"
+                  ngClass="
+                    disablePrevious || totalPage === 1
+                      ? ' page-link'
+                      : 'page-link'
+                  "
+                  (click)="precedent()"
+                >
+                  Précédent
+                </button>
+              </li>
+              &nbsp;
+              <li class="page-item">
+                <button
+                  class="text-bg"
+                  [disabled]="disableNext || totalPage === 1"
+                  ngClass="
+                    disableNext || totalPage === 1 ? ' page-link' : 'page-link'
+                  "
+                  (click)="suivant()"
+                >
+                  Suivant
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <select
+            class="form-select"
+            id="pageSize "
+            (change)="onSelectedPageSize($event)"
+          >
+            <option value="1 ">1</option>
+            <option value="5 ">5</option>
+            <option value="10 ">10</option>
+            <option value="15 ">15</option>
+            <option value="20 ">20</option>
+            <option value="50 ">50</option>
+            <option value="100 ">100</option>
+          </select>
+        </div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <!--</block-ui>-->
+</div>
+

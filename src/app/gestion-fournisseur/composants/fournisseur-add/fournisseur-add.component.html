@@ -1,0 +1,157 @@
+<body>
+  <div
+    class="page-wrapper"
+    id="main-wrapper"
+    data-layout="vertical"
+    data-navbarbg="skin6"
+    data-sidebartype="full"
+    data-sidebar-position="fixed"
+    data-header-position="fixed"
+  >
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div class="brand-logo d-flex align-items-center justify-content-between">
+        <a href="./index.html" class="text-nowrap logo-img">
+          <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+        </a>
+      </div>
+    </aside>
+    <div class="body-wrapper">
+      <header class="app-header"></header>
+      <div class="container-fluid">
+        <div class="container-fluid">
+            <a class="return d-flex" [routerLink]="'/gestion-fournisseur/listFournisseur'">
+                <span class="material-icons"> arrow_back_ios_new </span>
+                <span class="ml-2"><b>Liste Type Fournisseurs</b></span>
+            </a>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Forms</h5>
+              <div class="card">
+                <div class="card-body">
+                  <form [formGroup]="fourniFrom" (ngSubmit)="addFournisseur()">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"
+                        >Nom</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Entrer Nom "
+                        name="nom"
+                        formControlName="nom"
+                        />
+                        <div *ngIf="validNom()" class="text-danger">
+                        veuillez remplir ce champ
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"
+                        >Adresse</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Entrer Adresse "
+                        name="adresse"
+                        formControlName="adresse"
+                        />
+                        <div *ngIf="validAdresse()" class="text-danger">
+                        veuillez remplir ce champ
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"
+                        >Email</label
+                      >
+                      <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Entrer L'email "
+                        name="email"
+                        formControlName="email"
+                        />
+                        <div *ngIf="validEmail()" class="text-danger">
+                        veuillez remplir ce champ
+                        </div>
+                    </div>
+                   <div class="mb-3" *ngIf="typesFournisseurs.length > 0">
+                    <label for="typeFournisseurId" class="form-label">Type de fournisseur</label>
+                    <select class="form-select" formControlName="typeFournisseurId" required>
+                      <option value="" disabled selected>Choisir un type de fournisseur</option>
+                      <option *ngFor="let typeFour of typesFournisseurs" [value]="typeFour.id">{{ typeFour.designation }}</option>
+                    </select>
+                  </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"
+                        >Solde</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Entrer Solde "
+                        name="solde"
+                        formControlName="solde"
+                        />
+                        <div *ngIf="validSolde()" class="text-danger">
+                        veuillez remplir ce champ
+                        </div>
+                    </div>
+                    <div class="mb-3" *ngIf="categorieFournisseurs.length > 0">
+                    <label for="categorieFournisseurId" class="form-label">Type de fournisseur</label>
+                    <select class="form-select" formControlName="categorieFournisseurId" required>
+                      <option value="" disabled selected>Choisir un categorie de fournisseur</option>
+                      <option *ngFor="let categorie of categorieFournisseurs" [value]="categorie.id">{{ categorie.designation }}</option>
+                    </select>
+                  </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"
+                        >Total Versement</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Entrer Total Versement "
+                        name="totalVersement"
+                        formControlName="totalVersement"
+                        />
+                        
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"
+                        >Telephone</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Entrer Telephone "
+                        name="telephone"
+                        formControlName="telephone"
+                        />
+                        
+                    </div>
+                    <div class="bt-boutton d-flex">
+                        <input
+                        type="submit"
+                        class="btnRegister"
+                        [disabled]="!fourniFrom.valid"
+                        value="Enregistrer"
+                        />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/sidebarmenu.js"></script>
+  <script src="../assets/js/app.min.js"></script>
+  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+</body>
+

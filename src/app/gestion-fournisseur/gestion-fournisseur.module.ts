@@ -9,6 +9,8 @@ import { TypeFournisseurListComponent } from './composants/type-fournisseur-list
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { BlockUIModule } from 'ng-block-ui';
+import { FournisseurAddComponent } from './composants/fournisseur-add/fournisseur-add.component';
+import { FournisseurListComponent } from './composants/fournisseur-list/fournisseur-list.component';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { BlockUIModule } from 'ng-block-ui';
     CategorieFournisseurListComponent,
     TypeFournisseurAddComponent,
     TypeFournisseurListComponent,
+    FournisseurAddComponent,
+    FournisseurListComponent,
     
   ],
 

@@ -6,6 +6,8 @@ import { TypeFournisseurAddComponent } from './composants/type-fournisseur-add/t
 import { TypeFournisseurListComponent } from './composants/type-fournisseur-list/type-fournisseur-list.component';
 import { CategorieFournisseurAddComponent } from './composants/categorie-fournisseur-add/categorie-fournisseur-add.component';
 import { CategorieFournisseurListComponent } from './composants/categorie-fournisseur-list/categorie-fournisseur-list.component';
+import { FournisseurAddComponent } from './composants/fournisseur-add/fournisseur-add.component';
+import { FournisseurListComponent } from './composants/fournisseur-list/fournisseur-list.component';
 
 const routes: Routes = [];
 
@@ -35,6 +37,26 @@ const routes: Routes = [];
       {
         path: 'listCategorieFournisseur',
         component: CategorieFournisseurListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'categorieFournisseur-edit/:categorieFournisseurId',
+        component: CategorieFournisseurAddComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addFournisseur',
+        component: FournisseurAddComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'listFournisseur',
+        component: FournisseurListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'fournisseur-edit/:fournisseurId',
+        component: FournisseurAddComponent,
         canActivate: [AuthGuard],
       },
     ]),
