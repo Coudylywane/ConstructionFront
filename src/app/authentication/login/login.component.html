@@ -1,53 +1,4 @@
-<!-- <div class="container-fluid login">
-  <section class=" container-fluid gradient-form" style="background-color: rgb(255, 255, 255);">
-      <div class="container-fluid">
-        <div class="row d-flex">
-          <div class="col-xl-12 test">
-            <div class="card rounded-3 text-black">
-              <div class="row row-img">
-                  <div class="col-lg-6">
-                      <div class="card-body p-md-5 mx-md-4" style="margin-top: 57px;justify-content: center;text-align: center;">
-                      <div class="text-center">
-                          <h4 class="mt-1 mb-5 pb-1" style="color: #C23220;">Connectez-vous</h4>
-                      </div>
-                          <form [formGroup]="form" (submit)="login()">
-                            <span style="color: darkred">
-                              {{err}}
-                            </span>
-                              <div class="form-group py-2">
-                                  <div class="input-field"> <span class="fa fa-user p-2"></span>
-                                    <input type="text" formControlName="login" placeholder="Nom utilisateur">
-                                  </div>
-                              </div>
-                              <div class="form-group py-2 pd-2">
-                                  <div class="input-field">
-                                    <span class="fa fa-lock p-2"></span>
-                                    <input type="password" placeholder="Mot de passe" formControlName="password">
-                                    <button class="btn bg-white text-muted">
-                                    <span class="fa fa-eye-slash"></span> </button>
-                                  </div>
-                              </div>
-                              <div class="form-inline"> <input type="checkbox" name="remember" id="remember"> <label for="remember" class="text-muted">Se rappeler de moi!</label> <a href="#" id="forgot" class="font-weight-bold">Mot de passe oublier?</a> </div>
-                              <button type="submit" [disabled]="!form.valid" class="btn btn-block mt-3">Login</button>
-                          </form>
-                      </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-</div> -->
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body>
-    <section>
+<!-- <section>
       <form [formGroup]="form" (submit)="login()">
         <span style="color: darkred">
           {{ err }}
@@ -89,6 +40,153 @@
           </button>
         </div>
       </form>
+    </section>-->
+
+    <section class="vh-100">
+      <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-9 col-lg-6 col-xl-5">
+            <svg width="500" height="573" viewBox="0 0 500 573" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_2006_6006)">
+              <rect width="500" height="573" fill="#996F05"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M40.3334 158.405V25.3722V0L33.9381 25.3722L40.3334 158.405ZM40.3334 0L46.6825 25.3722L40.3334 158.405V25.3722V0Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M40.3334 397.976V264.943V239.571L33.9381 264.943L40.3334 397.976ZM40.3334 239.571L46.6825 264.943L40.3334 397.976V264.943V239.571Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M40.3334 637.546V504.513V479.141L33.9381 504.513L40.3334 637.546ZM40.3334 479.141L46.6825 504.513L40.3334 637.546V504.513V479.141Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M14.0847 281.289V148.256V122.884L7.68945 148.256L14.0847 281.289ZM14.085 281.289V148.256V122.884L20.4341 148.256L14.085 281.289Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M14.0847 520.859V387.826V362.454L7.68945 387.826L14.0847 520.859ZM14.085 520.859V387.826V362.454L20.4341 387.826L14.085 520.859Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M92.5053 0.000567843L98.8544 25.3722L92.5053 158.405L86.1101 25.3722L92.5052 0.000563752V0L92.5053 0.000282895L92.5053 0V0.000567843Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M92.5053 239.572L98.8544 264.943L92.5053 397.976L86.1101 264.943L92.5052 239.572V239.571L92.5053 239.571L92.5053 239.571V239.572Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M92.5053 479.142L98.8544 504.513L92.5053 637.546L86.1101 504.513L92.5052 479.142V479.141L92.5053 479.141L92.5053 479.141V479.142Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M66.2519 281.289V148.256V122.884L59.8567 148.256L66.2519 281.289ZM66.2525 281.289V148.256V122.884L72.6017 148.256L66.2525 281.289Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M66.2519 520.859V387.826V362.454L59.8567 387.826L66.2519 520.859ZM66.2525 520.859V387.826V362.454L72.6017 387.826L66.2525 520.859Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M144.679 0.00365478L151.027 25.3722L144.679 158.386V158.405L144.678 158.395L144.678 158.405V158.386L138.284 25.3722L144.678 0.00362844V0L144.678 0.00182078L144.679 0V0.00365478Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M144.679 239.575L151.027 264.943L144.679 397.957V397.976L144.678 397.966L144.678 397.976V397.957L138.284 264.943L144.678 239.575V239.571L144.678 239.573L144.679 239.571V239.575Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M144.679 479.145L151.027 504.513L144.679 637.527V637.546L144.678 637.536L144.678 637.546V637.527L138.284 504.513L144.678 479.145V479.141L144.678 479.143L144.679 479.141V479.145Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M118.424 122.885L124.772 148.256L118.424 281.284V281.289L118.423 281.286L118.423 281.289V281.284L112.028 148.256L118.423 122.885V122.884L118.423 122.884L118.424 122.884V122.885Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M118.424 362.455L124.772 387.826L118.424 520.854V520.859L118.423 520.856L118.423 520.859V520.854L112.028 387.826L118.423 362.455V362.454L118.423 362.454L118.424 362.454V362.455Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M196.85 158.405V25.3722V0L190.455 25.3722L196.85 158.405ZM196.85 0L203.199 25.3722L196.85 158.405V25.3722V0Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M196.85 397.976V264.943V239.571L190.455 264.943L196.85 397.976ZM196.85 239.571L203.199 264.943L196.85 397.976V264.943V239.571Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M196.85 637.546V504.513V479.141L190.455 504.513L196.85 637.546ZM196.85 479.141L203.199 504.513L196.85 637.546V504.513V479.141Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M170.596 281.289V148.256V122.884L164.201 148.256L170.596 281.289ZM170.597 281.289V148.256V122.884L176.946 148.256L170.597 281.289Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M170.596 520.859V387.826V362.454L164.201 387.826L170.596 520.859ZM170.597 520.859V387.826V362.454L176.946 387.826L170.597 520.859Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M249.023 0.00174926L255.372 25.3722L249.023 158.396V158.405L249.023 158.4L249.023 158.405V158.396L242.628 25.3722L249.023 0.00173666V0L249.023 0.000871469L249.023 0V0.00174926Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M249.023 239.573L255.372 264.943L249.023 397.967V397.976L249.023 397.971L249.023 397.976V397.967L242.628 264.943L249.023 239.573V239.571L249.023 239.572L249.023 239.571V239.573Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M249.023 479.143L255.372 504.513L249.023 637.537V637.546L249.023 637.541L249.023 637.546V637.537L242.628 504.513L249.023 479.143V479.141L249.023 479.142L249.023 479.141V479.143Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M222.768 122.884L229.117 148.256L222.768 281.289L216.373 148.256L222.768 122.884V122.884L222.768 122.884L222.768 122.884V122.884Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M222.768 362.454L229.117 387.826L222.768 520.859L216.373 387.826L222.768 362.454V362.454L222.768 362.454L222.768 362.454V362.454Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M301.196 158.405V25.3722V0L294.8 25.3722L301.196 158.405ZM301.196 158.405V25.3722V0L307.545 25.3722L301.196 158.405Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M301.196 397.976V264.943V239.571L294.8 264.943L301.196 397.976ZM301.196 397.976V264.943V239.571L307.545 264.943L301.196 397.976Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M301.196 637.546V504.513V479.141L294.8 504.513L301.196 637.546ZM301.196 637.546V504.513V479.141L307.545 504.513L301.196 637.546Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M274.941 122.885L281.29 148.256L274.941 281.283V281.289L274.941 281.286L274.941 281.289V281.283L268.546 148.256L274.941 122.885V122.884L274.941 122.884L274.941 122.884V122.885Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M274.941 362.455L281.29 387.826L274.941 520.852V520.859L274.941 520.855L274.941 520.859V520.852L268.546 387.826L274.941 362.455V362.454L274.941 362.454L274.941 362.454V362.455Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M353.367 158.405V25.3722V0L346.972 25.3722L353.367 158.405ZM353.368 158.405V25.3722V0L359.717 25.3722L353.368 158.405Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M353.367 397.976V264.943V239.571L346.972 264.943L353.367 397.976ZM353.368 397.976V264.943V239.571L359.717 264.943L353.368 397.976Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M353.367 637.546V504.513V479.141L346.972 504.513L353.367 637.546ZM353.368 637.546V504.513V479.141L359.717 504.513L353.368 637.546Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M327.114 122.884L333.463 148.256L327.114 281.289L320.719 148.256L327.114 122.884V122.884L327.114 122.884L327.114 122.884V122.884Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M327.114 362.454L333.463 387.826L327.114 520.859L320.719 387.826L327.114 362.454V362.454L327.114 362.454L327.114 362.454V362.454Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M405.532 158.405V25.3722V0L399.137 25.3722L405.532 158.405ZM405.541 158.405V25.3722V0L411.89 25.3722L405.541 158.405Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M405.532 397.976V264.943V239.571L399.137 264.943L405.532 397.976ZM405.541 397.976V264.943V239.571L411.89 264.943L405.541 397.976Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M405.532 637.546V504.513V479.141L399.137 504.513L405.532 637.546ZM405.541 637.546V504.513V479.141L411.89 504.513L405.541 637.546Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M379.286 281.289V148.256V122.884L372.89 148.256L379.286 281.289ZM379.286 281.289V148.256V122.884L385.635 148.256L379.286 281.289Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M379.286 520.859V387.826V362.454L372.89 387.826L379.286 520.859ZM379.286 520.859V387.826V362.454L385.635 387.826L379.286 520.859Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M457.712 158.405V25.3722V0L451.317 25.3722L457.712 158.405ZM457.712 158.405V25.3722V0L464.062 25.3722L457.712 158.405Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M457.712 397.976V264.943V239.571L451.317 264.943L457.712 397.976ZM457.712 397.976V264.943V239.571L464.062 264.943L457.712 397.976Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M457.712 637.546V504.513V479.141L451.317 504.513L457.712 637.546ZM457.712 637.546V504.513V479.141L464.062 504.513L457.712 637.546Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M431.453 281.289V148.256V122.884L425.058 148.256L431.453 281.289ZM431.458 281.289V148.256V122.884L437.807 148.256L431.458 281.289Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M431.453 520.859V387.826V362.454L425.058 387.826L431.453 520.859ZM431.458 520.859V387.826V362.454L437.807 387.826L431.458 520.859Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M483.63 122.905L489.974 148.256L483.63 281.178V281.289L483.627 281.234L483.625 281.289V281.179L477.235 148.256L483.625 122.905V122.884L483.627 122.894L483.63 122.884V122.905Z" fill="black"/>
+              <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M483.63 362.475L489.974 387.826L483.63 520.748V520.859L483.627 520.804L483.625 520.859V520.749L477.235 387.826L483.625 362.475V362.454L483.627 362.464L483.63 362.454V362.475Z" fill="black"/>
+              <path d="M200.132 435.343V406.743H231.492V411.943H206.532V418.263H229.172V423.463H206.532V430.143H231.492V435.343H200.132ZM235.874 435.343V406.743H240.594L253.394 406.703C258.568 406.703 262.581 407.916 265.434 410.343C268.288 412.769 269.714 416.329 269.714 421.023C269.714 425.716 268.288 429.276 265.434 431.703C262.581 434.129 258.568 435.343 253.394 435.343H235.874ZM252.954 411.903H242.274V430.143H252.954C256.314 430.143 258.861 429.409 260.594 427.943C262.328 426.476 263.194 424.169 263.194 421.023C263.194 417.849 262.328 415.543 260.594 414.103C258.861 412.636 256.314 411.903 252.954 411.903ZM273.726 435.343V406.743H305.086V411.943H280.126V418.263H302.766V423.463H280.126V430.143H305.086V435.343H273.726Z" fill="white"/>
+              <path d="M196.982 128.02L251.633 128.683L136.272 376.672L81.6215 376.009L196.982 128.02Z" fill="white"/>
+              <path d="M306.283 129.345L251.633 128.682L360.946 379.396L415.597 380.059L306.283 129.345Z" fill="white"/>
+              <g filter="url(#filter0_i_2006_6006)">
+              <path d="M250.013 237.922L266.074 304.147L300.62 321.665L265.66 338.34L248.072 397.999L231.937 337.931L197.391 320.413L232.351 303.738L250.013 237.922Z" fill="black"/>
+              </g>
+              <path d="M265.589 304.265L265.643 304.489L265.848 304.593L299.487 321.651L265.445 337.888L265.243 337.984L265.18 338.198L248.095 396.155L232.42 337.801L232.362 337.586L232.163 337.485L198.524 320.427L232.567 304.189L232.775 304.09L232.834 303.868L249.989 239.942L265.589 304.265Z" stroke="#8A6404"/>
+              </g>
+              <defs>
+              <filter id="filter0_i_2006_6006" x="197.391" y="237.922" width="103.229" height="164.077" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dy="4"/>
+              <feGaussianBlur stdDeviation="2"/>
+              <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+              <feBlend mode="normal" in2="shape" result="effect1_innerShadow_2006_6006"/>
+              </filter>
+              <clipPath id="clip0_2006_6006">
+              <rect width="500" height="573" fill="white"/>
+              </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <form [formGroup]="form" (submit)="login()">
+              <span style="color: darkred">
+                {{ err }}
+              </span>
+              <div class="d-flex flex-row align-items-center justify-content-center">
+                <h3 class=" text-center fw-bold mb-0 me-3">Connexion</h3>
+                
+              </div>
+    
+              <div class="divider d-flex align-items-center my-4">
+                <span class="text-center  mx-3 mb-0">Informations</span>
+              </div>
+    
+              <!-- Email input -->
+              <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="form3Example3">Email</label>
+                <input type="text" formControlName="login" id="form3Example3" class="form-control form-control-lg"
+                  placeholder="Email@gmail.com" />
+              </div>
+    
+              <!-- mot de passe input -->
+              <div data-mdb-input-init class="form-outline mb-3">
+                <label class="form-label" for="form3Example4">Mot de passe</label>
+                <input type="password" id="form3Example4" formControlName="password" class="form-control form-control-lg"
+                  placeholder="*********" />
+              </div>
+    
+              <div class="d-flex justify-content-between align-items-center">
+                <!-- Checkbox 
+                <div class="form-check mb-0">
+                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                  <label class="form-check-label" for="form2Example3">
+                    Remember me
+                  </label>
+                </div>
+                <a href="#!" class="text-body">Forgot password?</a>-->
+              </div>
+    
+              <div class="text-center text-lg-start mt-4 pt-2">
+                <button  type="button"  [disabled]="!form.valid" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                  style="padding-left: 2.5rem; padding-right: 2.5rem;">Se connecter</button>
+                <p class="small fw-bold mt-4 pt-1 mb-0">Avez-vous deja un compte ? <a [routerLink]="" href="#"
+                    class="link-dangers">Inscription</a></p>
+              </div>
+    
+            </form>
+          </div>
+        </div>
+      </div>
+      <div>
+      <!--<div
+        class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+         Copyright 
+        <div class="text-white mb-3 mb-md-0">
+          Copyright © 2020. All rights reserved.
+        </div>
+         <a class="add d-flex" [routerLink]="'/gestion-hopital/addNaissance'" >
+        <span class="material-icons">
+          {{ "add" }}
+        </span>
+        <span class="ml-2"><b>Ajouter Naissance</b> </span>
+        </a>
+         Copyright -->
+    
+        
+      </div>
     </section>
-  </body>
-</html>
+  
