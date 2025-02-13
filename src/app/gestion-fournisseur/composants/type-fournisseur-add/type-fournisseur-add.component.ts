@@ -13,7 +13,7 @@ import { DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, formatDate } from '@angular/commo
 @Component({
   selector: 'app-type-fournisseur-add',
   templateUrl: './type-fournisseur-add.component.html',
-  styleUrls: ['./type-fournisseur-add.component.css'],
+  styleUrls: ['./type-fournisseur-add.component.scss'],
 })
 export class TypeFournisseurAddComponent {
   @BlockUI()
