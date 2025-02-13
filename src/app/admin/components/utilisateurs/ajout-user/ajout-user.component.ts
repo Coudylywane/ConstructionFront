@@ -10,20 +10,13 @@ export class AjoutUserComponent implements OnInit {
 
   userForm!: FormGroup;
   constructor() {
-    this.initAddForm();
+   
   }
 
   ngOnInit(): void {
   }
 
-  initAddForm() {
-    this.userForm = new FormGroup({
-      'nom': new FormControl(null),
-      'prenom': new FormControl(null, Validators.required),
-      'email': new FormControl(null, Validators.required),
-      'telephone': new FormControl(null, Validators.required),
-    });
-  }
+ 
 
   // validNom() {
   //   const nom = this.habitant.controls['nom'];

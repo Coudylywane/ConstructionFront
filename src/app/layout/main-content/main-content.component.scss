@@ -1,0 +1,94 @@
+.m-nav-item:hover, .m-nav-link:hover, .m-nav-icon:hover {
+  color: #996F05 !important;
+  background-color: rgb(247, 247, 247)!important;
+}
+
+
+.m-nav-item, .m-nav-link, .m-nav-icon {
+  color: rgb(0, 0, 0)!important;
+}
+[data-simplebar] {
+  position: relative;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+  border-right: 1px solid;
+  border-color: #D8DBE0;
+  padding: 10px;
+}
+.titre
+{
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  margin-left:23px;
+}
+//Update////
+.sidebar-ide{
+  background-color: #ffffff !important; 
+  width: 257px; 
+  color: #000000;
+  border-right: 1px solid var(--Borders-main, #030303);
+  
+}
+.simplebar-content{
+  border-radius: 1px solid ;
+  border-color: #8590A1;
+}
+.style-text{
+  margin-left: 10px; 
+  color: var(--Text-Colors-primary, #2D3D5E);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px; /* 185.714% */
+}
+.style-icon{
+  color: #2D3D5E;
+}
+///Update////
+.ms-auto-nav{
+  margin-right: auto !important;
+}
+.sidebar-brand {
+  color: var(--Text-Colors-primary, #2D3D5E);
+  font-family: "Inter Display";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; 
+  text-align: center; 
+  margin-top: 23px;
+  background: #ffffff;
+}
+.sidebar-toggler{
+  color: #000000;
+  background: #ffffff;
+
+
+}
+.nav-title{
+  
+  color: var(--Text-Colors-placeholder, #8590A1);
+  //text-align: center;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.44px;
+  text-transform: capitalize;
+}
+.nav-item{
+  display: flex;
+  align-items: center;
+  
+}
+.sidebar-nav .nav-link:hover {
+  
+  color: #996F05;
+ 
+}
