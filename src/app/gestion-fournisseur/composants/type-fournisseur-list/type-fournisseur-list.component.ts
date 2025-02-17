@@ -11,7 +11,7 @@ import { MyEncryptionService } from 'src/app/shared/services/my-encryption.servi
 @Component({
   selector: 'app-type-fournisseur-list',
   templateUrl: './type-fournisseur-list.component.html',
-  styleUrls: ['./type-fournisseur-list.component.css'],
+  styleUrls: ['./type-fournisseur-list.component.scss'],
 })
 export class TypeFournisseurListComponent {
   typeFournisseurs = [] as TypeFournisseurModel[];

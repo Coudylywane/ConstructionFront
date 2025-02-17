@@ -12,7 +12,7 @@ import { FournisseurService } from '../../services/fournisseur.service';
 @Component({
   selector: 'app-fournisseur-list',
   templateUrl: './fournisseur-list.component.html',
-  styleUrls: ['./fournisseur-list.component.css'],
+  styleUrls: ['./fournisseur-list.component.scss'],
 })
 export class FournisseurListComponent {
   fournisseurs = [] as FournisseurModel[];

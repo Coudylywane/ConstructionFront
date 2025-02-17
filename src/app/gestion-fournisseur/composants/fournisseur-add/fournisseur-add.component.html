@@ -19,15 +19,14 @@
     </aside>
     <div class="body-wrapper">
       <header class="app-header"></header>
-      <div class="container-fluid">
-        <div class="container-fluid">
-            <a class="return d-flex" [routerLink]="'/gestion-fournisseur/listFournisseur'">
+    
+      <div class="container">
+            <a class="return d-flex mt-4" [routerLink]="'/gestion-fournisseur/listFournisseur'">
                 <span class="material-icons"> arrow_back_ios_new </span>
-                <span class="ml-2"><b>Liste Type Fournisseurs</b></span>
+                <span class="ml-2"><b>Liste Type Fournisseur</b></span>
             </a>
-          <div class="card">
+          <div class="mt-4">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Forms</h5>
               <div class="card">
                 <div class="card-body">
                   <form [formGroup]="fourniFrom" (ngSubmit)="addFournisseur()">
@@ -46,21 +45,7 @@
                         veuillez remplir ce champ
                         </div>
                     </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label"
-                        >Adresse</label
-                      >
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Entrer Adresse "
-                        name="adresse"
-                        formControlName="adresse"
-                        />
-                        <div *ngIf="validAdresse()" class="text-danger">
-                        veuillez remplir ce champ
-                        </div>
-                    </div>
+                   
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label"
                         >Email</label
@@ -76,6 +61,80 @@
                         veuillez remplir ce champ
                         </div>
                     </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label"
+                            >Adresse</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Entrer Adresse "
+                            name="adresse"
+                            formControlName="adresse"
+                            />
+                            <div *ngIf="validAdresse()" class="text-danger">
+                            veuillez remplir ce champ
+                            </div>
+                        </div>
+
+                      </div>
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label"
+                            >Téléphone</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Entrer Telephone "
+                            name="telephone"
+                            formControlName="téléphone"
+                            />
+                            
+                        </div>
+
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label"
+                            >Solde</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Entrer Solde "
+                            name="solde"
+                            formControlName="solde"
+                            />
+                            <div *ngIf="validSolde()" class="text-danger">
+                            veuillez remplir ce champ
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label"
+                            >Total Versement</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Entrer Total Versement "
+                            name="totalVersement"
+                            formControlName="totalVersement"
+                            />
+                            
+                        </div>
+                      </div>
+
+
+                    </div>
+                    
                    <div class="mb-3" *ngIf="typesFournisseurs.length > 0">
                     <label for="typeFournisseurId" class="form-label">Type de fournisseur</label>
                     <select class="form-select" formControlName="typeFournisseurId" required>
@@ -83,21 +142,7 @@
                       <option *ngFor="let typeFour of typesFournisseurs" [value]="typeFour.id">{{ typeFour.designation }}</option>
                     </select>
                   </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label"
-                        >Solde</label
-                      >
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="Entrer Solde "
-                        name="solde"
-                        formControlName="solde"
-                        />
-                        <div *ngIf="validSolde()" class="text-danger">
-                        veuillez remplir ce champ
-                        </div>
-                    </div>
+                    
                     <div class="mb-3" *ngIf="categorieFournisseurs.length > 0">
                     <label for="categorieFournisseurId" class="form-label">Type de fournisseur</label>
                     <select class="form-select" formControlName="categorieFournisseurId" required>
@@ -105,32 +150,8 @@
                       <option *ngFor="let categorie of categorieFournisseurs" [value]="categorie.id">{{ categorie.designation }}</option>
                     </select>
                   </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label"
-                        >Total Versement</label
-                      >
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="Entrer Total Versement "
-                        name="totalVersement"
-                        formControlName="totalVersement"
-                        />
-                        
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label"
-                        >Telephone</label
-                      >
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="Entrer Telephone "
-                        name="telephone"
-                        formControlName="telephone"
-                        />
-                        
-                    </div>
+                   
+                    
                     <div class="bt-boutton d-flex">
                         <input
                         type="submit"
@@ -144,7 +165,7 @@
               </div>
             </div>
           </div>
-        </div>
+      
       </div>
     </div>
   </div>

@@ -1,11 +1,11 @@
 .return {
   /* background-color: #00A388; */
-  color: #eb71ac;
+  color: #996F05;
   border-radius: 4px;
   text-decoration: none;
-  width: 160px;
+  //width: 160px;
   /* // margin-top: -19px; */
-  margin-left: -24px;
+  //margin-left: -24px;
 }
 /* ///////////css form step///////// */
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
@@ -351,7 +351,7 @@ select.ng-touched.ng-valid {
 }
 
 .btnRegister:disabled {
-  background: #edd3df;
+  background: #c0a664f9;
 }
 
 .btnRegister {
@@ -360,8 +360,8 @@ select.ng-touched.ng-valid {
   border: none;
   border-radius: 5px;
   padding: 10px;
-  background: #eb71ac;
-  color: black;
+  background: #996F05;
+  color: rgb(255, 255, 255);
   width: 35%;
   cursor: pointer;
   margin-left: 30%;

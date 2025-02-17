@@ -25,10 +25,12 @@
     "icons": "^1.0.0",
     "material": "^0.4.3",
     "material-icons": "^1.12.1",
+    "mdb-ui-kit": "^8.2.0",
     "ng-block-ui": "^4.0.1",
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "with": "^7.0.2",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
