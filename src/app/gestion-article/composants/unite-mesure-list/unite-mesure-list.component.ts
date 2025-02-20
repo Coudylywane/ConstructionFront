@@ -11,7 +11,7 @@ import { UniteMesureService } from '../../services/unite-mesure.service';
 @Component({
   selector: 'app-unite-mesure-list',
   templateUrl: './unite-mesure-list.component.html',
-  styleUrls: ['./unite-mesure-list.component.css'],
+  styleUrls: ['./unite-mesure-list.component.scss'],
 })
 export class UniteMesureListComponent {
   uniteMesures = [] as UniteMesureModel[];

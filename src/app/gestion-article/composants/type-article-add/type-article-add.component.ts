@@ -21,7 +21,7 @@ import { TypeArticleService } from '../../services/type-article.service';
 @Component({
   selector: 'app-type-article-add',
   templateUrl: './type-article-add.component.html',
-  styleUrls: ['./type-article-add.component.css'],
+  styleUrls: ['./type-article-add.component.scss'],
 })
 export class TypeArticleAddComponent {
   @BlockUI()

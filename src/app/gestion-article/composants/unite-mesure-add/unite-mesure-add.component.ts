@@ -12,7 +12,7 @@ import { DATE_PIPE_DEFAULT_TIMEZONE, DatePipe, formatDate } from '@angular/commo
 @Component({
   selector: 'app-unite-mesure-add',
   templateUrl: './unite-mesure-add.component.html',
-  styleUrls: ['./unite-mesure-add.component.css'],
+  styleUrls: ['./unite-mesure-add.component.scss'],
 })
 export class UniteMesureAddComponent {
   @BlockUI()

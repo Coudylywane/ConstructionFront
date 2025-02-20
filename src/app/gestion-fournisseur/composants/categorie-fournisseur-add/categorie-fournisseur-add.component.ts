@@ -23,7 +23,7 @@ import { CategorieFourisseurService } from '../../services/categorie-fourisseur.
 @Component({
   selector: 'app-categorie-fournisseur-add',
   templateUrl: './categorie-fournisseur-add.component.html',
-  styleUrls: ['./categorie-fournisseur-add.component.css'],
+  styleUrls: ['./categorie-fournisseur-add.component.scss'],
 })
 export class CategorieFournisseurAddComponent {
   @BlockUI()

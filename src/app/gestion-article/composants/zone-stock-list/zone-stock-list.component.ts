@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-zone-stock-list',
   templateUrl: './zone-stock-list.component.html',
-  styleUrls: ['./zone-stock-list.component.css'],
+  styleUrls: ['./zone-stock-list.component.scss'],
 })
 export class ZoneStockListComponent {
   zones = [] as ZoneStockModel[];

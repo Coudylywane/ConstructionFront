@@ -12,7 +12,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 @Component({
   selector: 'app-zone-stock-add',
   templateUrl: './zone-stock-add.component.html',
-  styleUrls: ['./zone-stock-add.component.css'],
+  styleUrls: ['./zone-stock-add.component.scss'],
 })
 export class ZoneStockAddComponent {
   @BlockUI()

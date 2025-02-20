@@ -11,7 +11,7 @@ import { MyEncryptionService } from 'src/app/shared/services/my-encryption.servi
 @Component({
   selector: 'app-type-article-list',
   templateUrl: './type-article-list.component.html',
-  styleUrls: ['./type-article-list.component.css']
+  styleUrls: ['./type-article-list.component.scss']
 })
 export class TypeArticleListComponent {
   typeArticles = [] as TypeArticleModel[];

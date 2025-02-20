@@ -1,27 +1,27 @@
 <div class="container-fluid">
   <div class="mt-4">
-    <a class="add style-button d-flex" [routerLink]="'/gestion-fournisseur/addTypeFournisseur'">
+    <a class="add style-button d-flex" [routerLink]="'/gestion-fournisseur/addCategorieFournisseur'">
       <span class="material-icons">
         {{ "add" }}
       </span>
-      <span class="ml-2 style-text"> Nouveau Categorie Fournisseur</span>
+      <span class="ml-2 style-text"> Nouveau Catégorie Fournisseur</span>
     </a>
     <h4 class="justify-content-left text-left">
-      Categories de Fournisseurs
+      Catégories de Fournisseurs
     </h4>
   </div>
   <!--TABLES-->
   <div class="container-fluid content-table">
     <h2 class="text-center mt-4 text-dispo" *ngIf="!categorieFournisseurs || categorieFournisseurs.length <= 0">
-      Pas de Categorie Disponible!!!
+      Pas de Catégorie de Fournisseur Disponible!!!
     </h2>
     <div class="mt-4">
       <table class="table table-hover">
         <thead>
           <tr style="text-align: center" class="style-text-table">
             <th scope="col">ID</th>
-            <th scope="col">Designation</th>
-            <th scope="col">Description</th>
+            <th scope="col">Désignation</th>
+            <th scope="col">Déscription</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -34,29 +34,24 @@
             <td>{{ categorieFournisseur.description }}</td>
             <td>
               <div class="d-flex">
-                <td style="margin-left: 180px">
-                 <a
-                    class="nav-link m-nav-link"
-                    (click)="change(categorieFournisseur.id)">
-                    <span class="material-icons">mode_edit</span>
-                  </a> 
-                </td>
-                <td style="margin-left: 20px">
-                <a
-                    class="nav-link m-nav-link"
-                    (click)="deleteTypeFournisseur(categorieFournisseur?.id)"
-                   >
-                    <span class="material-icons">delete</span>
-                  </a>  
-                </td>
-              </div>
+            <td style="margin-left: 180px">
+              <a class="nav-link m-nav-link" (click)="change(categorieFournisseur.id)">
+                <span class="material-icons">mode_edit</span>
+              </a>
             </td>
-            <td></td>
-         
-          </tr>
-        </tbody>
-      </table>
-      <!--Pagination
+            <td style="margin-left: 20px">
+              <a class="nav-link m-nav-link" (click)="deleteTypeFournisseur(categorieFournisseur?.id)">
+                <span class="material-icons">delete</span>
+              </a>
+            </td>
+    </div>
+    </td>
+    <td></td>
+
+    </tr>
+    </tbody>
+    </table>
+    <!--Pagination
       <div class="row mt-4">
         <div class="col-lg-3 col-md-3 col-sm-12">
           <nav aria-label="Page navigation example ">
@@ -107,7 +102,7 @@
           </select>
         </div>
       </div>-->
-      <!---->
-    </div>
+    <!---->
   </div>
+</div>
 </div>

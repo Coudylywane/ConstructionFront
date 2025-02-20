@@ -355,14 +355,15 @@ select.ng-touched.ng-valid {
 }
 
 .btnRegister {
-  float: left;
-  margin-top: 1%;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  background: #996F05;
-  color: rgb(255, 255, 255);
+  display: flex;
+  padding: 7px 16px;
   width: 35%;
-  cursor: pointer;
-  margin-left: 30%;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  color: white;
+  //border:  8px solid #BF8B06;
+  background-color:  #BF8B06 ;
+  
 }
