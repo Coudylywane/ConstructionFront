@@ -199,7 +199,7 @@ export class TypeArticleAddComponent {
   }
 
   onSubmit() {
-    this.router.navigate(['/gestion-article/listZoneStock']);
+    this.router.navigate(['/gestion-article/listTypeArticle']);
   }
 
   clear() {
