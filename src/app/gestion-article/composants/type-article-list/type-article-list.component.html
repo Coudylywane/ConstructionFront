@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="mt-4">
     <a class="add style-button d-flex" [routerLink]="'/gestion-article/addTypeArticle'">
-      <span class="material-icons">
+      <span class="material-icons" style="color: white;">
         {{ "add" }}
       </span>
       <span class="ml-2 style-text"> Nouvel Type D'Article</span>
@@ -37,6 +37,7 @@
               <div class="d-flex">
             <td style="margin-left: 180px">
               <a class="nav-link m-nav-link" (click)="change(typeArticle?.id)">
+                
                 <span class="material-icons">mode_edit</span>
               </a>
             </td>

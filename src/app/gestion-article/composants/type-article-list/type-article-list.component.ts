@@ -50,6 +50,8 @@ export class TypeArticleListComponent {
     ]);
   }
 
+ 
+
   deleteTypeArticle(typeId?: Number): void {
     // alert('test');
     this.subscriptions.push(

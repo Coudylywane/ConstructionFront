@@ -46,7 +46,7 @@ export class FournisseurListComponent {
 
   change(id?: Number) {
     this.router.navigate([
-      '/gestion-fournisseur/Fournisseur-edit/',
+      '/gestion-fournisseur/fournisseur-edit/',
       this.encryptService.encryptText(Number(id) + ''),
     ]);
   }

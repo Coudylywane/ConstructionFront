@@ -126,7 +126,7 @@ color:#65b980;
   color: var(--Text-Colors-secondary, #8590A1);
   /* Body/B-12-12-600 */
   font-family: Inter;
-  font-size: 12px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
   line-height: 12px; /* 100% */
@@ -140,4 +140,7 @@ color:#65b980;
   line-height: 22px; /* 68.75% */
   letter-spacing: -0.32px;
 
+}
+.material-icons{
+  color: #996F05;
 }
