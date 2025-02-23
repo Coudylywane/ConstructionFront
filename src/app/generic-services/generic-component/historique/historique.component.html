@@ -1,0 +1,28 @@
+<br />
+<p-divider align="center"  type="dashed"><b style="font-size: 1.5rem;">Historique des traitements</b></p-divider>
+<div class="observation-content" *ngIf="!isDataRecoveryLoan">
+  <p-timeline [value]="listevent" class="d-flex" *ngIf="listevent?.length">
+    <ng-template pTemplate="content" let-event>
+      <div class="d-flex justify-content-between">
+        <span class="product-badge text-bold">
+          {{ getTitleObservation(event?.applicationStatus) }}
+        </span>
+        <div class="gd">
+          <span style="color: #203359"
+            ><p-tag styleClass="mr-2"
+              >Date : {{ event.observationDate | date: "dd/MM/YYYY  à HH:mm" }}
+            </p-tag>
+          </span>
+        </div>
+        <p-tag styleClass="mr-2" >
+          {{getLibeleApplicationActorInfo(event.userSender,event.fullNameSender,event.profilSender).libele}}
+        </p-tag>
+      </div>
+
+      <div style="padding: 10px 0 5px">
+        {{ event.description }}
+        <hr class="dotted" />
+      </div>
+    </ng-template>
+  </p-timeline>
+</div>

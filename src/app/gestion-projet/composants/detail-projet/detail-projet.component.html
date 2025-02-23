@@ -1,0 +1,220 @@
+<!--<p-toast></p-toast>
+<a class="return d-flex" [routerLink]="'/gestion-projet/listProjet'">
+          <span class="material-icons"> arrow_back_ios_new </span>
+          <span class="ml-2"><b>Liste des Projets</b></span>
+</a>
+
+
+<!-- Panel pour les informations du projet 
+<p-panel header="Informations du projet" [toggleable]="true">
+  <div class="row">
+     Nom du projet 
+    <div class="p-field col-12 md:col-3 lg:col-3 p-4 m-0">
+      <span class="p-float-label">
+        <label class="text-label-bold" for="name">Libellé</label>
+        <input
+          type=null;ll;ext"
+          id="name"
+          pInputText
+          [value]="projet?.name"
+          [disabled]="true"
+          class="label-input" />
+      </span>
+    </div>
+
+    <!-- Date de début 
+    <div class="p-field col-12 md:col-3 lg:col-3 p-4">
+      <span class="p-float-label">
+                <label class="text-label-bold" for="startDate">Date de début</label>
+
+        <input
+          type="text"
+          id="startDate"
+          [value]="projet?.startDate | date: 'dd/MM/yyyy'"
+          pInputText
+          [disabled]="true"
+          class="label-input" />
+        <label class="text-label-bold" for="startDate">Date de début</label>
+      </span>
+    </div>
+
+    <!-- Date de fin prévisionnelle 
+    <div class="p-field col-12 md:col-3 lg:col-3 p-4">
+      <span class="p-float-label">
+        <input
+          type="text"
+          id="endDateProvisioning"
+          [value]="projet?.endDateProvisioning | date: 'dd/MM/yyyy'"
+          pInputText
+          [disabled]="true"
+          class="label-input" />
+        <label class="text-label-bold" for="endDateProvisioning">Date de fin (prévisionnelle)</label>
+      </span>
+    </div>
+
+    <!-- Date de fin 
+    <div class="p-field col-12 md:col-3 lg:col-3 p-4">
+      <span class="p-float-label">
+        <input
+          type="text"
+          id="endDate"
+          [value]="projet?.endDate | date: 'dd/MM/yyyy'"
+          pInputText
+          [disabled]="true"
+          class="label-input" />
+        <label class="text-label-bold" for="endDate">Date de fin</label>
+      </span>
+    </div>
+
+    <!-- Description 
+    <div class="p-field col-12 md:col-12 lg:col-12 p-4">
+      <span class="p-float-label">
+        <textarea
+          id="description"
+          [value]="projet?.description"
+          pInputTextarea
+          [disabled]="true"
+          class="label-input textarea-description">
+        </textarea>
+        <label class="text-label-bold" for="description">Description</label>
+      </span>
+    </div>
+  </div>
+</p-panel> 
+
+<div class="site-card-header" *ngIf="canValidateOffre">
+  <div  class="py-3 flex justify-content-end ">
+    <button
+      *ngIf="canValidateOffre"
+      [disabled]="!canValidateOffre"
+      (click)="rejectOffer()"
+      pButton
+      pRipple
+      style="margin-right: 20px"
+      icon="pi pi-times-circle"
+      class="btn btn-danger btn-upload m-1"
+      label="Rejeter l'offre">
+    </button>
+
+    <button
+      *ngIf="canValidateOffre"
+      [disabled]="!canValidateOffre"
+      (click)="ValidOffer()"
+      pButton
+      pRipple
+      style="margin-right: 20px"
+      icon="pi pi-save"
+      class="btn btn-success btn-upload m-1"
+      label="Valider l'offre"></button>
+  </div>
+</div>
+(click)="ValidOffer()"
+(click)="rejectOffer()"
+-->
+
+<p-toast></p-toast>
+<a class="return d-flex" [routerLink]="'/gestion-projet/listProjet'">
+  <span class="material-icons"> arrow_back_ios_new </span>
+  <span class="ml-2"><b>Liste des Projets</b></span>
+</a>
+<div class="site-card-header" >
+  <div  class="py-3 flex justify-content-end ">
+    <button
+      (click)="validateProject('REFUSER')"
+      pButton
+      pRipple
+      style="margin-right: 20px"
+      icon="pi pi-times-circle"
+      class="btn btn-danger btn-upload m-1"
+      label="Rejeter le projet">
+    </button>
+
+    <button
+      (click)="validateProject('VALIDATED')"
+      pButton
+      pRipple
+      style="margin-right: 20px"
+      icon="pi pi-save"
+      class="btn btn-success btn-upload m-1"
+      label="Valider le projet"></button>
+  </div>
+</div>
+<div
+  class="offer-banner mb-4 flex justify-content-between align-items-center"
+  *ngIf="projet"
+>
+  <div>Projet {{ projet?.id}}</div>
+</div>
+
+<p-tabView [scrollable]="true">
+  <!-- Informations principales -->
+  <p-tabPanel>
+    <div class="row">
+      <!--Prestataire-->
+
+      <!-- description -->
+      <div class="py-1">
+        <div class="p-field col-12 md:col-12 lg:col-12 p-4 m-0">
+          <span class="p-float-label">
+            <textarea
+              [value]="projet?.description"
+              id="description"
+              [disabled]="true"
+              pInputTextarea
+              class="label-input textarea-description"
+            >
+            </textarea>
+            <label class="text-label-bold" for="description">Description</label>
+          </span>
+        </div>
+      </div>
+      <div class="py-1">
+        <div class="p-field col-12 md:col-12 lg:col-12 p-4 m-0">
+          <span class="p-float-label">
+            <textarea
+              [value]="projet?.startDate | date : 'dd-MM-yyyy'"
+              id="description"
+              [disabled]="true"
+              pInputText
+              class="label-input"
+            >
+            </textarea>
+            <label class="text-label-bold" for="startDate">Date de debut</label>
+          </span>
+        </div>
+      </div>
+      <div class="py-1">
+        <div class="p-field col-12 md:col-12 lg:col-12 p-4 m-0">
+          <span class="p-float-label">
+            <textarea
+              [value]="projet?.endDateProvisioning | date : 'dd-MM-yyyy'"
+              id="endDateProvisioning"
+              [disabled]="true"
+              pInputText
+              class="label-input"
+            >
+            </textarea>
+            <label class="text-label-bold" for="endDateProvisioning"
+              >Date de fin provisoire</label
+            >
+          </span>
+        </div>
+      </div>
+      <div class="py-1">
+        <div class="p-field col-12 md:col-12 lg:col-12 p-4 m-0">
+          <span class="p-float-label">
+            <textarea
+              [value]="projet?.endDate | date : 'dd-MM-yyyy' "
+              id="endDate"
+              [disabled]="true"
+              pInputText
+              class="label-input"
+            >
+            </textarea>
+            <label class="text-label-bold" for="endDate">Date de fin</label>
+          </span>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

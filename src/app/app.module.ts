@@ -8,6 +8,8 @@ import { BlockUIModule } from 'ng-block-ui';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +21,9 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     BlockUIModule.forRoot(),
+    InputTextModule,
+    InputTextModule,
+    GestionProjetModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

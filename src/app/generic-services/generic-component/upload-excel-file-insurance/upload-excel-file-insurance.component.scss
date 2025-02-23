@@ -1,0 +1,79 @@
+::ng-deep .p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+  color: #1e1e1e;
+  font-size: 1.2rem;
+}
+
+::ng-deep .p-breadcrumb ul li .p-menuitem-link .p-menuitem-icon {
+  color: rgb(43, 100, 214);
+  font-size: 1.4rem;
+}
+
+::ng-deep .p-breadcrumb ul li:last-child .p-menuitem-text {
+  color: rgb(4, 39, 109);
+  font-weight:bold
+}
+
+.custom-file-upload {
+  position: relative;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.custom-file-upload button {
+  background-color:rgb(0, 51, 153);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.custom-file-upload button:hover {
+  background-color:rgb(0, 51, 153);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease ;
+}
+
+
+.custom-file-upload input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+::ng-deep .p-progressbar .p-progressbar-value {
+  border: 0 none;
+  margin: 0;
+  background: rgb(4, 39, 109);
+  background: -moz-linear-gradient(90deg, rgb(0, 51, 153) 17%,hsl(216, 67%, 71%) 77%);
+  background: -webkit-linear-gradient(90deg, rgb(0, 51, 153) 17%,hsl(216, 67%, 71%) 77%);
+  background: linear-gradient(90deg, rgb(0, 51, 153) 17%, hsl(216, 67%, 71%) 77%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#054e1e",endColorstr="#0aa640",GradientType=1);
+}
+
+.activity-header {
+  text-align: center;
+  color: white;
+  background-image: linear-gradient(to right, #143327,#358767);
+  margin: auto;
+  width: 60%;
+  border-color: linear-gradient(to right, #143327,#358767);
+}
+
+.item-selected {
+  background-color: rgba(0, 0, 0, 0.44) !important;
+}
+
+.text-bold {
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+

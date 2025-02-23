@@ -1,0 +1,14 @@
+<p-dialog
+  *ngIf="dialogConfigImg.display"
+  [header]="dialogConfigImg.title"
+  [(visible)]="dialogConfigImg.display"
+  [style]="{ width: '40vw' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="close()"
+  [maximizable]="true">
+  <div class="row container">
+    <img [src]="imageURL" alt=""/>
+  </div>
+</p-dialog>

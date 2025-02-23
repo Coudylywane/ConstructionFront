@@ -57,6 +57,7 @@ export class AddProjetComponent {
       endDateProvisioning: new Date(projet.endDateProvisioning),
       endDate: new Date(projet.endDate),
       startDate: new Date(projet.startDate),
+      status:"ENATENTE"
     };
 
     // Préparation du corps de la requête

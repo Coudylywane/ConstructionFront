@@ -1,0 +1,60 @@
+.observation-content {
+  max-height: 80vh;
+  padding: 1rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  border: 1px solid #003399;
+  border-top: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+  ::-webkit-scrollbar {
+    width: 0 !important;
+    background: transparent !important;
+  }
+
+  .text-bold {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .gd {
+    position: absolute;
+    margin-left: 43%;
+  }
+
+
+  hr.dotted {
+    border-top: 3px dotted rgb(109, 109, 109);
+  }
+
+  span {
+    &.product-badge {
+      border-radius: var(--border-radius);
+      padding: .25em .5rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .3px;
+    }
+  }
+}
+
+
+
+:host ::ng-deep .p-timeline-event-opposite {
+  display: none;
+}
+
+:host ::ng-deep .observation-content {
+  .p-tag {
+    background: transparent;
+    color: #212529 !important;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+}
+
+
+
