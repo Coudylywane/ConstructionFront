@@ -4,9 +4,9 @@ import { MainContentComponent } from './layout/main-content/main-content.compone
 
 const routes: Routes = [
   //{
-   // path: '',
-    //redirectTo: 'login',
-    //pathMatch: 'full',
+  // path: '',
+  //redirectTo: 'login',
+  //pathMatch: 'full',
   //},
   // {
   //   path: '**',
@@ -48,9 +48,20 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () =>
-      import('./admin/admin.module').then(
-        (m) => m.AdminModule
-      ),
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: '',
+    component: MainContentComponent,
+    children: [
+      {
+        path: 'gestion-projet',
+        loadChildren: () =>
+          import('./gestion-projet/gestion-projet.module').then(
+            (m) => m.GestionProjetModule
+          ),
+      },
+    ],
   },
 ];
 
