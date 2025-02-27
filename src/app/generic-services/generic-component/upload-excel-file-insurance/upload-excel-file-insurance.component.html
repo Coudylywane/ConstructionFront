@@ -1,0 +1,79 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="card">
+      <div class="d-flex justify-content-around">
+        <p-calendar placeholder="Définir l'année" [(ngModel)]="selectedYear" view="year" dateFormat="yy"
+                    inputId="yearpicker"></p-calendar>
+
+        <p-dropdown [options]="sources" [(ngModel)]="selectedSource" optionLabel="name"
+                    [showClear]="true"
+                    placeholder="Définir la source"></p-dropdown>
+
+        <p-dropdown [options]="companies" [(ngModel)]="selectedCompany" optionLabel="name"
+                    [showClear]="true"
+                    placeholder="Compagnie d'assurance"></p-dropdown>
+
+        <p-dropdown *ngIf="selectedSource && selectedSource.value=='TSC'" [options]="months" [(ngModel)]="selectedMonth"
+                    optionLabel="name"
+                    [showClear]="true"
+                    placeholder="Définir le mois"></p-dropdown>
+        <p-dropdown *ngIf="selectedSource && (selectedSource.value=='FC' || selectedSource.value=='PR')"
+                    [options]="trimesters"
+                    [(ngModel)]="selectedTrimester"
+                    optionLabel="name" [showClear]="true" placeholder="Définir le trimestre"></p-dropdown>
+      </div>
+    </div>
+
+
+    <div class="modal-body">
+      <div class="custom-file-upload my-5" style="width: 100%">
+        <div class="my-5" *ngIf="uploadProgress">
+          <p-progressBar class="my-3" [value]="uploadProgress"></p-progressBar>
+        </div>
+        <button (click)="fileInput.click()" style="width: 100%">
+          Choisir un fichier <span class="pi pi-upload"></span>
+        </button>
+        <input #fileInput type="file" (change)="onFileSelected($event)" accept=".xls,.xlsx" />
+        <div class="grid my-2" *ngIf="hasUploadedFile">
+          <div class="col">
+            <i class="pi pi-file-excel" style="color: #8f0404; font-size: 5rem"></i>
+          </div>
+          <div class="col">{{ fileUploaded?.name }}</div>
+          <div class="col">{{ fileUploaded?.size / 1000 }} KO</div>
+          <div class="col">
+            <button
+              type="button"
+              icon="pi pi-times"
+              pbutton
+              class="p-element p-button p-component p-button-icon-only"
+              style="width: 40px">
+              <span class="p-button-icon pi pi-times" (click)="reset()"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer p-dialog-footer app-dialog-footer">
+
+  <button
+    *ngIf="fileUploaded"
+    pButton
+    pRipple
+    icon="{{buttonIcon}}"
+    class="btn btn-success pull-right"
+    label="{{buttonLabel}}"
+    (click)="uploadFile()"></button>
+
+  &nbsp;&nbsp;
+
+  <button *ngIf="res" pButton pRipple icon="pi pi-history" class="btn btn-primary" label="Voir historique"
+          (click)="history(res)">
+  </button>
+
+</div>
+<div class="flex justify-content-center">
+  <p [ngStyle]="{'color': status === 'SUCCESS' ? 'green' : 'red'}" class="fs-5">{{ text }}</p>
+</div>

@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="mt-4">
+    <!-- Button to add a new project -->
+    <a
+      class="add style-button d-flex"
+      [routerLink]="'/gestion-projet/addProjet'"
+    >
+      <span class="material-icons">add</span>
+      <span class="ml-2 style-text">Nouveau projet</span>
+    </a>
+    <h4 class="justify-content-left text-left">Liste des projets</h4>
+  </div>
+
+  <!-- Table Section -->
+  <div class="container-fluid content-table">
+    <!-- Conditional message when no projects are available -->
+    <h2 *ngIf="projets.length === 0" class="text-center text-dispo mt-4">
+      Pas de projets Disponible!!!
+    </h2>
+
+    <!-- Projects Table -->
+    <div *ngIf="projets.length > 0" class="mt-4">
+      <table class="table table-hover">
+        <thead>
+          <tr style="text-align: center" class="style-text-table">
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Date de debut</th>
+            <th scope="col">Date de fin</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center">
+          <!-- Dynamically generate rows for each project -->
+          <tr *ngFor="let projet of projets">
+            <th scope="row">{{ projet.id }}</th>
+            <td>{{ projet.name }}</td>
+            <td>{{ projet.startDate | date : "dd-MM-yyyy" }}</td>
+            <td>{{ projet.endDate | date : "dd-MM-yyyy" }}</td>
+            <td>
+              <div class="d-flex justify-content-center">
+                <!-- Edit Button -->
+                <a class="nav-link m-nav-link" (click)="editProjet(projet.id)">
+                  <span class="material-icons">mode_edit</span>
+                </a>
+                <a
+                  class="nav-link m-nav-link"
+                  [routerLink]="[
+                    '/gestion-projet/detailProjet',
+                    projet.id
+                  ]"
+                >
+                  <span class="material-icons">visibility</span>
+                </a>
+                <!-- Delete Button 
+                <a
+                  class="nav-link m-nav-link"
+                  (click)="deleteProjet(projet.id)"
+                  style="margin-left: 20px"
+                >
+                  <span class="material-icons">delete</span>
+                </a>  -->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="row mt-4">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <!-- Previous Button -->
+              <li class="page-item">
+                <button
+                  class="text-bg2"
+                  [disabled]="disablePrevious || totalPage === 1"
+                  [ngClass]="
+                    disablePrevious || totalPage === 1
+                      ? 'page-link disabled'
+                      : 'page-link'
+                  "
+                  (click)="precedent()"
+                >
+                  Précédent
+                </button>
+              </li>
+              &nbsp;
+              <!-- Next Button -->
+              <li class="page-item">
+                <button
+                  class="text-bg"
+                  [disabled]="disableNext || totalPage === 1"
+                  [ngClass]="
+                    disableNext || totalPage === 1
+                      ? 'page-link disabled'
+                      : 'page-link'
+                  "
+                  (click)="suivant()"
+                >
+                  Suivant
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Page Size Selector -->
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <select
+            class="form-select"
+            id="pageSize"
+            (change)="onSelectedPageSize($event)"
+          >
+            <option value="1">1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1281 @@
+<p-table
+  #dt
+  [value]="datas"
+  [(selection)]="selected"
+  [dataKey]="tableConfig!.dataKey!"
+  [styleClass]="'p-datatable-customers rounded'"
+  [rowHover]="true"
+  [rows]="tableConfig!.paginationRow!"
+  [showCurrentPageReport]="true"
+  (onPage)="onPageIndexChange($event)"
+  [rowsPerPageOptions]="[5, 10, 20, 25]"
+  [loading]="tableConfig!.loading!"
+  [paginator]="tableConfig!.enablePagination!"
+  lazy="true"
+  [totalRecords]="totalRecords"
+  (onRowSelect)="onSelect($event)"
+  [currentPageReportTemplate]="'Voir {first} à {last} sur {totalRecords} entrées'"
+  [filterDelay]="1"
+  [globalFilterFields]="tableConfig!.searchBarField!"
+  [columns]="cols!"
+  [resizableColumns]="true"
+  [stateKey]="tableConfig!.key!"
+  [stateStorage]="'session'"
+  [expandedRowKeys]="expandedRows"
+  (onRowUnselect)="onUnselect($event)"
+  (onRowExpand)="onRowExpand()"
+  (onRowCollapse)="onRowCollapse()">
+  <!-- Title and custom actions start -->
+  <ng-template pTemplate="caption" *ngIf="tableConfig.header">
+    <ng-container *ngIf="!headerTemplateRef">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-4 col-md-4 text-start d-flex">
+          <h1 class="table-title">{{ tableConfig.title }}</h1>
+          <i
+            class="pi pi-info-circle"
+            *ngIf="tableConfig.titleTooltip"
+            tooltipPosition="top"
+            [pTooltip]="tableConfig.titleTooltip"
+            ></i>
+        </div>
+        <div class="col-8 col-md-8 text-end">
+          <!--Export and reload-->
+          <div class="d-inline fix-position">
+            <button class="btn btn-secondary ms-2" (click)="reload()" *ngIf="tableConfig.enableReload">
+              <i class="pi pi-refresh"></i>
+            </button>
+
+            <div ngbDropdown class="d-inline-block ms-2" *ngIf="tableConfig.enableExport">
+              <button class="btn btn-secondary" id="exportTable" ngbDropdownToggle><i class="pi pi-file"></i></button>
+              <div ngbDropdownMenu aria-labelledby="exportTable">
+                <button ngbDropdownItem (click)="excel()"><i class="pi pi-file-excel"></i> MS EXCEL</button>
+                <button ngbDropdownItem (click)="pdf()"><i class="pi pi-file-pdf"></i> MS PDF</button>
+                <button ngbDropdownItem (click)="dt.exportCSV()"><i class="pi pi-file"></i> CSV</button>
+                <button ngbDropdownItem (click)="dt.exportCSV({ selectionOnly: true })">
+                  <i class="pi pi-filter"></i>SELECTION
+                </button>
+                <button ngbDropdownItem *ngIf="tableConfig.rowSelect" (click)="dt.exportCSV({ selectionOnly: true })">
+                  <i class="pi pi-filter"></i>SELECTION
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!--Search bar-->
+          <span class="p-input-icon-left ms-2 search-bar" *ngIf="tableConfig.enableSearchBar">
+            <i class="pi pi-search"></i>
+            <input
+              class="form-control"
+              pInputText
+              type="text"
+              #searchField
+              (input)="dt.filterGlobal($any($event.target).value, 'contains'); searchEventMethode(searchField.value)"
+              placeholder="{{ 'Rechercher' | translate }}" />
+          </span>
+
+          <!--Add button-->
+          <div *ngIf="tableConfig.addBtn" class="add-btn d-inline fix-position ms-2">
+            <a
+              pButton
+              pRipple
+              type="button"
+              class="ms-2"
+              (click)="add()"
+              label="{{ tableConfig.addBtnTitle ?? 'Ajouter' | translate }}"
+              icon="pi pi-plus">
+            </a>
+          </div>
+          <div *ngIf="tableConfig.addBtnImport" class="add-btn d-inline fix-position ms-2">
+            <a
+              pButton
+              pRipple
+              type="button"
+              class="ms-2"
+              (click)="add()"
+              label="{{ tableConfig.addBtnTitle ?? 'Importer' | translate }}"
+              icon="pi pi-upload">
+            </a>
+          </div>
+          <!--save button-->
+          <div *ngIf="tableConfig.saveBtn" class="add-btn d-inline fix-position ms-2">
+            <a
+              pButton
+              pRipple
+              type="button"
+              class="ms-2"
+              (click)="saveAmortization()"
+              label="{{ tableConfig.addBtnTitle ?? 'Enregistrer' | translate }}"
+              icon="pi pi-save">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="tableConfig.enableMultiSearch">
+        <div class="formgrid grid">
+          <div *ngFor="let item of tableConfig.searchMultiples" class="field col">
+            <div *ngIf="item.type === 'input'">
+              <input
+                type="text"
+                [(ngModel)]="item.value"
+                pInputText
+                placeholder="{{ item.label }}"
+                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+            </div>
+            <div class="field col" *ngIf="item.type === 'dropdown'">
+              <p-dropdown
+                placeholder="{{ item.label }}"
+                [style]="{ width: '100%' }"
+                [options]="item.array"
+                [(ngModel)]="item.selected"
+                optionLabel="{{ 'value' || 'name' }}"></p-dropdown>
+            </div>
+            <div class="field col" *ngIf="item.type === 'date' || item.type === 'mois'">
+              <p-calendar [locale]="localeFr" [style]="{ width: '100%' }" [monthNavigator]="false"
+                          [(ngModel)]="item.calendar.date" view="{{item.calendar.view}}"
+                          placeholder="{{item.calendar.view=='year'?'Année':'mois/Année'}}"
+                          dateFormat="{{item.calendar.dateFormat}}"></p-calendar>
+            </div>
+          </div>
+          <button
+            class="btn btn-primary ms-2"
+            [style]="{ 'background-color': '#003399', height: '36px' }"
+            tooltipPosition="top"
+            pTooltip="Rechercher"
+            (click)="searchMultiple()">
+            <i class="pi pi-search"></i>
+          </button>
+          <button
+            class="btn btn-secondary ms-2"
+            [style]="{ height: '36px' }"
+            tooltipPosition="top"
+            pTooltip="Rafraîchir"
+            (click)="reloadTables()">
+            <i class="pi pi-refresh"></i>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="headerTemplateRef" [ngTemplateOutlet]="headerTemplateRef"></ng-container>
+  </ng-template>
+  <!-- Title and custom actions end -->
+
+  <!-- Table Header start -->
+  <ng-template pTemplate="header" let-columns>
+    <tr class="mx-3" [ngClass]="{ 'transparent' : tableConfig.transparentOrPrimaryBackground === 'transparent'}">
+      <th *ngIf="tableConfig.expandable"></th>
+      <th *ngIf="!tableConfig.rowSelect && tableConfig.selectByRadio"></th>
+      <th *ngIf="!tableConfig.rowSelect && tableConfig.selectByCheckBox"></th>
+      <th
+        *ngFor="let col of cols!"
+        [pSortableColumn]="col.field"
+        pResizableColumn
+        [ngStyle]="{ width: col.width ?? 'inherit' }"
+        class="my-left-text">
+        <div class="p-d-flex p-jc-between p-ai-center">
+          <span *ngIf="!shouldHideHeadersBasedOnRoute(col.header)" class="ms-2">{{ col.header | translate }}</span>
+          <span class="p-ml-auto">
+            <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+            <p-columnFilter
+              *ngIf="col.filterable"
+              type="text"
+              [field]="col.field"
+              display="menu"
+              [showMatchModes]="false"
+              matchMode="startsWith"
+              [showOperator]="false"
+              [showAddButton]="false"
+              [showClearButton]="false"></p-columnFilter>
+          </span>
+        </div>
+      </th>
+      <th *ngIf="tableConfig.displayState" pResizableColumn>{{ "Statut" }}</th>
+      <th *ngIf="tableConfig.displayAction" pResizableColumn>{{ "Actions" }}</th>
+    </tr>
+
+    <!--column search-->
+    <tr *ngIf="tableConfig.extraFilter" class="mx-3">
+      <th *ngIf="tableConfig.expandable"></th>
+      <th *ngIf="!tableConfig.rowSelect && tableConfig.selectByRadio"></th>
+      <th *ngIf="!tableConfig.rowSelect && tableConfig.selectByCheckBox"></th>
+      <th *ngFor="let col of cols!" pResizableColumn class="text-end text-center">
+        <input
+          *ngIf="col.searcheable"
+          pInputText
+          type="text"
+          (input)="dt.filter($any($event.target).value, col.field, 'contains')"
+          placeholder="{{ 'SEARCH_BY' | translate }} {{ col.field }}"
+          class="p-column-filter" />
+        <!--multiselect colum search-->
+        <p-multiSelect
+          *ngIf="col.multiselectable"
+          [options]="col.multiSelectOptions!"
+          placeholder="Tout"
+          (onChange)="col.onMultiSelect!($event)"
+          styleClass="p-column-filter"
+          [optionLabel]="col.field">
+          <ng-template let-option pTemplate="item">
+            <div class="p-multiselect-representative-option">
+              <span class="p-ml-1">{{ option.label }}</span>
+            </div>
+          </ng-template>
+        </p-multiSelect>
+        <!--single select colum search-->
+        <p-dropdown
+          *ngIf="col.selectable"
+          [options]="col.selectOptions!"
+          (onChange)="dt.filter($event.value, col.field, 'equals')"
+          styleClass="p-column-filter"
+          placeholder="Select a {{ col.field }}"
+          [showClear]="true">
+          <ng-template let-option pTemplate="item">
+            <span [class]="'customer-badge status-' + option.value">&#123;&#123;option.label&#125;&#125;</span>
+          </ng-template>
+        </p-dropdown>
+        <!--date select column search-->
+        <p-calendar
+          *ngIf="col.type === 'date'"
+          (onSelect)="col.onDateSelect!($event)"
+          (onClearClick)="dt.filter('', col.field, 'equals')"
+          [showButtonBar]="true"
+          styleClass="p-column-filter"
+          [placeholder]="col.header"
+          [readonlyInput]="true"
+          dateFormat="yy-mm-dd"></p-calendar>
+      </th>
+      <th *ngIf="tableConfig.displayAction" pResizableColumn></th>
+      <th *ngIf="tableConfig.displayState" pResizableColumn></th>
+    </tr>
+  </ng-template>
+  <!-- Table Header end -->
+
+  <!-- Body start -->
+  <ng-template pTemplate="body" let-data let-columns="columns" let-expanded="expanded">
+    <tr class="p-selectable-row mx-3" [pSelectableRow]="data">
+      <td *ngIf="tableConfig.expandable">
+        <button
+          type="button"
+          pButton
+          pRipple
+          [pRowToggler]="data"
+          class="p-button-text p-button-rounded p-button-plain"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+      </td>
+      <td *ngIf="!tableConfig.rowSelect && tableConfig.selectByRadio">
+        <p-tableRadioButton [value]="data"></p-tableRadioButton>
+      </td>
+      <td *ngIf="!tableConfig.rowSelect && tableConfig.selectByCheckBox">
+        <p-tableCheckbox [value]="data"></p-tableCheckbox>
+      </td>
+      <ng-container *ngFor="let col of cols!; index as i">
+        <ng-template #defaultCol>
+          <td class="break-word" style="word-wrap: break-word; word-break: break-all;padding: 7px">
+            <ng-container *ngIf="col!.type! === 'text'">
+              <p class="text-justify my-left-text">
+                {{ col!.subField! ? data[col!.field][col!.subField!] : data[col!.field] }}
+              </p>
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'date'">
+              <p class="text-justify my-left-text">
+                {{ (col!.subField! ? data[col!.field][col!.subField!] : data[col!.field]) | date: "dd/MM/yyyy" }}
+              </p>
+            </ng-container>
+            <ng-container *ngIf="col?.type === 'loadHistoryStatus'">
+              <div class="load-history-status  {{data[col!.field] === 'FAILED' ? 'border-danger': 'border-success'}}">
+                <span>  {{ (data[col!.field] === 'SUCCESS' ? 'succès' : 'échec') | titlecase }}</span>
+                <i class="flex {{ data[col!.field] === 'FAILED'  ? 'pi pi-times-circle' : 'pi pi-check-circle' }}"></i>
+              </div>
+              <app-load-status [statusLoad]="data[col?.field]"></app-load-status>
+            </ng-container>
+            <ng-container *ngIf="col?.type === 'loadHistoryStatusDetail'">
+              <div class="load-history-status  {{getBorderClass(data,col).className}}">
+                <span>  {{ getBorderClass(data, col).title | titlecase }}</span>
+                <i class="flex {{ getBorderClass(data,col).icon }}"></i>
+              </div>
+              <app-load-status [statusLoad]="data[col?.field]"></app-load-status>
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'amount'">
+              <p class="text-justify my-right-text">
+                {{
+                  (col!.subField! ? data[col!.field][col!.subField!] : data[col!.field])
+                    | currency: "XOF" : "symbol" : "1.0-0"
+                }}
+              </p>
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'amountWithoutSymbol'">
+              <p class="text-justify my-right-text">
+                {{
+                  (col!.subField! ? data[col!.field][col!.subField!] : data[col!.field]) | currency: "" : "" : "1.0-0"
+                }}
+              </p>
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'percent'">
+              <p class="text-justify my-left-text">
+                {{ col!.subField! ? data[col!.field][col!.subField!] : data[col!.field] * 100 }}%
+              </p>
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'progress'">
+              <span class="p-column-title">{{ col.field }}</span>
+              <p-progressBar [value]="data![col!.field]" [showValue]="true"></p-progressBar>
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'status'">
+              <!-- status mutualiste -->
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'incomplet' && !shouldHideHeadersBasedOnRoute(col.header)"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Incomplet
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'complement_info_rep'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Complement info reprise
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'candidat' && !shouldHideHeadersBasedOnRoute(col.header)"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Demande soumise</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'mutualiste' && !shouldHideHeadersBasedOnRoute(col.header)"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Demande validée</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'complement_info'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Complément requis</span
+              >
+              <span
+                *ngIf="
+                  data[col!.field].toLowerCase() === 'mise_a_jour_candidat' &&
+                  !shouldHideHeadersBasedOnRoute(col.header)
+                "
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >dossier d'adhésion modifié</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'mise_a_jour_mutualiste'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >dossier mutualiste modifié</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'verif_actuaire'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Vérification</span
+              >
+
+              <!-- Statut demande -->
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'demande_acceptee'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Demande acceptée
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'demande_rejetee'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Demande rejetée
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'fature_chargee'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Facture chargée</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'demande_soumise_se'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Demande soumise</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'amortissement_etabli'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Amortissement établi
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_genere'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Protocole généré</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_rejete'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Protocole rejeté</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_corrige'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Protocole corrigé</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_accepte' && data['statusRemboursement'] === 100"
+                [class]="'col-badge status-paiement-termine '"
+              >paiement terminé
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_accepte'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >paiement en cours
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_signe_par_mutualiste'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Signé par mutualiste
+              </span>
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_signe_par_se'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Signé par SE</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'protocole_transmis'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Protocole transmis</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'procuration_transmise'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Procuration transmise</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'cheque_genere'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Chèque Généré</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'bl_charge'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >BL chargé</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'pv_reception_charge'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >PV de reception chargé</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'procuration_transmise_dpl'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Procuration transmise à la DPL</span
+              >
+
+              <!-- statut convention -->
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'en_cours'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >En cours</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'terminee'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Terminée</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'resiliee'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Resiliée</span
+              >
+
+              <!-- statut payment -->
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'cheque_disponible'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Chèque disponible</span
+              >
+              <span
+                *ngIf="data[col!.field].toLowerCase() === 'cheque_retire'"
+                [class]="'col-badge status-' + data[col!.field].toLowerCase()"
+              >Chèque retiré</span
+              >
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'phaseStatusSite'">
+              <span
+                *ngIf="data[col!.field]"
+                [class]="'col-badge phase-status-site ' + data[col!.field].toLowerCase()"
+              >{{ PhaseTypeRecord[data[col!.field]]?.name }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'reservationStatus'">
+              <span
+                *ngIf="data[col!.field]"
+                [class]="'col-badge reservation-status ' + getStatusReservation(data)?.name.toLowerCase()"
+              >{{ getStatusReservation(data)?.value}}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'clientType'">
+              <span
+                *ngIf="data[col!.field][col!.subField!]"
+                [class]="'col-badge client-type-reservation ' + data[col!.field][col!.subField!].toLowerCase()"
+              >{{ BuyerTypeRecord[data[col!.field][col!.subField!]].value.toUpperCase() }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'penaltyNature'">
+              <span
+                *ngIf="data[col!.field]"
+                [class]="'col-badge penalty-nature ' + data[col!.field].toLowerCase()"
+              >{{ PenaltyNatureEnumRecord[data[col!.field]].value.toUpperCase() }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'offreStatus'">
+              <span
+                *ngIf="data[col!.field]"
+                [class]="'col-badge offre-status-site ' + data[col!.field].toLowerCase()"
+              >{{ getStatusOfferTitle(data[col!.field].toUpperCase()) }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'paramsSecoursStatus'">
+              <span
+                *ngIf="data[col!.field]"
+                [class]="'col-badge params-secours-status' "
+                [ngClass]="{
+                'actif':data?.stated ,
+                'inactif':!data?.stated
+                }"
+              >{{ getStatusParamSecousTitle(data) }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'statusSiteInPhase'">
+              <span
+                *ngIf="data[col!.field].toLowerCase()"
+                [class]="'col-badge site-tracking-status ' + data[col!.field].toLowerCase()"
+              >{{ SiteTrackingStatusEnum[data[col!.field]]?.value }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'statusPaymentReservation'">
+              <span
+                *ngIf="data[col!.field].toLowerCase()"
+                [class]="'col-badge status-payment-reservation ' + data[col!.field].toLowerCase()"
+              >{{ AmortizationStatusReservationRecord[data[col!.field]]?.value }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'statusPaymentOffer'">
+              <span
+                *ngIf="data[col!.field].toLowerCase()"
+                [class]="'col-badge status-payment-offer ' + data[col!.field].toLowerCase()"
+              >{{ OfferPaymentTrackingStatusRecord[data[col!.field]]?.value }}
+              </span>
+            </ng-container>
+
+
+            <ng-container *ngIf="col!.type! === 'clientTypeIdrFo'">
+              <span
+                *ngIf="data[col!.field].toLowerCase()"
+                [class]="'col-badge client-type-status ' + data[col!.field].toLowerCase()"
+              >{{ PersonTypeRecord[data[col!.field]]?.value }}
+              </span>
+            </ng-container>
+
+
+            <ng-container *ngIf="col!.type! === 'reasonIdr'">
+              <span
+                *ngIf="data[col!.field].toLowerCase()"
+                [class]="'col-badge reason-type-status ' + data[col!.field]?.toLowerCase()"
+              >{{ ReasonRecord[data[col!.field]]?.value }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'statusIdrApp'">
+              <span
+                *ngIf="data[col!.field].toLowerCase()"
+                [class]="'col-badge idr-app-status ' + data[col!.field]?.toLowerCase()"
+              >{{ ApplicationIdrStatusEnumProperties[data[col!.field]]?.value }}
+              </span>
+            </ng-container>
+
+
+            <ng-container *ngIf="col!.type! === 'statusAdvanceFsApp'">
+              <span
+                *ngIf="data[col!.field].toLowerCase()"
+                [class]="'col-badge advance-fs-app-status ' + data[col!.field]?.toLowerCase()"
+              >{{ ApplicationAdvanceFsStatusEnumProperties[data[col!.field]]?.value }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col?.type === 'statusParcelReservation'">
+              <span
+                [class]="'col-badge statut-parcel-reservation ' + (data[col?.field] ? 'reserved':'no-reserved')"
+              >
+                {{ data[col!.field] ? 'réservée' : 'libre' }}
+              </span>
+            </ng-container>
+
+            <ng-container *ngIf="col?.type === 'statusParcelProperties'">
+              <div *ngIf="getParcelsProperties(data[col?.field])?.length; else noPropertiesInParcel; ">
+                <div
+                  class="col-badge statut-parcel-property"
+                  *ngFor="let property of getParcelsProperties(data[col?.field])">
+                  <img [pTooltip]="getParcelPropertyIcon(property?.siteParcelProperty)?.label" tooltipPosition="left"
+                       width="25"
+                       src="assets/layout/images/{{getParcelPropertyIcon(property?.siteParcelProperty)?.icon}}"
+                       alt="icon " />
+                </div>
+              </div>
+              <ng-template #noPropertiesInParcel>
+                <div style="text-align: center">
+                  Aucune caractéristique spécifique
+                </div>
+
+              </ng-template>
+
+            </ng-container>
+
+            <ng-container *ngIf="col!.type! === 'statusSubField'">
+              <span
+                *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'incomplet'"
+                [class]="'col-badge status-' + data[col!.field][col!.subField!].toLowerCase()"
+              >Incomplet
+              </span>
+              <span
+                *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'complement_info_rep'"
+                [class]="'col-badge status-' + data[col!.field][col!.subField!].toLowerCase()"
+              >Complement info reprise
+              </span>
+              <span
+                *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'demande_soumise_se'"
+                [class]="'col-badge status-' + data[col!.field][col!.subField!].toLowerCase()"
+              >Demande soumise</span
+              >
+              <span
+                *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'valide'"
+                [class]="'col-badge status-' + data[col!.field][col!.subField!].toLowerCase()"
+              >Demande validée</span
+              >
+              <span
+                *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'complement_info'"
+                [class]="'col-badge status-' + data[col!.field][col!.subField!].toLowerCase()"
+              >Complément requis</span
+              >
+              <span
+                *ngIf="
+                  data[col!.field].toLowerCase() ==
+                    'mise_a_jour_candid=================================================at' ||
+                  data[col!.field].toLowerCase() ==
+                    'mise_a_jour_mutual=================================================iste'
+                "
+                [class]="'col-badge status-' + data[col!.field][col!.subField!].toLowerCase()"
+              >Modifié</span
+              >
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'applicationType'">
+              <span class="pret-classe" *ngIf="data[col!.field].toLowerCase() === 'pret_construction'"
+              >Prêt Construction</span
+              >
+              <span class="pret-classe" *ngIf="data[col!.field].toLowerCase() === 'pret_espece'">Prêt Espece </span>
+              <span class="pret-classe" *ngIf="data[col!.field].toLowerCase() === 'operation_tabaski'"
+              >Operation Tabaski</span
+              >
+              <span class="pret-classe" *ngIf="data[col!.field].toLowerCase() === 'operation_korite'"
+              >Operation Korite</span
+              >
+              <span class="pret-classe" *ngIf="data[col!.field].toLowerCase() === 'pret_equipement'"
+              >Prêt equipement</span
+              >
+              <span class="pret-classe" *ngIf="data[col!.field].toLowerCase() === 'pret_vehicule'">Prêt Véhicule</span>
+            </ng-container>
+            <ng-container *ngIf="col!.type! === 'applicationTypeSubField'">
+              <span *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'pret_construction'"
+              >Prêt Construction</span
+              >
+              <span *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'pret_espece'">Prêt Espece </span>
+              <span *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'operation_tabaski'"
+              >Operation Tabaski</span
+              >
+              <span *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'operation_korite'"
+              >Operation Korite</span
+              >
+              <span *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'pret_equipement'">Prêt equipement</span>
+              <span *ngIf="data[col!.field][col!.subField!].toLowerCase() === 'pret_vehicule'">Prêt Véhicule</span>
+            </ng-container>
+          </td>
+        </ng-template>
+        <ng-container
+          [ngTemplateOutlet]="bodyRef || defaultCol"
+          [ngTemplateOutletContext]="{ $implicit: data, col: col, custom: tableConfig.customData, index: i }">
+        </ng-container>
+      </ng-container>
+      <!-- State row start -->
+      <td class="text-justify me-2" *ngIf="tableConfig.displayState">
+        <ng-container *ngFor="let state of tableConfig.states; index as i">
+          <ng-template #defaultTemplate let-state>
+            <a
+              pButton
+              pRipple
+              *ngIf="state.type === 'validated'"
+              type="button"
+              [label]="state.mini == null || state.mini == false ? ('COMMON.ACTIONS.VALIDATED' | translate) : ''"
+              class="ms-2 -accept text-center"
+              tooltipPosition="top"
+              pTooltip="{{ 'COMMON.ACTIONS.VALIDATED' | translate }}"
+              (click)="actionCallback(state, data)"
+              icon="pi pi-check"></a>
+            <a
+              pButton
+              pRipple
+              *ngIf="state.type === 'pending'"
+              type="button"
+              [label]="state.mini == null || state.mini == false ? ('COMMON.ACTIONS.PENDING' | translate) : ''"
+              class="ms-2 -second text-center"
+              tooltipPosition="top"
+              pTooltip="{{ 'COMMON.ACTIONS.PENDING' | translate }}"
+              (click)="actionCallback(state, data)"
+              icon="pi pi-clock"></a>
+            <a
+              pButton
+              pRipple
+              *ngIf="state.type === 'rejected'"
+              type="button"
+              [label]="state.mini == null || state.mini == false ? ('COMMON.ACTIONS.REJECTED' | translate) : ''"
+              class="delete-button ms-2 -warn text-center"
+              tooltipPosition="top"
+              pTooltip="{{ 'COMMON.ACTIONS.REJECTED' | translate }}"
+              (click)="actionCallback(state, data)"
+              icon="pi pi-times-circle"></a>
+            <a
+              pButton
+              pRipple
+              *ngIf="state.type === 'edit'"
+              type="button"
+              [label]="state.mini == null || state.mini == false ? ('COMMON.ACTIONS.REJECTED' | translate) : ''"
+              class="ms-2 btn-eland-edit text-center"
+              tooltipPosition="top"
+              pTooltip="Modifier"
+              (click)="actionCallback(state, data)"
+              icon="pi pi-pencil"></a>
+          </ng-template>
+
+          <ng-container
+            [ngTemplateOutlet]="statesRef || defaultTemplate"
+            [ngTemplateOutletContext]="{ $implicit: state, item: data, custom: tableConfig.customData, index: i }">
+          </ng-container>
+        </ng-container>
+      </td>
+
+      <!-- State row end -->
+      <!-- Action row start -->
+      <td class="content-left me-2" *ngIf="tableConfig.displayAction">
+        <!-- {{data.state}} -->
+
+        <ng-container *ngFor="let action of tableConfig.actions; index as i">
+          <ng-template #defaultTemplate let-action>
+            <div *ngFor="let col of cols">
+              <button
+                pButton
+                pRipple
+                *ngIf="action.type === 'incomplete' && data[col!.field]?.toLowerCase() === 'incomplet'"
+                type="button"
+                label="Traiter"
+                class="ms-2 text-center"
+                tooltipPosition="top"
+                pTooltip="Traiter"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-spin pi-spinner"></button>
+              <button
+                pButton
+                pRipple
+                style="width: 100%"
+                *ngIf="
+                  (action.type === 'treat_mise_a_jour' && data[col!.field]?.toLowerCase() == 'mise_a_jour_candidat') ||
+                  (action.type === 'treat_mise_a_jour' && data[col!.field]?.toLowerCase() == 'mise_a_jour_mutualiste')
+                "
+                type="button"
+                label="Traiter la MAJ"
+                class="text-center"
+                tooltipPosition="top"
+                pTooltip="Traiter la mise a jour"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-spin pi-spinner"></button>
+              <button
+                pButton
+                pRipple
+                *ngIf="action.type === 'treat' && data[col!.field]?.toLowerCase() === 'candidat'"
+                type="button"
+                label="Traiter"
+                class="ms-2 text-center"
+                tooltipPosition="top"
+                pTooltip="Traiter"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-spin pi-spinner"></button>
+              <button
+                pButton
+                pRipple
+                *ngIf="action.type === 'treat' && data[col!.field]?.toLowerCase() === 'verif_actuaire'"
+                type="button"
+                label="Traiter"
+                class="ms-2 text-center"
+                tooltipPosition="top"
+                pTooltip="Traiter"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-spin pi-spinner"></button>
+              <button
+                pButton
+                pRipple
+                *ngIf="action.type === 'view' && data[col!.field]?.toLowerCase() === 'mutualiste'"
+                type="button"
+                label="Consulter"
+                class="ms-2 text-center"
+                tooltipPosition="top"
+                pTooltip="Consulter"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-eye"></button>
+            </div>
+            <div class="example-container">
+              <div class="p-buttonset">
+                <a
+                  pButton
+                  pRipple
+                  *ngIf="action.type === 'viewChild'"
+                  type="button"
+                  [label]="action.mini == null || action.mini == false ? 'Enfants' : ''"
+                  class="p-button-rounded p-button-text"
+                  tooltipPosition="top"
+                  pTooltip="Voir la liste des enfants"
+                  (click)="actionCallback(action, data)"
+                  icon="pi pi-users"></a>
+                <a
+                  pButton
+                  pRipple
+                  *ngIf="action.type === 'viewRegistry'"
+                  type="button"
+                  [label]="action.mini == null || action.mini == false ? 'Extrait' : ''"
+                  class="p-button-rounded p-button-text"
+                  tooltipPosition="top"
+                  pTooltip="Visualiser l'extrait de naissance"
+                  (click)="actionCallback(action, data)"
+                  icon="pi pi-file"></a>
+              </div>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_accep_reject'"></div>
+
+            <div *ngIf="data.state === 'cp_cons_soumise_amount_sup_amountCons'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'traiter'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Traiter' : ''"
+                class="btn-eland-edit p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Traiter"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-spin pi-spinner"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_soumise_amount_inf_amountCons'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'traiter'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Traiter' : ''"
+                class="btn-eland-edit p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Traiter"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-spin pi-spinner"></a>
+            </div>
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'viewInfo'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.OPEN' | translate) : ''"
+              class="btn-eland-second p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Visualiser"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-eye"></a>
+
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'cancel'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? 'Supprimer' : ''"
+              class="btn-eland-delete p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Annuler"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-times">
+            </a>
+
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'viewMore'"
+              type="button"
+              class="btn-eland-second p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Voir Plus"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-info"></a>
+
+            <div *ngIf="data.state === 'cp_cons_accep_reject_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'generateAmortization'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.OPEN' | translate) : ''"
+                class="btn-eland-generateAmorti p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Generer amortissement"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-table"></a>
+            </div>
+
+            <div *ngIf="data.state === 'cp_cons_amortissementEtabli_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'generer'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.ARCHIVE' | translate) : ''"
+                class="btn-eland-accept p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Editer le contrat"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-file"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_protocoleRejete_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'corriger'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.ARCHIVE' | translate) : ''"
+                class="btn-eland-corriger p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Corriger le contrat"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-copy"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_protocoleaccept_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'viewDocument'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.OPEN' | translate) : ''"
+                class="btn-eland-second p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Afficher le document"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-file"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_protocolegenerer_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'validatApplication'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.OPEN' | translate) : ''"
+                class="btn-eland-edit p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Validation du contrat"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-check"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_protocolesigneparmutualiste_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'signeProtocole'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Singer' : ''"
+                class="btn-eland-signe p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Signer le contrat"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-key"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_protocolesigneparsee_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'chargerBLouPV'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Singer' : ''"
+                class="btn-eland-downloadBL p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="charger le BL"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-upload"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_veh_generate_protocolesigneparsee_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'generatePV'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Generer' : ''"
+                class="btn-eland-downloadBL p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Generer le Pv"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-file"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_veh_protocolesigneparsee_ccc'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'chargerBLouPV'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Singer' : ''"
+                class="btn-eland-downloadBL p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="charger le Pv de reception"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-upload"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_generer_cheque'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'genererCheque'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.ARCHIVE' | translate) : ''"
+                class="btn-eland-accept p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Etablir chèque"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-money-bill"></a>
+            </div>
+
+            <div *ngIf="data.state === 'cp_cons_charger_bon_livraison'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'chargerBonLivraison'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.ARCHIVE' | translate) : ''"
+                class="btn-eland-accept p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Charger"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-upload"></a>
+            </div>
+            <div *ngIf="data.state === 'cp_cons_transmettre_procuration_dpl'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'transmettreDPL'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.ARCHIVE' | translate) : ''"
+                class="btn-eland-accept p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Transmettre"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-pencil"></a>
+            </div>
+
+            <div *ngIf="data.statut === 'CHEQUE_RETIRE'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'viewPaymentDocument'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.OPEN' | translate) : ''"
+                class="btn-eland-edit p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Afficher le document"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-file"></a>
+            </div>
+            <div *ngIf="data.statut === 'CHEQUE_DISPONIBLE'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'editPayment'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Modifier' : ''"
+                class="btn-eland-accept p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Modifier"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-upload"></a>
+            </div>
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'viewDocument'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.OPEN' | translate) : ''"
+              class="btn-eland-second p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Afficher le document"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-file"></a>
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'download'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.DOWNLOAD' | translate) : ''"
+              class="btn -disable p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="{{ 'COMMON.ACTIONS.DOWNLOAD' | translate }}"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-download"></a>
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'start'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.START' | translate) : ''"
+              class="p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="{{ 'COMMON.ACTIONS.START' | translate }}"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-caret-right"></a>
+
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'edit'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? 'Modifier' : ''"
+              class="btn-eland-edit p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Modifier"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-pencil"></a>
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'viewDetails'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? 'Detail' : ''"
+              class="btn-eland-edit p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Detail"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-eye"></a>
+
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'reset'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? 'Réinitialiser' : ''"
+              class="btn-eland-reset p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Réinitialiser"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-refresh"></a>
+
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'delete'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? 'Supprimer' : ''"
+              class="btn-eland-delete p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Supprimer"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-trash"></a>
+
+            <div *ngIf="data.conventionStatus === 'EN_COURS'">
+              <a
+                pButton
+                pRipple
+                *ngIf="action.type === 'cancel'"
+                type="button"
+                [label]="action.mini == null || action.mini == false ? 'Supprimer' : ''"
+                class="btn-eland-delete p-button-rounded p-button-outlined btn-action"
+                tooltipPosition="top"
+                pTooltip="Résilier"
+                (click)="actionCallback(action, data)"
+                icon="pi pi-times"></a>
+            </div>
+
+            <!-- liste agents -->
+            <div
+              *ngIf="action?.type === 'enabled' && data['profil'] !== undefined"
+              (click)="actionCallback(action, data)"
+              [ngClass]="{
+                'custom-toggle-button': true,
+                'custom-toggle-button-enabled': data.enabled,
+                'custom-toggle-button-disabled': !data.enabled
+              }"
+              pTooltip="{{ 'compte ' + (data.enabled ? 'activé' : 'désactivé') }}"
+              tooltipPosition="top">
+              <div class="toggle-switch"></div>
+            </div>
+
+            <!-- liste paramétrage pret -->
+            <div
+              *ngIf="action?.type === 'enabled' && data['applicationType'] !== undefined"
+              (click)="actionCallback(action, data)"
+              [ngClass]="{
+                'custom-toggle-button': true,
+                'custom-toggle-button-enabled': data.enable,
+                'custom-toggle-button-disabled': !data.enable
+              }"
+              pTooltip="{{ 'paramètre prêt ' + (data.enable ? 'activé' : 'désactivé') }}"
+              tooltipPosition="top">
+              <div class="toggle-switch"></div>
+            </div>
+
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'open'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? 'Ouvrir' : ''"
+              class="btn-eland-second p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="Détails"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-info-circle"></a>
+
+            <a
+              pButton
+              pRipple
+              *ngIf="action.type === 'archive'"
+              type="button"
+              [label]="action.mini == null || action.mini == false ? ('COMMON.ACTIONS.ARCHIVE' | translate) : ''"
+              class="-second p-button-rounded p-button-outlined btn-action"
+              tooltipPosition="top"
+              pTooltip="{{ 'COMMON.ACTIONS.ARCHIVE' | translate }}"
+              (click)="actionCallback(action, data)"
+              icon="pi pi-eye"></a>
+          </ng-template>
+
+          <ng-container
+            [ngTemplateOutlet]="actionsRef || defaultTemplate"
+            [ngTemplateOutletContext]="{ $implicit: action, item: data, custom: tableConfig.customData, index: i }">
+          </ng-container>
+        </ng-container>
+      </td>
+      <!-- Action row end -->
+    </tr>
+  </ng-template>
+  <!-- Body end -->
+
+  <!-- Expansion start -->
+  <ng-template pTemplate="rowexpansion" let-data let-columns="columns">
+    <tr>
+      <td [attr.colspan]="cols!.length + 1">
+        <ng-container
+          [ngTemplateOutlet]="rowexpansionRef!"
+          [ngTemplateOutletContext]="{ $implicit: data, custom: tableConfig.customData }">
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+  <!-- Expansion end -->
+
+  <!-- Empty message start -->
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="12" class="text-center">{{ "Aucun résultat" | translate }}</td>
+    </tr>
+  </ng-template>
+  <!-- Empty message end -->
+</p-table>
+
+

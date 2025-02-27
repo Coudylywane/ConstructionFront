@@ -1,0 +1,121 @@
+<div
+  class="page-wrapper"
+  id="main-wrapper"
+  data-layout="vertical"
+  data-navbarbg="skin6"
+  data-sidebartype="full"
+  data-sidebar-position="fixed"
+  data-header-position="fixed"
+>
+  <!-- Sidebar Start -->
+  <aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="brand-logo d-flex align-items-center justify-content-between">
+      <a href="./index.html" class="text-nowrap logo-img">
+        <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+      </a>
+    </div>
+  </aside>
+  <div class="body-wrapper">
+    <header class="app-header"></header>
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <a class="return d-flex" [routerLink]="'/gestion-projet/listProjet'">
+          <span class="material-icons"> arrow_back_ios_new </span>
+          <span class="ml-2"><b>Liste des Projets</b></span>
+        </a>
+
+        <div class="card-body mt-4">
+          <div class="card">
+            <div class="card-body">
+              <form [formGroup]="projetForm">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nom du projet</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Entrer le nom du projet"
+                    formControlName="name"
+                  />
+                  <!-- <<div *ngIf="projectForm.get('name').invalid && projectForm.get('name').touched" class="text-danger">
+                      Veuillez remplir ce champ
+                    </div> -->
+                </div>
+
+                <div class="mb-3">
+                  <label for="description" class="form-label"
+                    >Description</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Entrer la description"
+                    formControlName="description"
+                  />
+                  <!-- <div *ngIf="projectForm.get('description').invalid && projectForm.get('description').touched" class="text-danger">
+                      Veuillez remplir ce champ
+                    </div> -->
+                </div>
+
+                <div class="mb-3">
+                  <label for="startDate" class="form-label"
+                    >Date de début</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="startDate"
+                  />
+                  <!-- <div *ngIf="projectForm.get('startDate').invalid && projectForm.get('startDate').touched" class="text-danger">
+                      Veuillez remplir ce champ
+                    </div> -->
+                </div>
+
+                <div class="mb-3">
+                  <label for="endDateProvisioning" class="form-label"
+                    >Date de fin prévisionnelle</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="endDateProvisioning"
+                  />
+                  <!-- <div *ngIf="projectForm.get('endDateProvisioning').invalid && projectForm.get('endDateProvisioning').touched" class="text-danger">
+                      Veuillez remplir ce champ
+                    </div> -->
+                </div>
+
+                <div class="mb-3">
+                  <label for="endDate" class="form-label">Date de fin</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="endDate"
+                  />
+                  <!-- <div *ngIf="projectForm.get('endDate').invalid && projectForm.get('endDate').touched" class="text-danger">
+                      Veuillez remplir ce champ
+                    </div> -->
+                </div>
+                <div class="bt-boutton d-flex justify-content-center">
+                  <button
+                    (click)="createProject()"
+                    [disabled]="!projetForm.valid"
+                    class="btnRegister">
+                    Enregistrer
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog
+  [style]="{ width: '50vw', backgroundColor: 'black', color: 'white' }"
+  icon="pi pi-check-circle"
+  [baseZIndex]="10000"
+>
+</p-confirmDialog>

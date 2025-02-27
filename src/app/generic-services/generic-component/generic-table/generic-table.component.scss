@@ -1,0 +1,828 @@
+$topbarLeftBgColor: #583a14;
+$topbarRightBgColor: #583a14;
+$topbarLeftTextColor: #c6a531;
+$topbarRightTextColor: #c6a531;
+$topbarBorderBottomColor: #583a14;
+$primaryColor: #583A14;
+$accentColor: #c6a531;
+$warningColor: #E64545;
+$primaryTextColor: #ffffff;
+$bodyBgColor: #F2F8FA;
+
+//Eland custo colors
+$portalBrown: #583A14;
+$portalYellow: #C6A531;
+$portalOrange: #FA9614;
+$portalBlue100: #005BCC;
+$portalBlue200: #00BFFF;
+$portalBlue300: #003399;
+$portalGreen: #2E9D14;
+$portalDarkGreen: #256029;
+$portalRed: #E64545;
+$portalGray: #AEAEAE;
+$portalWhite: white;
+$portalDarkYellow: #8D652E;
+$portalDarkGray: #484848;
+$portalLightGray: #EFF1F4;
+//un style devrait peut être être créer pour les différents tailles et autres critères de polices 
+$default-font-size: 14px;
+
+.fix-position {
+  top: -2px;
+  position: relative;
+}
+
+.my-center-text {
+  text-align: center !important;
+  width: 100%;
+}
+
+.my-left-text {
+  text-align: left !important;
+  width: 100%;
+}
+
+.my-right-text {
+  text-align: right !important;
+  padding-right: 20px
+}
+
+.header {
+  background-color: #256029;
+}
+
+tr > th {
+  background-clip: padding-box;
+  position: relative;
+  background-color: #003399;
+  color: white;
+}
+
+tr.transparent > th {
+  background-color: transparent;
+  color: #003399;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  text-align: left !important;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  text-align: left;
+}
+
+::ng-deep .pi-sort-alt:before {
+  --webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  color: #9E0E40
+}
+
+::ng-deep .pi-filter:before {
+  --webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  color: gray;
+}
+
+.pret-classe {
+  margin-left: 3vh;
+}
+
+.col-badge {
+  border-radius: var(--border-radius);
+  padding: .25em .5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .3px;
+  justify-content: center !important;
+  margin-left: 3vh;
+  text-align: center;
+
+  &.status-mutualiste {
+    background: #C8E6C9;
+    color: #256029;
+  }
+
+  &.status-complement_info {
+    background: #FFCDD2;
+    color: #C63737;
+  }
+
+  &.status-complement_info_rep {
+    background: #fff1cd;
+    color: #A25A5A
+  }
+
+  &.status-candidat {
+    background: #FEEDAF;
+    color: #8A5340;
+  }
+
+  &.status-mise_a_jour_candidat {
+    background: #db8d33;
+    color: #8A5340;
+  }
+
+  &.status-mise_a_jour_mutualiste {
+    background: #db8d33;
+    color: #8A5340;
+  }
+
+  &.status-incomplet {
+    background: #c52f01cb;
+    color: #fffefe;
+  }
+
+  &.status-verif_actuaire {
+    background: #FEEDAF;
+    color: #8A5340;
+  }
+
+  //Statut convention
+  &.status-en_cours {
+    background: #C8E6C9;
+    color: #256029;
+  }
+
+  &.status-terminee {
+    background: #c9ddfa;
+    color: #354d8f;
+  }
+
+  &.status-resiliee {
+    background: #FFCDD2;
+    color: #C63737;
+    text-align: center;
+
+  }
+
+  //statut demande
+  &.status-demande_acceptee {
+    font-weight: bold;
+    background: rgba(142, 92, 18, 0.25);
+    color: #8E5C12;
+  }
+
+  &.status-demande_rejetee {
+    font-weight: bold;
+    background: rgba(242, 15, 15, 0.25);
+    color: #F20F0F;
+  }
+
+
+  &.status-demande_soumise {
+    font-weight: bold;
+    background: rgba(0, 51, 153, 0.25);
+    color: #003399;
+  }
+
+  &.status-bl_charge {
+    font-weight: bold;
+    background: rgba(242, 124, 15, 0.25);
+    color: #F27C0F;
+  }
+
+  &.status-pv_reception_charge {
+    font-weight: bold;
+    background: rgba(242, 124, 15, 0.25);
+    color: #F27C0F;
+  }
+
+  &.status-amortissement_etabli {
+    font-weight: bold;
+    background: rgba(45, 106, 30, 0.25);
+    color: #2D6A1E;
+  }
+
+  &.status-protocole_genere {
+    font-weight: bold;
+    color: #092749;
+    background: rgba(9, 39, 73, 0.25);
+  }
+
+  &.status-protocole_corrige {
+    font-weight: bold;
+    background: rgba(150, 14, 112, 0.25);
+    color: #960E70;
+  }
+
+  &.status-protocole_rejete {
+    background: #dca398;
+    color: #7b050b;
+  }
+
+
+  &.status-protocole_accepte {
+    font-weight: bold;
+    background: rgba(186, 168, 8, 0.25);
+    color: #BAA808;
+  }
+
+  &.status-protocole_signe_par_mutualiste {
+    background: #00BFFF;
+    color: #354d8f;
+  }
+
+  &.status-protocole_signe_par_se {
+    font-weight: bold;
+    color: #30925D;
+    background: rgba(48, 146, 93, 0.25);
+  }
+
+  //statut paiement
+  &.status-cheque_disponible {
+    background: #C8E6C9; // $portalGreen;
+    color: darkgreen;
+  }
+
+  &.status-cheque_retire {
+    color: hsl(216, 83%, 88%);
+    background: $portalBlue100;
+  }
+
+  &.status-paiement-termine {
+    background: #155815;
+    color: white;
+  }
+
+  &.status-aucun-paiement-note {
+    background: rgba(8, 186, 133, 0.25);
+    color: #428772;
+  }
+}
+
+p-table {
+  border-radius: 10px;
+}
+
+.p-button {
+  width: 100px;
+}
+
+.btn-action {
+  width: 40px !important;
+}
+
+.example-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.table-title {
+  font-weight: bold !important;
+  font-size: medium;
+  padding-right: 10px;
+}
+
+.add-btn .p-button {
+  border-left: 1px dotted black;
+  padding-left: 10px;
+  background: $portalGreen !important;
+  border: 1px solid $portalGreen;
+
+}
+
+.add-btn .p-button .a:hover {
+  color: red;
+}
+
+
+.content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-left {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .search-bar {
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+
+.btn-eland,
+.btn-file,
+.p-fileupload .p-fileupload-buttonbar .p-button {
+  border: 0 $portalBlue100;
+  border-radius: 8px;
+  background: $portalBlue100;
+  text-decoration: $primaryTextColor;
+  color: $primaryTextColor;
+  margin: 3px;
+
+  &:enabled:hover {
+    opacity: 90%;
+    background: $primaryColor;
+    color: $primaryTextColor;
+  }
+
+  &:disabled {
+    opacity: 25%;
+    background: $primaryColor;
+    color: $primaryTextColor;
+  }
+}
+
+
+.btn-eland-signe {
+  border-color: $portalBlue200;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalBlue200;
+  margin: 3px;
+}
+
+.btn-eland-signe:hover {
+  color: #fff;
+  background-color: $portalBlue200;
+  border-color: $portalBlue200;
+}
+
+
+.btn-eland-second {
+  border-color: $portalDarkGray;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalDarkGray;
+  margin: 3px;
+}
+
+.btn-eland-second:hover {
+  color: #fff;
+  background-color: $portalDarkGray;
+  border-color: $portalDarkGray;
+}
+
+.btn-eland-generateAmorti {
+  border-color: $portalDarkYellow;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalDarkYellow;
+  margin: 3px;
+}
+
+.btn-eland-generateAmorti:hover {
+  color: #fff;
+  background-color: $portalDarkYellow;
+  border-color: $portalDarkYellow;
+}
+
+
+.btn-eland-generate {
+  border-color: $portalDarkGray;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalDarkGray;
+  margin: 3px;
+}
+
+.btn-eland-generate:hover {
+  color: #fff;
+  background-color: $portalDarkGray;
+  border-color: $portalDarkGray;
+}
+
+
+.btn-eland-delete {
+  border-color: $portalRed;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalRed;
+  margin: 3px;
+}
+
+.btn-eland-delete:hover {
+  color: #fff;
+  background-color: $portalRed;
+  border-color: $portalRed;
+}
+
+
+.btn-eland-warn,
+cancel-button {
+  border: 0 $warningColor;
+  border-radius: 8px;
+  background: $warningColor;
+  text-decoration: $primaryTextColor;
+  color: $primaryTextColor;
+  margin: 3px;
+
+  &:enabled:hover {
+    opacity: 90%;
+    background: $warningColor;
+    color: $primaryTextColor;
+  }
+
+  &:disabled {
+    opacity: 25%;
+    background: $warningColor;
+    color: $primaryTextColor;
+  }
+}
+
+.btn-eland-edit {
+  border-color: $portalBlue100;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalBlue100;
+  margin: 3px;
+}
+
+.btn-eland-edit:hover {
+  color: #fff;
+  background-color: $portalBlue100;
+  border-color: $portalBlue100;
+}
+
+.btn-eland-download {
+  border-color: $portalBrown;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalBrown;
+  margin: 3px;
+}
+
+.btn-eland-download:hover {
+  color: #fff;
+  background-color: $portalBrown;
+  border-color: $portalBrown;
+}
+
+.btn-eland-downloadBL {
+  border-color: $portalDarkGreen;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalDarkGreen;
+  margin: 3px;
+}
+
+.btn-eland-downloadBL:hover {
+  color: #fff;
+  background-color: $portalDarkGreen;
+  border-color: $portalDarkGreen;
+}
+
+.btn-eland-accept {
+  border-color: $portalGreen;
+  border-radius: 8px;
+  background: transparent;
+  color: $portalGreen;
+  margin: 3px;
+}
+
+.btn-eland-accept:hover {
+  color: #fff;
+  background-color: $portalGreen;
+  border-color: $portalGreen;
+}
+
+.btn-eland-corriger {
+  border-color: #c52f01cb;
+  border-radius: 8px;
+  background: transparent;
+  color: #c52f01cb;
+  margin: 3px;
+}
+
+.btn-eland-corriger:hover {
+  color: #fff;
+  background-color: #c52f01cb;
+  border-color: #c52f01cb;
+}
+
+.btn-eland-disable {
+  border: 0 $portalGray;
+  border-radius: 8px;
+  background: $portalGray;
+  text-decoration: $primaryTextColor;
+  color: $primaryTextColor;
+  margin: 3px;
+
+  &:enabled:hover {
+    opacity: 90%;
+    background: $portalGray;
+    color: $primaryTextColor;
+  }
+
+  &:disabled {
+    opacity: 25%;
+    background: $portalGray;
+    color: $primaryTextColor;
+  }
+}
+
+div.load-history-status {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+
+  span {
+    margin-right: 10px;
+  }
+
+  &.border-success {
+    border: 1px solid rgba(28, 116, 48, 1) !important;
+    color: rgba(28, 116, 48, 1) !important;
+  }
+
+  &.border-warning {
+    //border: 1px solid rgb(201, 175, 44) !important;
+    //color: rgb(201, 175, 44)!important;
+    border: 1px solid #003399 !important;
+    color: #003399 !important;
+  }
+
+  &.border-danger {
+    border: 1px solid rgba(201, 44, 44, 1) !important;
+    color: rgba(201, 44, 44, 1) !important;
+  }
+}
+
+.phase-status-site {
+  &.acquisition {
+    font-weight: bold;
+    background: rgba(150, 14, 112, 0.25);
+    color: #960E70;
+  }
+
+  &.viabilisation {
+    font-weight: bold;
+    background: #786240;
+    color: #ffffff;
+  }
+
+  &.commercialisation {
+    font-weight: bold;
+    background: #C8E6C9;
+    color: #1c7430;
+  }
+}
+
+.site-tracking-status {
+  &.submitted {
+    font-weight: bold;
+    background: rgba(0, 61, 55, 0.25);
+    color: #003c36;
+  }
+
+  &.approved {
+    font-weight: bold;
+    background: rgba(76, 176, 79, 0.25);
+    color: #4caf50;
+  }
+
+  &.rejected {
+    font-weight: bold;
+    background: rgba(242, 15, 15, 0.25);
+    color: #F20F0F;
+  }
+}
+
+.idr-app-status {
+  &.submitted_by_secretary {
+    font-weight: bold;
+    background: rgba(255, 117, 79, 0.5); /* Orange-rouge clair transparent */
+    color: #ff5722; /* Orange-rouge vif */
+  }
+
+
+  &.validated {
+    font-weight: bold;
+    background: rgba(76, 176, 79, 0.25);
+    color: #4caf50;
+  }
+
+  &.rejected {
+    font-weight: bold;
+    background: rgba(176, 76, 76, 0.25); /* Rouge clair transparent */
+    color: #f44336; /* Rouge vif */
+  }
+
+
+  &.verify_by_daf {
+    font-weight: bold;
+    background: rgba(76, 76, 176, 0.25); /* Bleu clair transparent */
+    color: #3f51b5; /* Bleu vif */
+  }
+
+  &.emit_by_daf_to_csa {
+    font-weight: bold;
+    background: rgba(255, 165, 0, 0.25); /* Orange clair transparent */
+    color: #ff9800; /* Orange vif */
+  }
+
+}
+
+.advance-fs-app-status {
+  &.submitted_by_secretary {
+    font-weight: bold;
+    background: rgba(255, 117, 79, 0.5); /* Orange-rouge clair transparent */
+    color: #ff5722; /* Orange-rouge vif */
+  }
+
+
+  &.validated,&.validated_by_cms_to_se {
+    font-weight: bold;
+    background: rgba(76, 176, 79, 0.25);
+    color: #4caf50;
+  }
+
+  &.rejected,&.refused_by_cms_to_se {
+    font-weight: bold;
+    background: rgba(176, 76, 76, 0.25); /* Rouge clair transparent */
+    color: #f44336; /* Rouge vif */
+  }
+
+
+  &.verify_by_daf {
+    font-weight: bold;
+    background: rgba(76, 76, 176, 0.25); /* Bleu clair transparent */
+    color: #3f51b5; /* Bleu vif */
+  }
+
+  &.emit_by_daf_to_csa,&.imputed_by_se_to_cms {
+    font-weight: bold;
+    background: rgba(255, 165, 0, 0.25); /* Orange clair transparent */
+    color: #ff9800; /* Orange vif */
+  }
+
+}
+
+.client-type-status {
+  &.procurataire {
+    font-weight: bold;
+    background: rgba(0, 61, 55, 0.25);
+    color: #003c36;
+  }
+
+  &.mutualist {
+    font-weight: bold;
+    background: rgba(76, 176, 79, 0.25);
+    color: #4caf50;
+  }
+
+  &.representative {
+    font-weight: bold;
+    background: rgba(0, 43, 150, 0.5);
+    color: #002B96;
+  }
+}
+
+.reason-type-status {
+  &.death {
+    font-weight: bold;
+    background: rgba(0, 61, 55, 0.25);
+    color: #003c36;
+  }
+
+  &.mutation {
+    font-weight: bold;
+    background: rgba(76, 176, 79, 0.25);
+    color: #4caf50;
+  }
+
+  &.resignation {
+    font-weight: bold;
+    background: rgba(0, 61, 55, 0.25);
+    color: #003c36;
+  }
+
+  &.exclusion {
+    font-weight: bold;
+    background: rgba(76, 176, 79, 0.25);
+    color: #4caf50;
+  }
+}
+
+
+.offre-status-site {
+  &.pending {
+    font-weight: bold;
+    background: rgba(0, 61, 55, 0.25);
+    color: #003c36;
+  }
+
+  &.accepted {
+    font-weight: bold;
+    background: rgba(76, 176, 79, 0.25);
+    color: #4caf50;
+  }
+
+  &.suspended {
+    font-weight: bold;
+    background: rgba(242, 15, 15, 0.25);
+    color: #F20F0F;
+  }
+
+}
+
+.params-secours-status {
+  &.actif {
+    font-weight: bold;
+    background: rgba(0, 61, 55, 0.25);
+    color: #003c36;
+  }
+
+
+  &.inactif {
+    font-weight: bold;
+    background: rgba(242, 15, 15, 0.25);
+    color: #F20F0F;
+  }
+
+}
+
+
+.statut-parcel-reservation {
+  &.reserved {
+    background: #009688;
+    color: #ffffff;
+  }
+
+  &.no-reserved {
+    background: #ff9800;
+    color: #000000;
+  }
+}
+
+.statut-parcel-property {
+  display: inline-block;
+}
+
+.penalty-nature{
+  &.resiliation{
+    background: #F20F0F;
+    color: #fff;
+  }
+  &.desistement{
+    background: #ff9800;
+    color: #fff;
+  }
+}
+
+.client-type-reservation {
+  &.mutualist {
+    background: #003399;
+    color: #ffffff;
+  }
+
+  &.third_party {
+    background: #009688;
+    color: #ffffff;
+  }
+}
+
+
+.status-payment-reservation{
+  color: #ffffff;
+  &.pending{ background: #2955ae}
+  &.validated{ background: #1c7430}
+  &.rejected{ background: #c92c2c}
+  &.cancelled{ background: #c92c2c}
+}
+
+.status-payment-offer{
+  color: #ffffff;
+  &.pending{ background: #2955ae}
+  &.validated{ background: #1c7430}
+  &.rejected{ background: #c92c2c}
+  &.cancelled{ background: #c92c2c}
+}
+
+.reservation-status{
+  color: #fff;
+  &.reserved{
+    background: #B3E5FC;
+    color: #23547B;
+
+  }
+  &.aquis{
+    background: #C8E6C9;
+    color: #256029;
+  }
+  &.canceled{
+    background: #FFCDD2;
+    color: #C63737;
+  }
+  &.payment_in_progress{
+    background: rgba(0, 51, 153, 0.5);
+    color: #003399;
+  }
+  &.payment_in_pending{
+    background: rgba(138, 106, 25, 0.5);
+    color: #8a6a19;
+  }
+
+}
