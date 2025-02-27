@@ -1,170 +1,122 @@
-div.offer-banner{
-  background-color: #996F05;
-  font-size: 2rem;
-  text-align: center;
-  color: #fff;
-  padding: 20px;
-}
-
-.divider-offer{
-  color: #996F05;
-  font-size: 1.2rem;
-}
-
-.header {
-  background-color: #256029;
-}
-tr > th {
-  background-clip: padding-box;
-  position: relative;
-  background-color: #996F05;
-  color: white;
-}
-
-tr > td {
-  padding: 1rem ;
-  border-bottom: 1px solid #ccc;
-}
-
-.site-card-header{
-  min-height: 3vh;
-  border-radius: 5px;
-  padding: 0.5rem 0.5rem 1rem;
-  background-color: rgba(204, 204, 204, 0.25);
-  border: 1px solid rgba(204, 204, 204, 0.5);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-  margin-bottom: 1rem;
-}
-
-.label-input{
-  font-weight: bold;
-  color: black;
-  width: 100%;
-}
-
-.p-float-label textarea ~ label{
-  top: -.75rem;
-  font-size: .85rem;
-}
-
-.textarea-description {
-  height: 20vh;
-  resize: none;
-}
-.site-location{
-  color: #203359;
-}
-
-.representative-card{
-  padding: 0.5rem;
-  margin: 0 0 1rem 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc
-}
-
-:host ::ng-deep {
-  .service-types .p-chip{
-    background: #dee2e6;
-    color: #212529
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
   }
 
-  .p-panel{
-    margin-bottom: 25px;
-  }
-
-  .p-panel .p-panel-header {
-    background-color: #996F05 !important;
-    color: white;
-    font-weight: bold !important;
-    font-size: medium;
-    padding-right: 5px;
-  }
-
-  .p-tabview{
-    .p-tabview-panels {
-      padding: 1rem 0.5rem;
-      background: transparent;
-    }
-
-    .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-      background: #996F05;
-      border-color: #dee2e6 #dee2e6 #ffffff #dee2e6;
-      color: #fff;
-    }
-
-    .add-item-button.p-button{
-      background: #996F05;
-      &.bg-green{
-        background: #2E9D14 ;
-      }
-      border-color: #fff;
-      color: #fff;
-      &:hover{
-        background: #2E9D14 ;
-        .p-button-icon, .p-button-label{
-          color: #fff;
-        }
-      }
-    }
-  }
-
-}
-
-.serviceStatus {
-  font-weight: bold;
-  padding: 5px ;
-
-  &.not_started{
-    background: rgba(0, 51, 153, 0.25);
+  .return {
     color: #996F05;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
   }
 
-  &.in_progress {
-    background: rgba(0, 61, 55, 0.25);
-    color: #003c36;
+  .return:hover {
+    text-decoration: underline;
   }
 
-  &.completed{
-    background: rgba(76, 176, 79, 0.25);
-    color: #4caf50;
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
   }
 
-  &.canceled{
-    background: rgba(242, 15, 15, 0.25);
-    color: #F20F0F;
+  .page-header h1 {
+    font-size: 24px;
+    color: #333;
   }
 
-}
-
-
-.statut-remboursement{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-
-input{
-  &.nbr-payment-pending{
-    background: #996F05;
-    color: #fff;
+  .actions .btn {
+    margin-left: 10px;
   }
 
-  &.nbr-payment-validated{
-    background: #1c7430;
-    color: #fff;
+  .project-banner {
+    background-color: #996F05;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
   }
-}
 
-.return {
-  /* background-color: #00A388; */
-  color: #996F05;
-  border-radius: 4px;
-  text-decoration: none;
-  /* width: 160px; */
-  /* // margin-top: -19px; */
-  /* margin-left: -24px; */
-}
+  .project-banner h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .col-12,
+  .col-6,
+  .col-4 {
+    flex: 1 1 100%;
+  }
+
+  @media (min-width: 768px) {
+    .col-6 {
+      flex: 1 1 calc(50% - 20px);
+    }
+    .col-4 {
+      flex: 1 1 calc(33.33% - 20px);
+    }
+  }
+
+  .field {
+    margin-bottom: 15px;
+  }
+
+  .field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }

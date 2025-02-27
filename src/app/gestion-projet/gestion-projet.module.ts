@@ -16,6 +16,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast'; // Importer ToastModule
 import { TabViewModule } from 'primeng/tabview';
 import { DividerModule } from 'primeng/divider';
+import { GenererDevisComponent } from './composants/generer-devis/generer-devis.component';
+import { ListDevisComponent } from './composants/list-devis/list-devis.component';
+import { AddTacheComponent } from './composants/add-tache/add-tache.component';
+import { ListTacheComponent } from './composants/list-tache/list-tache.component';
+import { GenererPlanningComponent } from './composants/generer-planning/generer-planning.component';
 
 
 
@@ -24,6 +29,11 @@ import { DividerModule } from 'primeng/divider';
     AddProjetComponent,
     ListProjetComponent,
     DetailProjetComponent,
+    GenererDevisComponent,
+    ListDevisComponent,
+    AddTacheComponent,
+    ListTacheComponent,
+    GenererPlanningComponent,
   ],
   imports: [
     CommonModule,

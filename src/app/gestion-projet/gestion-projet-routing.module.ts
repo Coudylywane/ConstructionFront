@@ -4,6 +4,11 @@ import { AuthGuard } from '../shared/services/auth.guard';
 import { AddProjetComponent } from './composants/add-projet/add-projet.component';
 import { ListProjetComponent } from './composants/list-projet/list-projet.component';
 import { DetailProjetComponent } from './composants/detail-projet/detail-projet.component';
+import { GenererDevisComponent } from './composants/generer-devis/generer-devis.component';
+import { ListDevisComponent } from './composants/list-devis/list-devis.component';
+import { ListTacheComponent } from './composants/list-tache/list-tache.component';
+import { AddTacheComponent } from './composants/add-tache/add-tache.component';
+import { GenererPlanningComponent } from './composants/generer-planning/generer-planning.component';
 
 const routes: Routes = [];
 
@@ -23,6 +28,31 @@ const routes: Routes = [];
       {
         path: 'detailProjet/:id',
         component: DetailProjetComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'genererDevis/:id',
+        component: GenererDevisComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'listDevis',
+        component: ListDevisComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'listTache',
+        component: ListTacheComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addTache',
+        component: AddTacheComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'genererPlanning/:id',
+        component: GenererPlanningComponent,
         canActivate: [AuthGuard],
       },
     ]),

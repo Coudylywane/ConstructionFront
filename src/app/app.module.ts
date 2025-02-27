@@ -23,7 +23,8 @@ import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
     BlockUIModule.forRoot(),
     InputTextModule,
     InputTextModule,
-    GestionProjetModule,
+    GestionProjetModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

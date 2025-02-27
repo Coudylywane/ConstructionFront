@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Projet } from 'src/app/shared/models/projet';
+import { Tache } from 'src/app/shared/models/Tache.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,28 +26,17 @@ export class ProjectService {
     return this.http.get<any>(this._api + '/projets', options);
   }
 
-  // getAllProjects(args: any): Observable<any> {
-  //   const params = new HttpParams()
-  //     .set('page', args?.page?.toString())
-  //     .set('perPage', args?.perPage?.toString());
-  //   return this.http.get<any>(this._api + '/projets', { params });
-  // }
-
   getFournisseurById(typeId: number): Observable<Projet> {
     return this.http.get<Projet>(this._api + '/fournisseur/' + typeId);
   }
-
-  // updateFournisseur(typeId: number, type: Projet): Observable<any> {
-  //   return this.http.put(this._api + '/fournisseur/' + type.id, type);
-  // }
 
   delete(typeId: Number) {
     return this.http.delete<Projet>(this._api + '/fournisseur/' + typeId);
   }
 
-  getProjetById(id: number): Observable<Projet> {
+  getProjetById(id: number): Observable<any> {
     return this.http
-      .get<Projet>(`${this._api}/projets/${id}`)
+      .get<any>(`${this._api}/projets/${id}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -61,5 +51,43 @@ export class ProjectService {
     return this.http.post(`${this._api}/projets/project/${id}`, null, {
       params: { status },
     });
+  }
+
+  creerDevis(devis: any): Observable<any> {
+    return this.http.post(
+      `${this._api}/devis/?projetId=${devis.projetId}`,
+      devis,
+      { responseType: 'text' } // Important pour éviter l'erreur de parsing
+    );
+  }
+
+  downloadDevisPdf(devisId: number): Observable<Blob> {
+    return this.http.get(`${this._api}/devis/${devisId}/pdf`, {
+      responseType: 'blob',
+    });
+  }
+
+  verifierDevisExistant(projetId: number): Observable<any> {
+    return this.http.get<any>(`${this._api}/devis/projet/${projetId}`);
+  }
+
+  validerDevis(id: number): Observable<any> {
+    return this.http.put(`${this._api}/devis/${id}/valider`, null);
+  }
+
+  annulerDevis(id: number): Observable<any> {
+    return this.http.put(`${this._api}/devis/${id}/refuser`, null);
+  }
+
+  obtenirTousLesDevis(): Observable<any> {
+    return this.http.get<any>(`${this._api}/devis`);
+  }
+
+  ajouterTache(tache: Tache): Observable<Tache> {
+    return this.http.post<Tache>(`${this._api}/taches/add`, tache);
+  }
+
+  listerTaches(): Observable<Tache[]> {
+    return this.http.get<Tache[]>(`${this._api}/taches/list`);
   }
 }

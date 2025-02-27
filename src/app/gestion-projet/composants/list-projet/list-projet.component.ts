@@ -24,25 +24,31 @@ export class ListProjetComponent {
   orderBy: string = 'name'; // Default field to order by
   direction: string = 'ASC'; // Default sorting direction
   args: any;
+  devisExistant: { [key: number]: number | null } = {};
 
   constructor(private projetService: ProjectService) {}
 
   ngOnInit(): void {
-    this.getProjects(this.args); // Fetch projects when the component initializes
+    this.getProjects(this.args);
   }
 
   getProjects(args: any): void {
-    this.projetService.getAllProjets(this.page = 0, this.perPage = 50).subscribe({
-      next: (page) => {
-        this.projets = page.content;
-        this.totalElements = page.totalElements;
-        this.totalPage = Math.ceil(this.totalElements / this.perPage);
-        this.updatePaginationState();
-      },
-      error: (error) => {
-        console.error('Erreur lors de la récupération des projets:', error);
-      },
-    });
+    this.projetService
+      .getAllProjets((this.page = 0), (this.perPage = 50))
+      .subscribe({
+        next: (page) => {
+          this.projets = page.content;
+          this.totalElements = page.totalElements;
+          this.totalPage = Math.ceil(this.totalElements / this.perPage);
+          this.updatePaginationState();
+
+          // Vérification des devis existants après le chargement des projets
+          this.verifierDevisExistant();
+        },
+        error: (error) => {
+          console.error('Erreur lors de la récupération des projets:', error);
+        },
+      });
   }
 
   editProjet(id: number): void {
@@ -77,5 +83,47 @@ export class ListProjetComponent {
   updatePaginationState(): void {
     this.disablePrevious = this.page === 1;
     this.disableNext = this.page === this.totalPage;
+  }
+  verifierDevisExistant() {
+    this.projets.forEach((projet) => {
+      this.projetService.verifierDevisExistant(projet.id).subscribe({
+        next: (devis) => {
+          console.log(devis);
+          // Stocker l'ID du devis si disponible
+          this.devisExistant[projet.id] = devis[0].id || null;
+          console.log('jjj', this.devisExistant[projet.id]);
+        },
+        error: (err) => {
+          console.error(
+            `Erreur lors de la vérification du devis pour le projet ID: ${projet.id}`,
+            err
+          );
+          this.devisExistant[projet.id] = null;
+        },
+      });
+    });
+  }
+
+  telechargerDevis(projetId: number) {
+    this.projetService.downloadDevisPdf(projetId).subscribe((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `devis_${projetId}.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+  visualiserDevis(projetId: number) {
+    this.projetService.downloadDevisPdf(projetId).subscribe(
+      (pdfBlob: Blob) => {
+        const fileURL = URL.createObjectURL(pdfBlob);
+        window.open(fileURL, '_blank'); // Ouvre le PDF dans un nouvel onglet
+      },
+      (error) => {
+        console.error('Erreur lors de la génération du devis : ', error);
+      }
+    );
   }
 }

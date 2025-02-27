@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <h2>Sélection des articles pour le devis</h2>
+
+  <!-- Liste des articles disponibles -->
+  <div *ngIf="articles.length > 0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prix unitaire</th>
+          <th>Quantité</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of articles">
+          <td>{{ article.id }}</td>
+          <td>{{ article.designation }}</td>
+          <td>{{ article.prixDevis }}F</td>
+          <td>
+            <input
+              type="number"
+              [(ngModel)]="article.quantite"
+              min="0"
+              class="form-control"
+            />
+          </td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="ajouterAuDevis(article)"
+            >
+              Ajouter
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Message si aucun article n'est disponible -->
+  <div *ngIf="articles.length === 0">
+    <p>Aucun article disponible.</p>
+  </div>
+
+  <!-- Liste des articles sélectionnés -->
+  <div *ngIf="articlesSelectionnes.length > 0" class="mt-4">
+    <h3>Articles sélectionnés</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prix unitaire</th>
+          <th>Quantité</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of articlesSelectionnes">
+          <td>{{ article.id }}</td>
+          <td>{{ article.designation }}</td>
+          <td>{{ article.prixDevis }}F</td>
+          <td>{{ article.quantite }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bouton pour valider le devis -->
+  <div class="mt-4">
+    <button
+      class="btn btn-success"
+      (click)="validerDevis()"
+      [disabled]="articlesSelectionnes.length === 0"
+    >
+      Valider le devis
+    </button>
+  </div>
+</div>

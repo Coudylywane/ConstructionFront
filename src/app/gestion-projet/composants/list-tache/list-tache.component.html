@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="mt-4">
+    <!-- Button to add a new project -->
+    <a
+      class="add style-button d-flex"
+      [routerLink]="'/gestion-projet/addTache'"
+    >
+      <span class="material-icons">add</span>
+      <span class="ml-2 style-text">Nouvelle tache</span>
+    </a>
+    <h4 class="justify-content-left text-left">Liste des taches</h4>
+  </div>
+
+  <!-- Table Section -->
+  <div class="container-fluid content-table">
+    <!-- Conditional message when no projects are available -->
+    <h2 *ngIf="taches.length === 0" class="text-center text-dispo mt-4">
+      Pas de taches Disponible!!!
+    </h2>
+
+    <!-- Projects Table -->
+    <div *ngIf="taches.length > 0" class="mt-4">
+      <table class="table table-hover">
+        <thead>
+          <tr style="text-align: center" class="style-text-table">
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Duree estimee (en jours)</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center">
+          <!-- Dynamically generate rows for each project -->
+          <tr *ngFor="let tache of taches">
+            <th scope="row">{{ tache.id }}</th>
+            <td>{{ tache.nom }}</td>
+            <td>{{ tache.dureeEstimee }}</td>
+            <td>{{ tache.statut}}</td>
+            <td>
+              <div class="d-flex justify-content-center">
+                
+                
+
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
