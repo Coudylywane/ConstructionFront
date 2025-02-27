@@ -28,6 +28,7 @@ export class GenererPlanningComponent {
       next: (data) => {
         this.taches = data;
       },
+      
       error: (error) => {
         console.error('Erreur lors du chargement des tâches', error);
         this.errorMessage = 'Erreur lors du chargement des tâches';

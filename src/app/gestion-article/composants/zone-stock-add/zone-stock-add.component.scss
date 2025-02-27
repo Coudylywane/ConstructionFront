@@ -96,9 +96,7 @@
   /* // margin-left: 231px;
   //   margin-right: 231px; */
 }
-input.next.action-button:disabled {
-  background: #69e7d2;
-}
+
 .suivant.action-button {
   width: 100px;
   background: #00a388;
@@ -320,30 +318,8 @@ select.ng-touched.ng-valid {
   position: relative;
 }
 
-.cin {
-  width: 82px;
-  color: black;
-  border-color: black;
-}
-.btn-outline-primary {
-  --cui-btn-color: #fcf258;
-  --cui-btn-border-color: #fcf258;
-  --cui-btn-hover-color: rgba(255, 255, 255, 0.87);
-  --cui-btn-hover-bg: #fcf258;
-  --cui-btn-hover-border-color: #fcf258;
-  --cui-btn-focus-shadow-rgb: 50, 31, 219;
-  --cui-btn-active-color: rgba(255, 255, 255, 0.87);
-  --cui-btn-active-bg: #fcf258;
-  --cui-btn-active-border-color: #fcf258;
-  --cui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 21, 0.125);
-  --cui-btn-disabled-color: #fcf258;
-  --cui-btn-disabled-bg: transparent;
-  --cui-gradient: none;
-}
-.cin .btn-outline {
-  background-color: #fcf258;
-  color: #000;
-}
+
+
 .passport {
   margin-left: 7px;
   color: black;
@@ -366,4 +342,21 @@ select.ng-touched.ng-valid {
   //border:  8px solid #BF8B06;
   background-color:  #BF8B06 ;
   
+}
+
+.btn-outline-secondary {
+  --cui-btn-color: #bf8b06;
+  --cui-btn-border-color: #bf8b06;
+  --cui-btn-hover-color: rgb(255 255 255 / 95%);
+  --cui-btn-hover-bg: #BF8B06;
+  --cui-btn-hover-border-color: #BF8B06;
+  --cui-btn-focus-shadow-rgb: 157, 165, 177;
+  --cui-btn-active-color: rgba(44, 56, 74, 0.95);
+  --cui-btn-active-bg: #BF8B06;
+  --cui-btn-active-border-color: #BF8B06;
+  --cui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 21, 0.125);
+  --cui-btn-disabled-color: #9da5b1;
+  --cui-btn-disabled-bg: transparent;
+  --cui-gradient: none;
+  width: 35%;
 }
