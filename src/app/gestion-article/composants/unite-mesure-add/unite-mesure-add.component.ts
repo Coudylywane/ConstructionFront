@@ -77,7 +77,7 @@ export class UniteMesureAddComponent {
       throw invalidPipeArgumentError(DatePipe, (error as Error).message);
     }
   }
-  ///Validation des champs////////////////::::::
+  ////////////////////Validation des champs////////////////::::::
 
   validNom() {
     const nom = this.uniteFrom.controls['nom'];

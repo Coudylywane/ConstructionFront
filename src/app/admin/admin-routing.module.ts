@@ -10,12 +10,12 @@ import { ListUserComponent } from "./components/utilisateurs/list-user/list-user
       {
         path: 'ajoutUser',
         component: AjoutUserComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
       },
       {
         path: 'listUser',
         component: ListUserComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
       },
     ])
   ],

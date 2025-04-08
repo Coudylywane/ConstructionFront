@@ -17,7 +17,7 @@ export class ProjectService {
     return this.http.post(this._api + '/projets/create', projectRequestDto, {
       headers,
     });
-  }
+}
 
   getAllProjets(page = 0, perPage = 50): Observable<any> {
     const options = {

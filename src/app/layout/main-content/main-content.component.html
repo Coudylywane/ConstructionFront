@@ -1,11 +1,27 @@
 <!--NavBar -->
-<div
-  class="sidebar sidebar-ide sidebar-dark sidebar-fixed"
-  style="border-radius: 1px solid black"
-  id="sidebar"
->
+<div class="sidebar sidebar-ide sidebar-dark sidebar-fixed" style="border-radius: 1px solid black" id="sidebar">
   <div class="sidebar-brand d-none d-md-block">
-    <h4>IDE</h4>
+    <svg width="83" height="31" viewBox="0 0 83 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.4515 0.144705L19.8106 0.215005L6.38729 26.5225L0.0281764 26.4522L13.4515 0.144705Z" fill="#996F05"/>
+      <path d="M26.1697 0.28512L19.8106 0.21482L32.5303 26.8113L38.8894 26.8816L26.1697 0.28512Z" fill="#996F05"/>
+      <g filter="url(#filter0_i_4004_2578)">
+      <path d="M19.6222 11.8033L21.491 18.8287L25.5108 20.687L21.4428 22.456L19.3963 28.7848L17.5188 22.4126L13.4991 20.5542L17.567 18.7853L19.6222 11.8033Z" fill="black"/>
+      </g>
+      <path d="M19.5975 13.6567L21.0078 18.9582L21.068 19.1844L21.2804 19.2826L24.289 20.6735L21.2443 21.9975L21.0367 22.0878L20.9671 22.3031L19.4189 27.0911L17.9984 22.2703L17.9346 22.0535L17.7295 21.9587L14.7208 20.5677L17.7656 19.2437L17.9805 19.1503L18.0467 18.9255L19.5975 13.6567Z" stroke="#8A6404"/>
+      <path d="M40.2528 27V15.56H52.7968V17.64H42.8128V20.168H51.8688V22.248H42.8128V24.92H52.7968V27H40.2528ZM54.5497 27V15.56H56.4377L61.5577 15.544C63.627 15.544 65.2324 16.0293 66.3737 17C67.515 17.9707 68.0857 19.3947 68.0857 21.272C68.0857 23.1493 67.515 24.5733 66.3737 25.544C65.2324 26.5147 63.627 27 61.5577 27H54.5497ZM61.3817 17.624H57.1097V24.92H61.3817C62.7257 24.92 63.7444 24.6267 64.4377 24.04C65.131 23.4533 65.4777 22.5307 65.4777 21.272C65.4777 20.0027 65.131 19.08 64.4377 18.504C63.7444 17.9173 62.7257 17.624 61.3817 17.624ZM69.6903 27V15.56H82.2343V17.64H72.2503V20.168H81.3063V22.248H72.2503V24.92H82.2343V27H69.6903Z" fill="#996F05"/>
+      <defs>
+      <filter id="filter0_i_4004_2578" x="13.4991" y="11.8033" width="12.0117" height="20.9815" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="4"/>
+      <feGaussianBlur stdDeviation="2"/>
+      <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+      <feBlend mode="normal" in2="shape" result="effect1_innerShadow_4004_2578"/>
+      </filter>
+      </defs>
+      </svg>
     <!-- <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
       <use href="assets/dist/assets/brand/coreui.svg#full"></use>
     </svg>
@@ -13,306 +29,176 @@
       <use href="assets/dist/assets/brand/coreui.svg#signet"></use>
     </svg> -->
   </div>
-  <ul
-    class="sidebar-nav sidebar-navs"
-    data-coreui="navigation"
-    id=""
-    data-simplebar=""
-  >
-    <!--ADMINISTRATION-->
-    <li class="nav-title">Administration</li>
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        routerLink="'/admin/listUser'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">people</span>
-        <span class="style-text">Utilisateurs</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-    <!--GESTION FOURNISSEURS-->
-    <li class="nav-title">Gestion Fournisseur</li>
+  <ul class="sidebar-nav sidebar-navs" data-coreui="navigation" id="" data-simplebar="">
 
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-fournisseur/listFournisseur'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">local_shipping</span>
-        <span class="style-text">Fournisseur</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-fournisseur/listTypeFournisseur'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">event_note</span>
-        <span class="style-text">Type Fournisseur</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-fournisseur/listCategorieFournisseur'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">transfer_within_a_station</span>
-        <span class="style-text">Categorie Fournisseur</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-    <!--GESTION Stocks-->
-    <li class="nav-title">Gestion Articles</li>
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-article/listArticle'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">
-          {{ "inventory_2" }}
-        </span>
-        <span class="style-text">Produits</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-article/listZoneStock'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">domain</span>
-        <span class="style-text">Zone de Stock</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-article/listUniteMesure'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">panorama_vertical</span>
-        <span class="style-text">Unite de Mesure</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-    <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-article/listTypeArticle'"
-        href="javascript:void(0);"
-      >
-        <span class="material-icons style-icon">event_note</span>
-        <span class="style-text">Type Article</span>
-      </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
-        <path
-          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
-      </svg>
-    </li>
-    <!--GESTION PROJETS-->
+        <!--GESTION DE PROJETS-->
     <li class="nav-title">Gestion Projets</li>
     <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-projet/listProjet'"
-        href="javascript:void(0);"
-      >
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listProjet'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           {{ "assignment_turned_in" }}
         </span>
         <span class="style-text">Projets</span>
       </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
         <path
           d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
+          fill="#2D3D5E" />
       </svg>
     </li>
     <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-projet/listDevis'"
-        href="javascript:void(0);"
-      >
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listDevis'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           description
         </span>
         <span class="style-text">Devis</span>
       </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
         <path
           d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
+          fill="#2D3D5E" />
       </svg>
     </li>
     <li class="nav-item m-nav-item">
-      <a
-        class="nav-link m-nav-link"
-        [routerLink]="'/gestion-projet/listTache'"
-        href="javascript:void(0);"
-      >
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listTache'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           description
         </span>
         <span class="style-text">Tache</span>
       </a>
-      <svg
-        style="margin-right: 20px"
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-      >
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
         <path
           d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
-          fill="#2D3D5E"
-        />
+          fill="#2D3D5E" />
       </svg>
     </li>
 
+   
+    <!--GESTION FOURNISSEURS-->
+    <li class="nav-title">Gestion Fournisseur</li>
+
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-fournisseur/listFournisseur'" href="javascript:void(0);">
+        <span class="material-icons style-icon">local_shipping</span>
+        <span class="style-text">Fournisseur</span>
+      </a>
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
+        <path
+          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+          fill="#2D3D5E" />
+      </svg>
+    </li>
+
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-fournisseur/listTypeFournisseur'"
+        href="javascript:void(0);">
+        <span class="material-icons style-icon">event_note</span>
+        <span class="style-text">Type Fournisseur</span>
+      </a>
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
+        <path
+          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+          fill="#2D3D5E" />
+      </svg>
+    </li>
+
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-fournisseur/listCategorieFournisseur'"
+        href="javascript:void(0);">
+        <span class="material-icons style-icon">transfer_within_a_station</span>
+        <span class="style-text">Categorie Fournisseur</span>
+      </a>
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
+        <path
+          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+          fill="#2D3D5E" />
+      </svg>
+    </li>
+    <!--GESTION Stocks-->
+    <li class="nav-title">Gestion Articles</li>
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listArticle'" href="javascript:void(0);">
+        <span class="material-icons style-icon">
+          {{ "inventory_2" }}
+        </span>
+        <span class="style-text">Produits</span>
+      </a>
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
+        <path
+          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+          fill="#2D3D5E" />
+      </svg>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listZoneStock'" href="javascript:void(0);">
+        <span class="material-icons style-icon">domain</span>
+        <span class="style-text">Zone de Stock</span>
+      </a>
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
+        <path
+          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+          fill="#2D3D5E" />
+      </svg>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listUniteMesure'" href="javascript:void(0);">
+        <span class="material-icons style-icon">panorama_vertical</span>
+        <span class="style-text">Unite de Mesure</span>
+      </a>
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
+        <path
+          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+          fill="#2D3D5E" />
+      </svg>
+    </li>
+    <li class="nav-item m-nav-item">
+      <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listTypeArticle'" href="javascript:void(0);">
+        <span class="material-icons style-icon">event_note</span>
+        <span class="style-text">Type Article</span>
+      </a>
+      <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+        fill="none">
+        <path
+          d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+          fill="#2D3D5E" />
+      </svg>
+    </li>
+     <!--ADMINISTRATION-->
+     <li class="nav-title">Administration</li>
+     <li class="nav-item m-nav-item">
+       <a class="nav-link m-nav-link" [routerLink]="'/admin/listUser'" href="javascript:void(0);">
+         <span class="material-icons style-icon">people</span>
+         <span class="style-text">Utilisateurs</span>
+       </a>
+       <svg style="margin-right: 20px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+         fill="none">
+         <path
+           d="M7.92667 11.4933C7.83893 11.4939 7.75195 11.477 7.67073 11.4439C7.5895 11.4107 7.51563 11.3618 7.45333 11.3L3.45333 7.30001C3.39085 7.23804 3.34125 7.1643 3.30741 7.08306C3.27356 7.00182 3.25613 6.91469 3.25613 6.82668C3.25613 6.73867 3.27356 6.65153 3.30741 6.5703C3.34125 6.48906 3.39085 6.41532 3.45333 6.35335C3.57824 6.22918 3.74721 6.15948 3.92333 6.15948C4.09946 6.15948 4.26842 6.22918 4.39333 6.35335L7.92667 9.88668L11.4533 6.35335C11.5782 6.22918 11.7472 6.15948 11.9233 6.15948C12.0995 6.15948 12.2684 6.22918 12.3933 6.35335C12.4558 6.41532 12.5054 6.48906 12.5393 6.5703C12.5731 6.65153 12.5905 6.73867 12.5905 6.82668C12.5905 6.91469 12.5731 7.00182 12.5393 7.08306C12.5054 7.1643 12.4558 7.23804 12.3933 7.30001L8.39333 11.3C8.26916 11.4232 8.10156 11.4926 7.92667 11.4933Z"
+           fill="#2D3D5E" />
+       </svg>
+     </li>
+   
   </ul>
-  <button
-    class="sidebar-toggler"
-    type="button"
-    data-coreui-toggle="unfoldable"
-  ></button>
+  <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
 </div>
 <!--SideBar -->
 
 <div class="wrapper d-flex flex-column min-vh-100">
   <header class="header header-sticky bg-white">
     <div class="container-fluid">
-      <button
-        class="header-toggler px-md-0 me-md-3"
-        type="button"
-        onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()"
-      >
+      <button class="header-toggler px-md-0 me-md-3" type="button"
+        onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()">
         <svg class="icon icon-lg">
-          <use
-            href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-menu"
-          ></use>
+          <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-menu"></use>
         </svg>
       </button>
       <a class="header-brand d-md-none" href="#">
@@ -321,42 +207,26 @@
       <!-- Left links -->
       <ul class="navbar-nav header-nav ms-auto-nav">
         <li class="nav-item">
-          <a
-            class="nav-link active"
-            style="
+          <a class="nav-link active" style="
               border-radius: 6px;
               border: 1px solid var(--Color-5, #996f05);
-            "
-            aria-current="page"
-            href="#"
-            >Dashboards</a
-          >
+            " aria-current="page" [routerLink]="''" >Dashboards</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Fournisseurs</a>
+          <a class="nav-link" [routerLink]="'/gestion-fournisseur/listFournisseur'">Fournisseurs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Projets</a>
+          <a class="nav-link" [routerLink]="'/gestion-projet/listProjet'">Projets</a>
         </li>
       </ul>
       <!-- Left links -->
 
       <ul class="header-nav ms-3 bg-white">
         <li class="nav-item dropdown">
-          <a
-            class="nav-link py-0"
-            data-coreui-toggle="dropdown"
-            href="#"
-            role="button"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+          <a class="nav-link py-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">
             <div class="avatar avatar-md">
-              <img
-                class="avatar-img"
-                src="assets/dist/assets/img/avatars/8.jpg"
-                alt="user@email.com"
-              />
+              <img class="avatar-img" src="assets/dist/assets/img/avatars/1.jpg" alt="user@email.com" />
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-end pt-0">
@@ -365,52 +235,36 @@
             </div>
             <a class="dropdown-item" href="#">
               <svg class="icon me-2">
-                <use
-                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-bell"
-                ></use>
+                <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
               </svg>
-              Updates <span class="badge badge-sm bg-info ms-2">2</span></a
-            >
+              Updates <span class="badge badge-sm bg-info ms-2">2</span></a>
             <a class="dropdown-item" href="#">
               <svg class="icon me-2">
-                <use
-                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"
-                ></use>
+                <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
               </svg>
-              Messages <span class="badge badge-sm bg-success ms-2">2</span></a
-            >
+              Messages <span class="badge badge-sm bg-success ms-2">2</span></a>
 
             <div class="dropdown-header bg-light py-2">
               <div class="fw-semibold">Settings</div>
             </div>
             <a class="dropdown-item" href="#">
               <svg class="icon me-2">
-                <use
-                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-user"
-                ></use>
+                <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
               </svg>
               Profile
             </a>
             <a class="dropdown-item" href="#">
               <svg class="icon me-2">
-                <use
-                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-settings"
-                ></use>
+                <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
               </svg>
               paramétre
             </a>
 
             <div class="dropdown-divider"></div>
 
-            <a
-              class="dropdown-item"
-              (click)="logout()"
-              href="javascript:void(0);"
-            >
+            <a class="dropdown-item" (click)="logout()" href="javascript:void(0);">
               <svg class="icon me-2">
-                <use
-                  href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-account-logout"
-                ></use>
+                <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
               </svg>
               Déconnexion
             </a>

@@ -8,7 +8,7 @@ import { Projet } from 'src/app/shared/models/projet';
 @Component({
   selector: 'app-add-projet',
   templateUrl: './add-projet.component.html',
-  styleUrls: ['./add-projet.component.css'],
+  styleUrls: ['./add-projet.component.scss'],
   providers: [MessageService, ConfirmationService],
 })
 export class AddProjetComponent {
