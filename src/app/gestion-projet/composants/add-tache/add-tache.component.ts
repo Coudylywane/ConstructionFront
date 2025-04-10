@@ -9,7 +9,7 @@ import { Tache } from 'src/app/shared/models/Tache.model';
 @Component({
   selector: 'app-add-tache',
   templateUrl: './add-tache.component.html',
-  styleUrls: ['./add-tache.component.css'],
+  styleUrls: ['./add-tache.component.scss'],
 })
 export class AddTacheComponent {
   tacheForm!: FormGroup;

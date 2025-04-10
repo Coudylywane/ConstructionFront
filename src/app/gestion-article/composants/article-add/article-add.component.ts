@@ -11,6 +11,9 @@ import { UniteMesureModel } from 'src/app/shared/models/unite-mesure.model';
 import { ZoneStockModel } from 'src/app/shared/models/zone-stock.model';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { UniteMesureService } from '../../services/unite-mesure.service';
+import { TypeArticleService } from '../../services/type-article.service';
+import { ZoneStockService } from '../../services/zone-stock.service';
 
 
 @Component({
@@ -24,11 +27,11 @@ export class ArticleAddComponent {
   Article : ArticleModel = new ArticleModel();
   subscriptions = [] as Subscription[];
   error = '';
-  zoneStock = [] as ZoneStockModel[];
-  uniteMesure = [] as UniteMesureModel[];
-  typeArticle = [] as TypeArticleModel[];
+  zoneStocks = [] as ZoneStockModel[];
+  uniteMesures = [] as UniteMesureModel[];
+  typeArticles = [] as TypeArticleModel[];
   isEditing: boolean = false;
-
+ 
   constructor(
     private router :Router,
     private encryptService: MyEncryptionService,
@@ -36,6 +39,9 @@ export class ArticleAddComponent {
     private toastService: ToastService,
     private articleService : ArticleService,
     private fb: FormBuilder,
+    private uniteMesureService: UniteMesureService,
+    private typeArticleService: TypeArticleService,
+    private zoneStockService: ZoneStockService,
 
   ){}
 //////////////// //////       AJOUT ARTICLE...............
@@ -54,12 +60,25 @@ addArticle() {
       prixVenteUnitaire: this.articleForm.value.prixVenteUnitaire,
       quantity: this.articleForm.value.quantity,
       prixReel: this.articleForm.value.prixReel,
-      zoneStock: this.articleForm.value.zoneStock ? { id: this.articleForm.value.zoneStock } : null,
-      uniteMesure: this.articleForm.value.uniteMesure ? { id: this.articleForm.value.uniteMesure } : null,
-      typeArticle: this.articleForm.value.typeArticle ? { id: this.articleForm.value.typeArticle } : null,
+      zoneStock: this.articleForm.value.zoneStock ,
+      uniteMesure: this.articleForm.value.uniteMesure  ,
+      typeArticle: this.articleForm.value.typeArticle ,
     };
 
     //console.log('Données envoyées au backend :', articleData);
+      const uniteMesure: UniteMesureModel = new UniteMesureModel();
+      uniteMesure.id = this.articleForm.value.uniteMesureId; // Assurez-vous que l'ID est correct et non undefined
+      articleData.uniteMesure = uniteMesure;
+     
+      console.log(this.articleForm.value.uniteMesureId);
+
+      const zoneStock: ZoneStockModel = new ZoneStockModel();
+      zoneStock.id = this.articleForm.value.zoneStockId; 
+      articleData.zoneStock = zoneStock;
+
+      const typeArticle: TypeArticleModel = new TypeArticleModel();
+      typeArticle.id = this.articleForm.value.typeArticleId; 
+      articleData.typeArticle = typeArticle;
 
     this.articleService.addArticle(articleData).subscribe({
       next: response => {
@@ -89,10 +108,11 @@ addArticle() {
                 prixReviensUnitaire: new FormControl(type.prixReviensUnitaire, [Validators.required]),
                 prixVenteUnitaire: new FormControl(type.prixVenteUnitaire, [Validators.required]),
                 quantity: new FormControl(type.quantity, [Validators.required]),
-                typeArticleId: new FormControl(null, [Validators.required]),
+                typeArticleId: ['', Validators.required],
                 prixReel: [null, Validators.required],
-                zoneStock : new FormControl(null),
-                uniteMesure : new FormControl(null)
+                zoneStock:  ['', Validators.required],  
+                uniteMesure : ['', Validators.required],
+                typeArticle : ['', Validators.required] 
           });
         } else {
           this.articleForm = this.fb.group({
@@ -108,7 +128,8 @@ addArticle() {
             prixReel: [null, Validators.required],
             typeArticleId: new FormControl(null, [Validators.required]),
             zoneStock : new FormControl(null),
-            uniteMesure : new FormControl(null)
+            uniteMesure : new FormControl(null),
+            typeArticle: new FormControl(null),
             
           });
         }
@@ -139,8 +160,67 @@ addArticle() {
   ngOnInit() {
 
     //console.log(this.addArticle);
-    this.initForms(new ArticleModel());
+    this.uniteMesureService.getAllUniteMesures().subscribe(
+      (response) => {
+        if (response && Array.isArray(response.uniteMesure)) {
+          this.uniteMesures = response.uniteMesure;          
 
+        } else {
+          this.uniteMesures = [];
+
+        }
+      },
+      (error) => {
+        console.error("Erreur lors de la récupération des Untées", error);
+      }
+    );  
+
+    this.typeArticleService.getAllTypeArticles().subscribe(
+      (response) => {
+        console.log("Données récupérées:", response);
+        if (response && Array.isArray(response.typeArticle)) {
+          this.typeArticles = response.typeArticle;          
+          console.log("typeArticles :", this.typeArticles); 
+
+        } else {
+          console.log("Aucune donnée pour Unitée");
+          this.typeArticles = [];
+
+        }
+      },
+      (error) => {
+        console.error("Erreur lors de la récupération des Untées", error);
+      }
+    );  
+   
+    this.typeArticleService
+    .getAllTypeArticles()
+    .subscribe((typeArticle) => {
+      //console.log(typeArticle);
+      this.typeArticles= typeArticle || [];
+      //console.log("Données après affectation :", this.typeArticles);
+    });
+
+
+     this.zoneStockService.getAllZones().subscribe(
+      (response) => {
+        //console.log("Données récupérées:", response);
+        if (response && Array.isArray(response.zone)) {
+          this.zoneStocks = response.zone;          
+         // console.log("zoneStocks :", this.zoneStocks); // Vérifie que zoneStocks contient bien un tableau d'objets
+
+        } else {
+          console.log("Aucune donnée pour zones");
+          this.zoneStocks = [];
+
+        }
+      },
+      (error) => {
+        console.error("Erreur lors de la récupération des zones", error);
+      }
+    );  
+
+    this.initForms(new ArticleModel());
     this.articleForm = this.fb.group({
       designation: ['', Validators.required],
       description: ['', Validators.required],
@@ -152,9 +232,12 @@ addArticle() {
       quantity: [null, Validators.required],
       prixVenteUnitaire: [null, Validators.required],
       prixReel: [null ],
-      zoneStock: [null], 
-      uniteMesure: [null],  
-      typeArticle: [null]
+      zoneStock:['', Validators.required],
+      uniteMesure:['', Validators.required],
+      typeArticle:['', Validators.required],
+      zoneStockId: [null], 
+      uniteMesureId: [null],  
+      typeArticleId: [null]
     });
     const articleId = this.route.snapshot.params['articleId']; // Récupérez l'ID de la zone depuis les paramètres de route
     if (articleId) {

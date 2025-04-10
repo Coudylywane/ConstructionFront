@@ -132,35 +132,37 @@
 
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="mb-3" *ngIf="zoneStocks.length > 0">
                                     <label class="form-label">Zone de Stock</label>
                                     <select class="form-select" formControlName="zoneStock">
-                                        <option *ngFor="let zone of zoneStock" [value]="zone.id">{{ zone.designation }}
+                                        <option value="" disabled selected>Choisir une zone de stock</option>
+                                        <option *ngFor="let zone of zoneStocks" [value]="zone.id">{{ zone.designation }}
                                         </option>
                                     </select>
                                 </div>
 
-                               <div class="row">
+                               <div class="row md-4">
                                 <div class="col-md-6">
-                                    <div class="mb-3">
+                                    <div class="mb-3" *ngIf="uniteMesures.length > 0">
                                         <label class="form-label">Unité de Mesure</label>
-                                        <select class="form-select" formControlName="uniteMesure"> <!-- Correction ici -->
-                                            <option *ngFor="let unite of uniteMesure" [value]="unite.id">{{ unite.nom }}
-                                            </option>
+                                        <select class="form-select" formControlName="uniteMesure">
+                                            <option value="" disabled selected>Choisir une unité de mesure</option>
+                                            <option *ngFor="let unite of uniteMesures" [value]="unite.id">{{ unite.abreviation }}</option>
                                         </select>
                                     </div>
     
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Type d'Article</label>
-                                        <select class="form-select" formControlName="typeArticle"> <!-- Correction ici -->
-                                            <option *ngFor="let type of typeArticle" [value]="type.id">{{ type.designation
-                                                }}</option>
-                                        </select>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3" *ngIf="typeArticles">
+                                        <label class="form-label">Type d'Article</label>
+                                        <select class="form-select" formControlName="typeArticle">
+                                            <option value="" disabled selected>Choisir un type d'Article</option>
+                                            <option *ngFor="let type of typeArticles" [value]="type.id">{{ type.designation }}</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                  
                                 </div>
-                               </div>
 
                                 <!-- <div class="mb-3">
                                     <label for="typeFournisseurId" class="form-label">Unité de mesure</label>
