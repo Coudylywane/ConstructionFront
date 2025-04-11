@@ -19,4 +19,7 @@ export class MyEncryptionService {
   decryptText(text: string) {
     return CryptoJS.AES.decrypt(text, this.encPassword).toString(CryptoJS.enc.Utf8);
   }
+
+
+  
 }

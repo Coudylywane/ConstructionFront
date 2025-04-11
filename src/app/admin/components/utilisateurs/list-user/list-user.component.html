@@ -1,6 +1,24 @@
-lister les utlisateurs
+<div class="container-fluid">
 
+  <div class="mt-4">
+    <a class="add style-button d-flex" [routerLink]="'/gestion-article/addArticle'">
+      <span class="material-icons">
+        {{ "add" }}
+      </span>
+      <span class="ml-2 style-text"> Nouvel Utilisateur</span>
+    </a>
+    <h4 class="justify-content-left text-left">
+      Utilisateur
+    </h4>
+  </div>
 
+  <div class="container mt-4">
+    <h2 class="text-center mt-4 text-dispo" *ngIf="">
+      Pas de d'utilisateur Disponible!!!
+    </h2>
+  </div>
+
+</div>
 <!--<div class="container">
   <div class="mt-4">
     <a
