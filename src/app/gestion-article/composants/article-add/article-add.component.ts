@@ -246,14 +246,14 @@ addArticle() {
       typeArticleId: [null]
     });
     const articleId = this.route.snapshot.params['articleId']; // Récupérer l'ID chiffré de l'URL
-console.log("🔹 ID chiffré récupéré de l'URL:", articleId);
+    console.log("🔹 ID chiffré récupéré de l'URL:", articleId);
 
-if (articleId) {
-  const decryptedId = this.encryptService.decryptText(articleId);
-  console.log("🔹 ID déchiffré:", decryptedId);
+    if (articleId) {
+    const decryptedId = this.encryptService.decryptText(articleId);
+    console.log("🔹 ID déchiffré:", decryptedId);
 
-  const typeIdDecript = Number(decryptedId);
-  if (!isNaN(typeIdDecript)) {
+    const typeIdDecript = Number(decryptedId);
+    if (!isNaN(typeIdDecript)) {
     this.isEditing = true;
     this.subscriptions.push(
       this.articleService.getArticleById(typeIdDecript).subscribe(
