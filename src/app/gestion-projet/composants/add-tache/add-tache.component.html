@@ -22,7 +22,8 @@
       <div class="container-fluid">
         <a class="return d-flex" [routerLink]="'/gestion-projet/listTache'">
           <span class="material-icons"> arrow_back_ios_new </span>
-          <span class="ml-2"><b>Liste des Taches</b></span>
+          <span class="ml-2"><b>Liste des Tâches 
+          </b></span>
         </a>
 
         <div class="card-body mt-4">
@@ -30,7 +31,7 @@
             <div class="card-body">
               <form [formGroup]="tacheForm">
                 <div class="mb-3">
-                  <label for="nom" class="form-label">Nom de la tache</label>
+                  <label for="nom" class="form-label">Nom de la tâche</label>
                   <input
                     type="text"
                     class="form-control"
@@ -76,7 +77,7 @@
                   <button
                     (click)="confirmCreateProject()"
                     [disabled]="!tacheForm.valid"
-                    class="btnRegister">
+                    class="btn btn-outline-secondary">
                     Enregistrer
                   </button>
                 </div>

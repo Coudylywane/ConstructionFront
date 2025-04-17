@@ -11,9 +11,12 @@ export class ArticleModel {
   public prixAchatUnitaire: number | undefined;
   public prixReviensUnitaire: number | undefined;
   public prixVenteUnitaire: number | undefined;
+  public prixDevis: number | undefined;
+  public prixReel: number | undefined;
+  public quantity: number | undefined;
   public status: number | undefined;
   public zoneStock: ZoneStockModel | undefined;
   public uniteMesure: UniteMesureModel | undefined;
-  public typeArticle: TypeArticleModel | undefined;
+  public typeArticle: TypeArticleModel | undefined; 
   
 }

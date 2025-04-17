@@ -26,6 +26,11 @@ const routes: Routes = [];
         canActivate: [AuthGuard],
       },
       {
+        path: 'article-edit/:articleId',
+        component: ArticleAddComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'listZoneStock',
         component: ZoneStockListComponent,
         canActivate: [AuthGuard],

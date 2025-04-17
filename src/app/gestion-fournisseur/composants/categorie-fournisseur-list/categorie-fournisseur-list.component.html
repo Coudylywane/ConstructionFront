@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="mt-4">
     <a class="add style-button d-flex" [routerLink]="'/gestion-fournisseur/addCategorieFournisseur'">
       <span class="material-icons">
@@ -6,12 +6,12 @@
       </span>
       <span class="ml-2 style-text"> Nouveau Catégorie Fournisseur</span>
     </a>
-    <h4 class="justify-content-left text-left">
+    <h4 class="justify-content-left text-left ">
       Catégories de Fournisseurs
     </h4>
   </div>
   <!--TABLES-->
-  <div class="container-fluid content-table">
+  <div class="container content-table">
     <h2 class="text-center mt-4 text-dispo" *ngIf="!categorieFournisseurs || categorieFournisseurs.length <= 0">
       Pas de Catégorie de Fournisseur Disponible!!!
     </h2>
@@ -35,13 +35,13 @@
             <td>
               <div class="d-flex">
             <td style="margin-left: 180px">
-              <a class="nav-link m-nav-link" (click)="change(categorieFournisseur.id)">
-                <span class="material-icons">mode_edit</span>
+              <a class="nav-link m-nav-link" (click)="change(categorieFournisseur.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                <span class="material-icons material">mode_edit</span>
               </a>
             </td>
             <td style="margin-left: 20px">
-              <a class="nav-link m-nav-link" (click)="deleteTypeFournisseur(categorieFournisseur?.id)">
-                <span class="material-icons">delete</span>
+              <a class="nav-link m-nav-link" (click)="deleteTypeFournisseur(categorieFournisseur?.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
+                <span class="material-icons material">delete</span>
               </a>
             </td>
     </div>

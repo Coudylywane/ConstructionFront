@@ -7,6 +7,12 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToastService {
+  showError(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
+  showSuccess(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
 
 
   constructor(private toastr: ToastrService) {

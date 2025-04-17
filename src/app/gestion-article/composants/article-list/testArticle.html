@@ -1,0 +1,174 @@
+
+  
+
+
+
+
+  
+<div class="container-fluid">
+    <div class="mt-4">
+      <a class="add style-button d-flex" [routerLink]="'/gestion-article/addArticle'">
+        <span class="material-icons">
+          {{ "add" }}
+        </span>
+        <span class="ml-2 style-text"> Nouvel Article</span>
+      </a>
+      <h4 class="justify-content-left text-left">
+        Articles
+      </h4>
+    </div>
+  
+    <!--Tableaux des Produits-->
+    <div class="container-fluid content-table">
+      <h2 class="text-center mt-4 text-dispo" *ngIf="!articles || articles.length <= 0">
+        Pas de d'article Disponible!!!
+      </h2>
+      <div class="mt-4" *ngIf="articles.length > 0">
+        <table class="table table-hover">
+          <thead>
+            <tr style="text-align: center" class="style-text-table">
+              <th scope="col">ID</th>
+              <th scope="col">
+                <a style="cursor: pointer; text-decoration: none; color: #eb71ac" class="d-flex">
+                  Code
+                </a>
+              </th>
+              <th scope="col">Designation</th>
+              <th scope="col">Prix Achat</th>
+              <th scope="col">Prix Vente</th>
+              <th scope="col">Zone de Stock</th>
+              <th scope="col">Unite de Mesure</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody style="text-align: center">
+            <tr *ngFor="let article of articles">
+              <th style="text-align: center" scope="row">
+                {{ articles.indexOf(article) + 1 }}
+              </th>
+              <td>{{ article.code }}</td>
+              <td>{{ article.designation }}</td>
+              <td>{{ article.prixAchatUnitaire }}</td>
+              <td>{{ article.prixVenteUnitaire }}</td>
+              <td>{{article.zoneStock?.designation}}</td>
+              <td>{{article.uniteMesure?.nom}}</td>
+              <td>
+              </td>
+              <td></td>
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">
+                    Souhaitez-vous supprimer ce Produit ?
+                  </h4>
+                  <button type="button" class="btn-close" aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label for="Motif">Veillez donner le motif de suppression</label>
+                      <div class="input-group">
+                        <textarea name="motif" id="motif" formControlName="motif" cols="30" rows="10"></textarea><br />
+                      </div>
+                    </div>
+                    <button class="btn btn-outline-secondary bi bi-calendar3" type="submit"
+                      (click)="modal.close('Save click')" style="background: #0d1549; color: white">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+        <!--Pagination-->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précedent</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Suivant</a>
+            </li>
+          </ul>
+        </nav>
+        <!--Pagination
+        <div class="row mt-4">
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <nav aria-label="Page navigation example ">
+              <ul class="pagination">
+                <li class="page-item">
+                  <button
+                    class="text-bg2"
+                    [disabled]="disablePrevious || totalPage === 1"
+                    ngClass="
+                      disablePrevious || totalPage === 1
+                        ? ' page-link'
+                        : 'page-link'
+                    "
+                    (click)="precedent()"
+                  >
+                    Précédent
+                  </button>
+                </li>
+                &nbsp;
+                <li class="page-item">
+                  <button
+                    class="text-bg"
+                    [disabled]="disableNext || totalPage === 1"
+                    ngClass="
+                      disableNext || totalPage === 1 ? ' page-link' : 'page-link'
+                    "
+                    (click)="suivant()"
+                  >
+                    Suivant
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-12">
+            <select
+              class="form-select"
+              id="pageSize "
+              (change)="onSelectedPageSize($event)"
+            >
+              <option value="1 ">1</option>
+              <option value="5 ">5</option>
+              <option value="10 ">10</option>
+              <option value="15 ">15</option>
+              <option value="20 ">20</option>
+              <option value="50 ">50</option>
+              <option value="100 ">100</option>
+            </select>
+          </div>
+        </div>-->
+        <!---->
+      </div>
+    </div>
+
+
+
+
+ 
+
+
+
+
+    <div class="content" *ngIf="articles.length > 0">
+      <div class="row mt-4">
+     
+        <div class="col-md-3 col-sm-6"  *ngFor="let article of articles">
+          <div class="card card-block" >
+            <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>
+            <img src="https://pixabay.com/get/gddb9aa87a3918c63a185cd162c5cd9d5a56f5f9618fdf2c0d7ac5a8bf8be4cf13fbf53ab6e129ef5c034e058a0e9f2fc_1280.jpg" alt="Photo of sunset">
+            <h5 class="card-title  mt-3 mb-3">DESIGNATION: {{ article.designation }} </h5>
+            <p class="card-text">This is a company that builds websites, web .</p> 
+          </div>
+        </div>
+         
+      </div>
+    </div>

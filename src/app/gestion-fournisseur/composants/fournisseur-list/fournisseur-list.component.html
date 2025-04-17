@@ -50,16 +50,15 @@
                 <td >
                  <a
                     class="nav-link m-nav-link"
-                    (click)="change(fournisseur.id)">
-                    <span class="material-icons">mode_edit</span>
+                    (click)="change(fournisseur.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                    <span class="material-icons material">mode_edit</span>
                   </a> 
                 </td>
                 <td style="margin-left: 20px">
                 <a
                     class="nav-link m-nav-link"
-                    (click)="deleteFournisseur(fournisseur?.id)"
-                   >
-                    <span class="material-icons">delete</span>
+                    (click)="deleteFournisseur(fournisseur?.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
+                    <span class="material-icons material">delete</span>
                   </a>  
                 </td>
               </div>
