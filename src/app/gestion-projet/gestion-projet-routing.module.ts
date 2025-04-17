@@ -9,6 +9,7 @@ import { ListDevisComponent } from './composants/list-devis/list-devis.component
 import { ListTacheComponent } from './composants/list-tache/list-tache.component';
 import { AddTacheComponent } from './composants/add-tache/add-tache.component';
 import { GenererPlanningComponent } from './composants/generer-planning/generer-planning.component';
+import { VisualiserDevisComponent } from './composants/visualiser-devis/visualiser-devis.component';
 
 const routes: Routes = [];
 
@@ -53,6 +54,11 @@ const routes: Routes = [];
       {
         path: 'genererPlanning/:id',
         component: GenererPlanningComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'visualiserDevis/:id',
+        component: VisualiserDevisComponent,
         canActivate: [AuthGuard],
       },
     ]),

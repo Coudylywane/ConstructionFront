@@ -34,8 +34,8 @@
 <div class="project-banner mb-4">
   <h2>Projet {{ projet?.id }}</h2>
 </div>
-
-<div *ngIf="this.devisExistant && projet?.devis[0].statut == 'EN_ATTENTE' " class="actions">
+<!-- 
+{# <div *ngIf="this.devisExistant && projet?.devis[0].statut == 'EN_ATTENTE' " class="actions">
   <h3>Devis du Projet</h3>
   <button
     pButton
@@ -61,12 +61,12 @@
     label="Annuler le devis"
     (click)="annulerDevis(projet?.devis[0].id)"
   ></button>
-</div>
+</div> #}
 
-<!-- Message si aucun devis n'existe -->
+Message si aucun devis n'existe 
 <div *ngIf="!this.devisExistant" class="mt-4">
   <h3>Aucun devis disponible pour ce projet.</h3>
-</div>
+</div> -->
 
 <!-- Onglets pour les différentes sections -->
 <p-tabView [scrollable]="true">
