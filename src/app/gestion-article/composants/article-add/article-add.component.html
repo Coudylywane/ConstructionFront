@@ -3,11 +3,7 @@
     <!-- Sidebar Start -->
     <aside class="left-sidebar">
         <!-- Sidebar scroll-->
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="./index.html" class="text-nowrap logo-img">
-                <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
-            </a>
-        </div>
+       
     </aside>
     <div class="body-wrapper">
         <header class="app-header"></header>
@@ -22,29 +18,37 @@
                     <div class="card">
                         <div class="card-body">
                             <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Désignation</label>
-                                    <input type="text" class="form-control" placeholder="Entrer la désignation "
-                                        name="designation" formControlName="designation" />
-                                    <div *ngIf="validDesignation()" class="text-danger"> Veuillez renseigner le designation</div> 
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Description</label>
-                                    <input type="text" class="form-control" placeholder="Entrer la description "
-                                        name="description" formControlName="description" />
-                                    <div *ngIf="validDescription()" class="text-danger"> Veuillez renseigner la description</div>
-                                       
-                                    
-                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Code</label>
-                                            <input type="text" class="form-control" placeholder="Entrer Adresse "
-                                                name="code" formControlName="code" />
-                                                <div *ngIf="validCode()" class="text-danger"> Veuillez renseigner le code</div>
+                                            <label for="exampleInputEmail1" class="form-label">Désignation</label>
+                                            <input type="text" class="form-control" placeholder="Entrer la désignation "
+                                                name="designation" formControlName="designation" />
+                                            <div *ngIf="validDesignation()" class="text-danger"> Veuillez renseigner le designation</div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Description</label>
+                                            <input type="text" class="form-control" placeholder="Entrer la description "
+                                                name="description" formControlName="description" />
+                                            <div *ngIf="validDescription()" class="text-danger"> Veuillez renseigner la description</div>
+                                               
+                                        </div>
 
+                                    </div>
+                                </div>
+                               
+
+                               
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Quantité Seuil</label>
+                                            <input type="number" formControlName="quantiteSeuil" class="form-control" />
+                                            <div *ngIf="articleForm.get('quantiteSeuil')?.touched && articleForm.get('quantiteSeuil')?.hasError('required')">
+                                              <small class="text-danger">La quantité seuil est requise si la quantité est inférieure à 2.</small>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -140,7 +144,7 @@
                                     </div>
 
                                 </div>
-
+                                
                                 <div class="mb-3" *ngIf="zoneStocks.length > 0">
                                     <label class="form-label">Zone de Stock</label>
                                     <select class="form-select" formControlName="zoneStock">
@@ -166,11 +170,19 @@
                                         <label class="form-label">Type d'Article</label>
                                         <select class="form-select" formControlName="typeArticle">
                                             <option value="" disabled selected>Choisir un type d'Article</option>
-                                            <option *ngFor="let type of typeArticles" [ngValue]="typeArticles">{{ type.designation }}</option>
+                                            <option *ngFor="let type of typeArticles" [ngValue]="type">{{ type.designation }}</option>
                                         </select>
                                         </div>
                                     </div>
                                   
+                                </div>
+
+                                <div class="mb-3" *ngIf="fournisseurs.length > 0">
+                                    <label class="form-label">Fournisseurs</label>
+                                    <select class="form-select" formControlName="fournisseur">
+                                        <option value="" disabled selected>Choisir un fournisseur</option>
+                                        <option *ngFor="let fournisseur of fournisseurs" [ngValue]="fournisseurs">{{ fournisseur.nom }}</option>
+                                    </select>
                                 </div>
 
                                 <!-- <div class="mb-3">

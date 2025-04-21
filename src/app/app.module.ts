@@ -23,7 +23,12 @@ import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
     BlockUIModule.forRoot(),
     InputTextModule,
     InputTextModule,
-    GestionProjetModule
+    GestionProjetModule,
+    BrowserAnimationsModule, // 👈 obligatoire
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      timeOut: 3000,
+    }),
 
   ],
   providers: [],

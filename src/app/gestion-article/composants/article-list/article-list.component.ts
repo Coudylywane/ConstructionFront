@@ -27,6 +27,8 @@ export class ArticleListComponent implements OnInit {
   @BlockUI()
   blockUI!: NgBlockUI;
   show: boolean = false;
+  selectedArticles: any[] = [];
+
 
   constructor(
     private articleService: ArticleService,
@@ -109,4 +111,35 @@ export class ArticleListComponent implements OnInit {
     this.getArticles(this.page, this.pageSize);
   }
 
+ 
+
+
+  toggleSelection(article: any) {
+    if (!article.id) return;
+  
+    const index = this.selectedArticles.findIndex(a => a.id === article.id);
+    if (index > -1) {
+      this.selectedArticles.splice(index, 1);
+    } else {
+      this.selectedArticles.push(article);
+    }
+  }
+  
+  
+  isSelected(id?: number): boolean {
+    if (!id) return false;
+    return this.selectedArticles.some(a => a.id === id);
+  }
+  
+  commanderSelection() {
+    console.log('Articles à commander :', this.selectedArticles);
+    // Exemple : redirection ou appel d’un service
+    this.router.navigate(['/gestion-article/addCommande'], {
+      state: { articles: this.selectedArticles }
+    });
+  }
+
 }
+
+
+

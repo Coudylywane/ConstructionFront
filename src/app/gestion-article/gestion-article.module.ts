@@ -11,6 +11,8 @@ import { TypeArticleAddComponent } from './composants/type-article-add/type-arti
 import { TypeArticleListComponent } from './composants/type-article-list/type-article-list.component';
 import { UniteMesureAddComponent } from './composants/unite-mesure-add/unite-mesure-add.component';
 import { UniteMesureListComponent } from './composants/unite-mesure-list/unite-mesure-list.component';
+import { CommandeAddComponent } from './composants/commande-add/commande-add.component';
+import { CommandeListComponent } from './composants/commande-list/commande-list.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { UniteMesureListComponent } from './composants/unite-mesure-list/unite-m
     UniteMesureAddComponent,
     UniteMesureListComponent,
     TypeArticleListComponent,
-    TypeArticleAddComponent
+    TypeArticleAddComponent,
+    CommandeAddComponent,
+    CommandeListComponent
   ],
   imports: [GestionArticleRoutingModule, SharedModule, BlockUIModule.forRoot()],
 })

@@ -9,6 +9,8 @@ import { UniteMesureListComponent } from './composants/unite-mesure-list/unite-m
 import { UniteMesureAddComponent } from './composants/unite-mesure-add/unite-mesure-add.component';
 import { TypeArticleListComponent } from './composants/type-article-list/type-article-list.component';
 import { TypeArticleAddComponent } from './composants/type-article-add/type-article-add.component';
+import { CommandeListComponent } from './composants/commande-list/commande-list.component';
+import { CommandeAddComponent } from './composants/commande-add/commande-add.component';
 
 const routes: Routes = [];
 
@@ -73,6 +75,16 @@ const routes: Routes = [];
       {
         path: 'typeArticle-edit/:uniteId',
         component: TypeArticleAddComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'listCommande',
+        component: CommandeListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'addCommande',
+        component: CommandeAddComponent,
         canActivate: [AuthGuard],
       },
     ]),

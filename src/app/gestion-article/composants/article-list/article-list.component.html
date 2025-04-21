@@ -1,16 +1,41 @@
 <div class="container-fluid">
 
-  <div class="mt-4">
-    <a class="add style-button d-flex" [routerLink]="'/gestion-article/addArticle'">
-      <span class="material-icons">
-        {{ "add" }}
-      </span>
-      <span class="ml-2 style-text"> Nouvel Article</span>
-    </a>
+ <div class="textTitle mt-4">
     <h4 class="justify-content-left text-left">
       Articles
     </h4>
+ </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <!--<div class="text-center mt-4">
+        <a class="btn btn-success style-button" [routerLink]="'/gestion-article/addCommande'" style="width: 35%;text-transform: uppercase;font-size: 12px;">
+          <i class="material-icons">shopping_cart</i> <b>Commander</b>
+          <i class="material-icons">shopping_cart</i> Commander les articles sélectionnés
+        </a>-->
+        <button 
+          class="btn btn-success style-button" 
+          style="width: 36%; text-transform: uppercase; font-size: 12px;margin-top:21px;"
+          [disabled]="selectedArticles.length === 0"
+          (click)="commanderSelection()">
+          <i class="material-icons">shopping_cart</i> <b>Commander ({{ selectedArticles.length }})</b>
+        </button>
+      </div>
+
+    
+    <div class=" col-sm-6 mt-4">
+      <a class="add style-button d-flex" [routerLink]="'/gestion-article/addArticle'">
+        <span class="material-icons">
+          {{ "add" }}
+        </span>
+        <span class="ml-2 style-text"> Nouvel Article</span>
+      </a>
+     
+    </div>
+
   </div>
+
+  
 
   <div class="container mt-4">
     <h2 class="text-center mt-4 text-dispo" *ngIf="!articles || articles.length <= 0">
@@ -26,7 +51,7 @@
               <!-- IMAGE -->
               <div class="col-md-5 d-flex align-items-center">
                 <img
-                  src=" https://images.pexels.com/photos/93400/pexels-photo-93400.jpeg"
+                  src=" https://images.pexels.com/photos/159358/construction-site-build-construction-work-159358.jpeg"
                   alt="Image de l'article"
                   class="img-fluid rounded-start"
                   style="height: 100%; width: 100%; object-fit: cover;"
@@ -35,7 +60,18 @@
     
               <!-- CONTENU -->
               <div class="col-md-7">
-                <div class="card-body">
+                <div class="card-body position-relative">
+
+                   <!-- CHECKBOX EN HAUT À DROITE -->
+                  <div class="form-check position-absolute top-0 end-0 m-2">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      [checked]="isSelected(article.id!)"
+                      (change)="toggleSelection(article)"
+                      [id]="'check-' + article.id"
+                    />
+                  </div>
                   
                   <!-- TITRE -->
                   <h4 class="card-title "> 
