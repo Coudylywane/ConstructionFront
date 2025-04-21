@@ -3,12 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainContentComponent } from './layout/main-content/main-content.component';
 
 const routes: Routes = [
-  //{
-  // path: '',
-  //redirectTo: 'login',
-  //pathMatch: 'full',
-  //},
-  
+  {
+  path: '',
+  redirectTo: 'login',
+  pathMatch: 'full',
+  },
   // {
   //   path: '**',
   //   component: NotFoundComponent,
@@ -64,6 +63,16 @@ const routes: Routes = [
       },
     ],
   },
+{
+  path: '',
+  component: MainContentComponent,
+  children: [
+    { path: 'gestion-utilisateur',
+      loadChildren: () => import('./gestion-utilisateur/gestion-utilisateur.module').then(m => m.GestionUtilisateurModule)
+    },
+  ]
+
+}
 ];
 
 @NgModule({

@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Projet } from 'src/app/shared/models/projet';
 import { Tache } from 'src/app/shared/models/Tache.model';
@@ -17,7 +22,7 @@ export class ProjectService {
     return this.http.post(this._api + '/projets/create', projectRequestDto, {
       headers,
     });
-}
+  }
 
   getAllProjets(page = 0, perPage = 50): Observable<any> {
     const options = {
@@ -90,4 +95,32 @@ export class ProjectService {
   listerTaches(): Observable<Tache[]> {
     return this.http.get<Tache[]>(`${this._api}/taches/list`);
   }
+
+  getDevisByProjetId(projetId: number): Observable<any> {
+    return this.http.get<any>(`${this._api}/devis/projet/${projetId}`);
+  }
+
+  getPlanningByDevisId(devisId: number): Observable<any> {
+    return this.http.get<any>(`${this._api}/planning/devis/${devisId}`).pipe(
+      catchError((error) => {
+        console.error('Error fetching planning:', error);
+        return of(null);
+      })
+    );
+  }
+
+  generatePlanning(devisId: number, taches: any[]): Observable<any> {
+    return this.http
+      .post<any>(`${this._api}/planning/generate/${devisId}`, taches)
+      .pipe(
+        catchError((error) => {
+          console.error('Error generating planning:', error);
+          throw error;
+        })
+      );
+  }
+
+  // getPlanningByDevisId(devisId: number): Observable<any> {
+  //   return this.http.get<any>(`${this._api}/planning/devis/${devisId}`);
+  // }
 }

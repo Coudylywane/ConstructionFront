@@ -45,22 +45,24 @@ export class ArticleListComponent implements OnInit {
   change(id?: number) {
     if (id !== undefined && id !== null) {
       const encryptedId = this.encryptService.encryptText(id.toString());
-      
+
       console.log("ID original:", id);
       console.log("ID encrypté (avant passage URL):", encryptedId);
-  
+
       this.router.navigate(['/gestion-article/article-edit', encryptedId]);
     } else {
       console.error("Erreur : ID invalide pour la modification !");
     }
   }
-  
-  
-  
+
+
+
   getArticles(page = 0, size = 2) {
     this.subscriptions.push(
       this.articleService.getAllArticles(page, size).subscribe(
         (data:any) => {
+          console.log('Articles récupérés:', data);
+
           this.page = data.currentPage;
           this.totalPage = data.totalPages;
           this.articles = data.article;

@@ -32,8 +32,8 @@
   <ul class="sidebar-nav sidebar-navs" data-coreui="navigation" id="" data-simplebar="">
 
         <!--GESTION DE PROJETS-->
-    <li class="nav-title">Gestion Projets</li>
-    <li class="nav-item m-nav-item">
+    <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN']">Gestion Projets</li>
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listProjet'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           {{ "assignment_turned_in" }}
@@ -47,7 +47,7 @@
           fill="#2D3D5E" />
       </svg>
     </li>
-    <li class="nav-item m-nav-item">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listDevis'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           description
@@ -61,7 +61,7 @@
           fill="#2D3D5E" />
       </svg>
     </li>
-    <li class="nav-item m-nav-item">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listTache'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           description
@@ -76,11 +76,11 @@
       </svg>
     </li>
 
-   
-    <!--GESTION FOURNISSEURS-->
-    <li class="nav-title">Gestion Fournisseur</li>
 
-    <li class="nav-item m-nav-item">
+    <!--GESTION FOURNISSEURS-->
+    <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN']">Gestion Fournisseur</li>
+
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-fournisseur/listFournisseur'" href="javascript:void(0);">
         <span class="material-icons style-icon">local_shipping</span>
         <span class="style-text">Fournisseur</span>
@@ -93,7 +93,7 @@
       </svg>
     </li>
 
-    <li class="nav-item m-nav-item">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-fournisseur/listTypeFournisseur'"
         href="javascript:void(0);">
         <span class="material-icons style-icon">event_note</span>
@@ -107,7 +107,7 @@
       </svg>
     </li>
 
-    <li class="nav-item m-nav-item">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-fournisseur/listCategorieFournisseur'"
         href="javascript:void(0);">
         <span class="material-icons style-icon">transfer_within_a_station</span>
@@ -121,8 +121,8 @@
       </svg>
     </li>
     <!--GESTION Stocks-->
-    <li class="nav-title">Gestion Articles</li>
-    <li class="nav-item m-nav-item">
+    <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN']">Gestion Articles</li>
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listArticle'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           {{ "inventory_2" }}
@@ -136,7 +136,7 @@
           fill="#2D3D5E" />
       </svg>
     </li>
-    <li class="nav-item m-nav-item">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listZoneStock'" href="javascript:void(0);">
         <span class="material-icons style-icon">domain</span>
         <span class="style-text">Zone de Stock</span>
@@ -148,7 +148,7 @@
           fill="#2D3D5E" />
       </svg>
     </li>
-    <li class="nav-item m-nav-item">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listUniteMesure'" href="javascript:void(0);">
         <span class="material-icons style-icon">panorama_vertical</span>
         <span class="style-text">Unite de Mesure</span>
@@ -160,7 +160,7 @@
           fill="#2D3D5E" />
       </svg>
     </li>
-    <li class="nav-item m-nav-item">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-article/listTypeArticle'" href="javascript:void(0);">
         <span class="material-icons style-icon">event_note</span>
         <span class="style-text">Type Article</span>
@@ -173,9 +173,9 @@
       </svg>
     </li>
      <!--ADMINISTRATION-->
-     <li class="nav-title">Administration</li>
-     <li class="nav-item m-nav-item">
-       <a class="nav-link m-nav-link" [routerLink]="'/admin/listUser'" href="javascript:void(0);">
+     <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN']">Administration</li>
+     <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
+       <a class="nav-link m-nav-link" [routerLink]="'/gestion-utilisateur/add-user'" href="javascript:void(0);">
          <span class="material-icons style-icon">people</span>
          <span class="style-text">Utilisateurs</span>
        </a>
@@ -186,7 +186,7 @@
            fill="#2D3D5E" />
        </svg>
      </li>
-   
+
   </ul>
   <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
 </div>
@@ -206,17 +206,17 @@
       </a>
       <!-- Left links -->
       <ul class="navbar-nav header-nav ms-auto-nav">
-        <li class="nav-item">
+        <li class="nav-item" *appHasAnyAuthority="['SUPER_ADMIN']">
           <a class="nav-link active" style="
               border-radius: 6px;
               border: 1px solid var(--Color-5, #996f05);
             " aria-current="page" [routerLink]="''" >Dashboards</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/gestion-fournisseur/listFournisseur'">Fournisseurs</a>
+          <a class="nav-link" [routerLink]="'/gestion-fournisseur/listFournisseur'" *appHasAnyAuthority="['SUPER_ADMIN']">Fournisseurs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/gestion-projet/listProjet'">Projets</a>
+          <a class="nav-link" [routerLink]="'/gestion-projet/listProjet'" *appHasAnyAuthority="['SUPER_ADMIN']">Projets</a>
         </li>
       </ul>
       <!-- Left links -->

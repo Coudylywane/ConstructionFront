@@ -41,47 +41,46 @@
             <td>{{ projet.status }}</td>
             <td>
               <div class="d-flex justify-content-center">
-                <!-- Edit Button
-                <a class="nav-link m-nav-link buttons" (click)="editProjet(projet.id)">
-                  <span class="material-icons">mode_edit</span>
-                </a> -->
-                <!-- View Button -->
-                <a
-                  class="nav-link m-nav-link buttons"
-                  style="margin-left: 10px"
-                  [routerLink]="['/gestion-projet/detailProjet', projet.id]"
-                >
-                  <span class="material-icons">info</span>
-                </a>
                 <!-- Generate Devis or Download Devis Button -->
                 <ng-container *ngIf="projet.status === 'VALIDATED'">
-                <a
+                   <!-- Telecharger devis -->
+                  <!-- <a
                     *ngIf="devisExistant[projet.id]"
                     class="nav-link m-nav-link buttons"
                     (click)="telechargerDevis(projet.id)"
                     style="margin-left: 10px"
                 >
                     <span class="material-icons">download</span>
-                </a>
-                    <a *ngIf="!devisExistant[projet.id]"
-                        class="nav-link m-nav-link buttons"
-                        [routerLink]="['/gestion-projet/genererDevis', projet.id]"
-                        style="margin-left: 10px"
-                    >
-                        <span class="material-icons">description</span>
-                    </a>
-                    <!-- Bouton pour visualiser le devis si existant -->
-                    <a
-                      *ngIf="devisExistant[projet.id]"
-                      class="nav-link m-nav-link buttons"
-                      (click)="visualiserDevis(projet.id)"
-                      style="margin-left: 10px"
-                    >
-                      <span class="material-icons">visibility</span>
-                    </a>
+                </a> -->
+                 <!-- Visualiser devis -->
+                  <a
+                    *ngIf="devisExistant[projet.id]"
+                    class="nav-link m-nav-link buttons"
+                    [routerLink]="[
+                      '/gestion-projet/visualiserDevis',projet.id]"
+                    style="margin-left: 10px"
+                  >
+                    <span class="material-icons">visibility</span>
+                  </a>
+                <!-- Generer devis -->
+                  <a
+                    *ngIf="!devisExistant[projet.id]"
+                    class="nav-link m-nav-link buttons"
+                    [routerLink]="['/gestion-projet/genererDevis', projet.id]"
+                    style="margin-left: 10px"
+                  >
+                    <span class="material-icons">description</span>
+                  </a>
 
-            </ng-container>
-
+                  <!-- Bouton pour visualiser le devis si existant -->
+                  <a
+                    class="nav-link m-nav-link buttons"
+                    style="margin-left: 10px"
+                    [routerLink]="['/gestion-projet/detailProjet', projet.id]"
+                  >
+                    <span class="material-icons">info</span>
+                  </a>
+                </ng-container>
               </div>
             </td>
           </tr>

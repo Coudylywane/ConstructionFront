@@ -21,8 +21,9 @@ import { ListDevisComponent } from './composants/list-devis/list-devis.component
 import { AddTacheComponent } from './composants/add-tache/add-tache.component';
 import { ListTacheComponent } from './composants/list-tache/list-tache.component';
 import { GenererPlanningComponent } from './composants/generer-planning/generer-planning.component';
-
-
+import { VisualiserDevisComponent } from './composants/visualiser-devis/visualiser-devis.component';
+import { CfaCurrencyPipe } from './cfa-currency.pipe';
+import { VisualiserPlanningComponent } from './composants/visualiser-planning/visualiser-planning.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,9 @@ import { GenererPlanningComponent } from './composants/generer-planning/generer-
     AddTacheComponent,
     ListTacheComponent,
     GenererPlanningComponent,
+    VisualiserDevisComponent,
+    CfaCurrencyPipe,
+    VisualiserPlanningComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { LayoutModule } from './layout/layout.module';
@@ -10,7 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
-
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr'; // Import fr-FR locale data
+registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,7 +33,9 @@ import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
     }),
 
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' }, // Set fr-FR as the default locale
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

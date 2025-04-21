@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoleModel } from 'src/app/shared/models/role.model';
 import { UtilisateurModel } from 'src/app/shared/models/utilisateur.model';
 //import * as moment from 'moment';
 //import { SocketService } from 'src/app/shared/services/socket-service';
@@ -23,13 +24,22 @@ export class AuthService {
   async authenticationProcess(url: string, body: any) {
     await this.http.post<any>(url, body).toPromise()
       .then((data) => {
-        console.log(data);
+        console.log('Login réussi:', data);
         this.setSession(data).then(x => {
           this.identity().subscribe((user: any) => {
-            this.storeUser(user)
-                  .then(() => {
-                    this.router.navigate(['/gestion-article/listArticle']);
-                  });
+            console.log('Utilisateur récupéré après login:', user);
+            //if (this.hasAuthority(['SUPER_ADMIN','ADMIN'], user)) {
+           //if (user.passwordChanged) {
+            if (this.hasAuthority(['SUPER_ADMIN'], user)) {
+              this.storeUser(user)
+                .then(() => {
+                  this.router.navigate(['/gestion-article/listArticle']);
+                });
+            }
+           //}
+
+            //}
+
             //if (user.passwordChanged) {
               /* if (this.hasAuthority(['SUPER_ADMIN','ADMIN'], user)) {
                 this.storeUser(user)
@@ -52,7 +62,7 @@ export class AuthService {
             //} else {
              // this.router.navigate(['/login/reset-password']);
             //}
-          }, (error: any) => console.log(error));
+          }, (error: any) => console.error('[AuthService] Erreur dans identity() :', error));
         });
       }).catch((error1) => this.errCon = true);
     return this.errCon;
@@ -63,7 +73,6 @@ export class AuthService {
   }
 
   async setSession(authResult: any) {
-
     localStorage.removeItem('id_token');
     localStorage.setItem('id_token', authResult.token);
   }
@@ -76,6 +85,10 @@ export class AuthService {
 
   token() {
     return localStorage.getItem('id_token')?.toString();
+  }
+  getCurrentUserRoles(): RoleModel[] {
+    const user = JSON.parse(localStorage.getItem('mdd_user')!);
+    return user?.roles || [];
   }
 
   /*public isLoggedIn() {
@@ -91,6 +104,7 @@ export class AuthService {
   }
 
   public identity() {
+    console.log('[AuthService] Appel de identity()');
     return this.http.get<any>('/api/connected-user');
   }
   // public isLoggedIn() {
@@ -111,6 +125,16 @@ export class AuthService {
   //     }
   //   }
   // }
+  convertText(conversion: string, user: any) {
+    if (conversion === 'encrypt') {
+      return CryptoJS.AES.encrypt(JSON.stringify(user).trim(), this.SECRET.trim()).toString();
+    } else {
+      const bytes = CryptoJS.AES.decrypt(user, this.SECRET.trim());
+      if (bytes.toString()) {
+        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      }
+    }
+  }
 
   hasAuthority(authorities: string[], user: UtilisateurModel): boolean {
     for (const authority of authorities) {
