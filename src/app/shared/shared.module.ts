@@ -28,6 +28,7 @@ import { BlockUIModule } from 'ng-block-ui';
     HttpClientModule,
     NgbModule,
     ConfirmDialogComponent,
+    HasAnyAuthorityDirective
   ],
   providers: [
     {

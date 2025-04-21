@@ -16,76 +16,104 @@
     <h2 class="text-center mt-4 text-dispo" *ngIf="!articles || articles.length <= 0">
       Pas de d'article Disponible!!!
     </h2>
- 
+
     <div class="container">
       <div class="row g-4">
         <div class="col-md-6" *ngFor="let article of articles">
           <div class="card shadow-lg rounded">
             <div class="row g-0">
-              
+
               <!-- IMAGE -->
               <div class="col-md-5 d-flex align-items-center">
-                <img
-                  src=" https://images.pexels.com/photos/93400/pexels-photo-93400.jpeg"
-                  alt="Image de l'article"
-                  class="img-fluid rounded-start"
-                  style="height: 100%; width: 100%; object-fit: cover;"
-                />
+                <img src=" https://images.pexels.com/photos/93400/pexels-photo-93400.jpeg" alt="Image de l'article"
+                  class="img-fluid rounded-start" style="height: 100%; width: 100%; object-fit: cover;" />
               </div>
-    
+
               <!-- CONTENU -->
               <div class="col-md-7">
                 <div class="card-body">
-                  
+
                   <!-- TITRE -->
-                  <h4 class="card-title "> 
+                  <h4 class="card-title ">
                     <i class="fas fa-box-open"></i> <b>Désignation:</b> {{ article.designation }}
                   </h4>
-    
+
                   <!-- QUANTITÉ -->
                   <p class="mb-1">
                     <i class="fas fa-cubes text-warning"></i> <b>Quantité:</b> {{ article.quantity }}
                   </p>
-    
+
                   <!-- STATUT AVEC COULEUR DYNAMIQUE -->
-                  <span 
-                    class="badge bg-success" >
-                    
-                   {{ article.status }}
+                  <span class="badge bg-success">
+
+                    {{ article.status }}
                   </span>
-    
+
                   <hr />
-    
+
                   <!-- BOUTONS D'ACTION -->
                   <div class="d-flex justify-content-end">
                     <button class="btn btn-outline-primary btn-sm me-2" (click)="change(article?.id)">
                       <i class="material-icons material"></i> Modifier
                     </button>
-                    
+
                   </div>
-    
+
                 </div>
               </div>
-    
+
             </div>
           </div>
         </div>
       </div>
-
-    </div>
-
-    <div class="mt-4">
-
-    </div>
-    
-    
-
-   
-    
+      <div class="row mt-4">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <nav aria-label="Page navigation example ">
+            <ul class="pagination">
+              <li class="page-item">
+                <button [disabled]="disablePrevious || totalPage === 1" [ngClass]="
+            disablePrevious || totalPage === 1
+              ? 'text-bg-secondary page-link'
+              : 'page-link'
+          " (click)="precedent()">
+                  Précédent
+                </button>
+              </li>
+              &nbsp;
+              <li class="page-item">
+                <button [disabled]="disableNext || totalPage === 1" [ngClass]="
+            disableNext || totalPage === 1
+              ? 'text-bg-secondary page-link'
+              : 'page-link'
+          " (click)="suivant()">
+                  Suivant
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <select class="form-select" id="pageSize " (change)="onSelectedPageSize($event)">
+            <option value="1 ">1</option>
+            <option value="5 ">5</option>
+            <option value="10 ">10</option>
+            <option value="15 ">15</option>
+            <option value="20 ">20</option>
+            <option value="50 ">50</option>
+            <option value="100 ">100</option>
+          </select>
+        </div>
+      </div>
   </div>
+
+  <div class="mt-4">
+
+  </div>
+
+
+
+
 
 </div>
 
-
-
-  
+</div>

@@ -63,6 +63,16 @@ const routes: Routes = [
       },
     ],
   },
+{
+  path: '',
+  component: MainContentComponent,
+  children: [
+    { path: 'gestion-utilisateur',
+      loadChildren: () => import('./gestion-utilisateur/gestion-utilisateur.module').then(m => m.GestionUtilisateurModule)
+    },
+  ]
+
+}
 ];
 
 @NgModule({
