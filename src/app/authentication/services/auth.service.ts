@@ -22,6 +22,8 @@ export class AuthService {
   ) { }
 
   async authenticationProcess(url: string, body: any) {
+    console.log(body,url);
+    
     await this.http.post<any>(url, body).toPromise()
       .then((data) => {
         console.log('Login réussi:', data);
