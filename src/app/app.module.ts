@@ -26,6 +26,12 @@ registerLocaleData(localeFr, 'fr-FR');
     InputTextModule,
     InputTextModule,
     GestionProjetModule,
+    BrowserAnimationsModule, // 👈 obligatoire
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      timeOut: 3000,
+    }),
+
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' }, // Set fr-FR as the default locale

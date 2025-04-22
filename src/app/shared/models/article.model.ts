@@ -1,3 +1,4 @@
+import { FournisseurModel } from "./fournisseur.model";
 import { TypeArticleModel } from "./type-article.model";
 import { UniteMesureModel } from "./unite-mesure.model";
 import { ZoneStockModel } from "./zone-stock.model";
@@ -18,5 +19,7 @@ export class ArticleModel {
   public zoneStock: ZoneStockModel | undefined;
   public uniteMesure: UniteMesureModel | undefined;
   public typeArticle: TypeArticleModel | undefined; 
+  public fournisseur: FournisseurModel | undefined; 
+  public quantiteSeuil: number | undefined; 
   
 }

@@ -22,7 +22,7 @@ export class ProjectService {
     return this.http.post(this._api + '/projets/create', projectRequestDto, {
       headers,
     });
-}
+  }
 
   getAllProjets(page = 0, perPage = 50): Observable<any> {
     const options = {
@@ -119,4 +119,8 @@ export class ProjectService {
         })
       );
   }
+
+  // getPlanningByDevisId(devisId: number): Observable<any> {
+  //   return this.http.get<any>(`${this._api}/planning/devis/${devisId}`);
+  // }
 }

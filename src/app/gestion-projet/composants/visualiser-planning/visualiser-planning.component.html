@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="mt-4">
+    <h4 class="justify-content-left text-left">Liste des tâches du planning</h4>
+  </div>
+
+  <div class="container-fluid content-table">
+    <h2 *ngIf="taches.length === 0" class="text-center text-dispo mt-4">
+      Aucune tâche disponible pour ce planning !
+    </h2>
+
+    <div *ngIf="taches.length > 0" class="mt-4">
+      <table class="table table-hover">
+        <thead>
+          <tr style="text-align: center" class="style-text-table">
+            <th scope="col">ID</th>
+            <th scope="col">Nom de la tâche</th>
+            <th scope="col">Date de début</th>
+            <th scope="col">Date de fin</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center">
+          <tr *ngFor="let tache of taches">
+            <th scope="row">{{ tache.id }}</th>
+            <td>{{ tache.nom }}</td>
+            <td>{{ tache.dateDebut | date : 'dd-MM-yyyy' }}</td>
+            <td>{{ tache.dateFin | date : 'dd-MM-yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

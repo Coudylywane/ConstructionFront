@@ -14,6 +14,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { UniteMesureService } from '../../services/unite-mesure.service';
 import { TypeArticleService } from '../../services/type-article.service';
 import { ZoneStockService } from '../../services/zone-stock.service';
+import { FournisseurService } from 'src/app/gestion-fournisseur/services/fournisseur.service';
+import { FournisseurModel } from 'src/app/shared/models/fournisseur.model';
 
 
 @Component({
@@ -30,6 +32,7 @@ export class ArticleAddComponent {
   zoneStocks = [] as ZoneStockModel[];
   uniteMesures = [] as UniteMesureModel[];
   typeArticles = [] as TypeArticleModel[];
+  fournisseurs = [] as FournisseurModel[];
   isEditing: boolean = false;
  
   constructor(
@@ -42,9 +45,10 @@ export class ArticleAddComponent {
     private uniteMesureService: UniteMesureService,
     private typeArticleService: TypeArticleService,
     private zoneStockService: ZoneStockService,
+    private fournisseurService: FournisseurService,
 
   ){}
-//////////////// //////       AJOUT ARTICLE...............
+//////////////////////AJOUT ARTICLE...............
 addArticle() {
   if (this.articleForm.valid) {
     console.log('Valeurs du formulaire:', this.articleForm.value);
@@ -52,7 +56,7 @@ addArticle() {
     const articleData: any = {
       designation: this.articleForm.value.designation,
       description: this.articleForm.value.description,
-      code: this.articleForm.value.code,
+      //code: this.articleForm.value.code,
       poids: this.articleForm.value.poids,
       prixDevis: this.articleForm.value.prixDevis,
       prixAchatUnitaire: this.articleForm.value.prixAchatUnitaire,
@@ -60,15 +64,20 @@ addArticle() {
       prixVenteUnitaire: this.articleForm.value.prixVenteUnitaire,
       quantity: this.articleForm.value.quantity,
       prixReel: this.articleForm.value.prixReel,
+      quantiteSeuil: this.articleForm.value.quantiteSeuil,
+
     
       // Vérifier que c'est un tableau et récupérer le premier élément
-      typeArticle: Array.isArray(this.articleForm.value.typeArticle) && this.articleForm.value.typeArticle.length > 0 
-        ? { id: this.articleForm.value.typeArticle[0].id } 
-        : null,
+      typeArticle: this.articleForm.value.typeArticle 
+      ? { id: this.articleForm.value.typeArticle.id } 
+      : null,    
     
       uniteMesure: this.articleForm.value.uniteMesure ? { id: this.articleForm.value.uniteMesure.id } : null,
       zoneStock: this.articleForm.value.zoneStock ? { id: this.articleForm.value.zoneStock.id } : null,
-    };
+      fournisseur: Array.isArray(this.articleForm.value.fournisseur) && this.articleForm.value.fournisseur.length > 0 
+      ? { id: this.articleForm.value.fournisseur[0].id } 
+      : null,
+        };
     
     // Vérification des champs obligatoires
     if (!articleData.zoneStock || !articleData.zoneStock.id) {
@@ -84,6 +93,11 @@ addArticle() {
     if (!articleData.typeArticle || !articleData.typeArticle.id) {
       console.error("Erreur : Type d'article obligatoire !");
       this.toastService.showError("Le type d'article est obligatoire !");
+      return;
+    }
+    if (!articleData.fournisseur || !articleData.fournisseur.id) {
+      console.error("Erreur : Fournisseur obligatoire !");
+      this.toastService.showError("Une fournisseur est obligatoire !");
       return;
     }
     
@@ -107,7 +121,7 @@ addArticle() {
     private initForms(type: ArticleModel) {
         if (type) {
             this.articleForm = this.fb.group({
-                code: new FormControl(type.code, [Validators.required]),
+                //code: new FormControl(type.code, [Validators.required]),
                 designation: new FormControl(type.designation, [Validators.required]),
                 description: new FormControl(type.description, [Validators.required]),
                 poids: new FormControl(type.poids, [Validators.required]),
@@ -123,11 +137,14 @@ addArticle() {
                 //typeArticle : new FormControl(type. [ Validators.required] 
                 zoneStock: [null, Validators.required],  
                 uniteMesure: [null, Validators.required],
-                typeArticle: [null, Validators.required]
+                typeArticle: [null, Validators.required],
+                fournisseur: [null, Validators.required],
+                quantiteSeuil: [null],
+
           });
         } else {
           this.articleForm = this.fb.group({
-            code: new FormControl(null, [Validators.required]),
+            //code: new FormControl(null, [Validators.required]),
             designation: new FormControl(null, [Validators.required]),
             description: new FormControl(null, [Validators.required]),
             poids: new FormControl(null, [Validators.required]),
@@ -143,7 +160,10 @@ addArticle() {
             //typeArticle: new FormControl(null),
             zoneStock: [null, Validators.required],  
             uniteMesure: [null, Validators.required],
-            typeArticle: [null, Validators.required]
+            typeArticle: [null, Validators.required],
+            fournisseur: [null, Validators.required],
+            quantiteSeuil: [null],
+
             
           });
         }
@@ -155,7 +175,7 @@ addArticle() {
           .subscribe((typeDetails: any) => {
             this.articleForm.patchValue({
               
-              code: typeDetails.code,
+              //code: typeDetails.code,
               designation: typeDetails.designation,
               description: typeDetails.description,
               poids: typeDetails.poids,
@@ -166,7 +186,9 @@ addArticle() {
               prixReel: typeDetails.prixReel,
               typeArticleId: typeDetails.typeArticleId,
               uniteMesureId: typeDetails.uniteMesureId,
-              zoneStockId: typeDetails.zoneStockId
+              zoneStockId: typeDetails.zoneStockId,
+              fournisseurId: typeDetails.fournisseurId,
+              quantiteSeuil:typeDetails.quantiteSeuil,
             });
           });
       }
@@ -226,11 +248,30 @@ addArticle() {
       }
     );  
 
+    this.fournisseurService.getAllFournisseurs().subscribe(
+      (response) => {
+        console.log("Données récupérées:", response);
+        if (response && Array.isArray(response.fournisseur)) {
+          this.fournisseurs = response.fournisseur;          
+         console.log("FOurnisseurs :", this.fournisseurs); 
+
+        } else {
+          console.log("Aucune donnée pour les Fournisseurs");
+          this.fournisseurs = [];
+
+        }
+      },
+      (error) => {
+        console.error("Erreur lors de la récupération des Fournisseurs", error);
+      }
+
+    );
+
     this.initForms(new ArticleModel());
     this.articleForm = this.fb.group({
       designation: ['', Validators.required],
       description: ['', Validators.required],
-      code: ['', Validators.required],
+      //code: ['', Validators.required],
       poids: [null, Validators.required],
       prixDevis: [null, Validators.required],
       prixAchatUnitaire: [null, Validators.required],
@@ -241,10 +282,31 @@ addArticle() {
       zoneStock:['', Validators.required],
       uniteMesure:['', Validators.required],
       typeArticle:['', Validators.required],
+      fournisseur:['', Validators.required],
+      quantiteSeuil:[null],
       zoneStockId: [null], 
       uniteMesureId: [null],  
-      typeArticleId: [null]
+      typeArticleId: [null],
+      fournisseurId: [null],
+
     });
+
+    this.articleForm.get('quantity')?.valueChanges.subscribe((val: number) => {
+      const seuilControl = this.articleForm.get('quantiteSeuil');
+    
+      if (val < 2) {
+        seuilControl?.setValidators([Validators.required]);
+        if (!seuilControl?.value) {
+          seuilControl?.setValue(1); // 👈 valeur par défaut si vide
+        }
+      } else {
+        seuilControl?.clearValidators();
+        seuilControl?.setValue(null); // 👈 nettoyer si > 2
+      }
+    
+      seuilControl?.updateValueAndValidity();
+    });
+    
     const articleId = this.route.snapshot.params['articleId']; // Récupérer l'ID chiffré de l'URL
     console.log("🔹 ID chiffré récupéré de l'URL:", articleId);
 
@@ -329,6 +391,10 @@ addArticle() {
   validQuantite() {
     const quantity = this.articleForm.controls['quantity'];
     return quantity.touched && quantity.hasError('required');
+  }
+  validQuantiteSeuil() {
+    const quantiteSeuil = this.articleForm.controls['quantiteSeuil'];
+    return quantiteSeuil.touched && quantiteSeuil.hasError('required');
   }
    
 }
