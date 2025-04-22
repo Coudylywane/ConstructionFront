@@ -23,7 +23,7 @@ export class AuthService {
 
   async authenticationProcess(url: string, body: any) {
     console.log(body,url);
-    
+
     await this.http.post<any>(url, body).toPromise()
       .then((data) => {
         console.log('Login réussi:', data);
@@ -33,6 +33,21 @@ export class AuthService {
             //if (this.hasAuthority(['SUPER_ADMIN','ADMIN'], user)) {
            //if (user.passwordChanged) {
             if (this.hasAuthority(['SUPER_ADMIN'], user)) {
+              this.storeUser(user)
+                .then(() => {
+                  this.router.navigate(['/gestion-article/listArticle']);
+                });
+            }else if (this.hasAuthority(['ADMIN'], user)) {
+              this.storeUser(user)
+                .then(() => {
+                  this.router.navigate(['/gestion-article/listArticle']);
+                });
+            } else if (this.hasAuthority(['S'], user)) {
+              this.storeUser(user)
+                .then(() => {
+                  this.router.navigate(['/gestion-projet/listProjet']);
+                });
+            } else if (this.hasAuthority(['GS'], user)) {
               this.storeUser(user)
                 .then(() => {
                   this.router.navigate(['/gestion-article/listArticle']);
