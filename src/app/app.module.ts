@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
 import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr'; // Import fr-FR locale data
+import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +30,7 @@ registerLocaleData(localeFr, 'fr-FR');
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 3000,
+      
     }),
 
   ],

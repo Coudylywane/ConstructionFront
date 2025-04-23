@@ -35,22 +35,22 @@ export class AuthService {
             if (this.hasAuthority(['SUPER_ADMIN'], user)) {
               this.storeUser(user)
                 .then(() => {
-                  this.router.navigate(['/gestion-article/listArticle']);
+                  this.router.navigate(['/gestion-article/Dashboard']);
                 });
             }else if (this.hasAuthority(['ADMIN'], user)) {
               this.storeUser(user)
                 .then(() => {
-                  this.router.navigate(['/gestion-article/listArticle']);
+                  this.router.navigate(['/gestion-article/Dashboard']);
                 });
             } else if (this.hasAuthority(['S'], user)) {
               this.storeUser(user)
                 .then(() => {
-                  this.router.navigate(['/gestion-projet/listProjet']);
+                  this.router.navigate(['/gestion-article/Dashboard']);
                 });
             } else if (this.hasAuthority(['GS'], user)) {
               this.storeUser(user)
                 .then(() => {
-                  this.router.navigate(['/gestion-article/listArticle']);
+                  this.router.navigate(['/gestion-article/Dashboard']);
                 });
             }
            //}

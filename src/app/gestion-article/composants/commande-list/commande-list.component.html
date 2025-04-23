@@ -24,81 +24,147 @@
               <th scope="col">ID</th>
               <th scope="col">Numero Commande</th>
               <th scope="col">Date</th>
-              <th scope="col">Action</th>
+              <th scope="col">Status</th>
+              <th scope="col" style="text-align: justify;">Action</th>
+
             </tr>
           </thead>
           <tbody style="text-align: center">
-           <!-- <tr style="text-align: center" scope="row" *ngFor="let commande of commandes">
+          <tr style="text-align: center" scope="row" *ngFor="let commande of commandes">
                 <th scope="row">{{ commande.id }}</th>
                 <td>{{ commande.numero }}</td>
                 <td>{{ commande.date | date }}</td>
                 <td>
+                  <!-- Affichage des badges en fonction du statut de la commande -->
+                  <span *ngIf="commande.status === 'EN_COURS'" class="badge bg-primary">En Cours</span>
+                  <span *ngIf="commande.status === 'VALIDEE'" class="badge bg-warning text-dark">Validée</span>
+                  <span *ngIf="commande.status === 'ANNULEE'" class="badge bg-danger">Annulée</span>
+                </td>
+                
               <td>
                 <div class="d-flex">
-                  <td style="margin-left: 180px">
-                    <a class="nav-link m-nav-link">
-                      <span class="material-icons material">mode_edit</span>
+                  <td>
+              
+                    <a class="nav-link m-nav-link"
+                      title="Voir les détails de la commande"
+                      data-bs-toggle="modal"
+                      data-bs-target="#detailsModal"
+                      (click)="selectedCommande = commande">
+                      <span class="material-icons material">visibility</span>
                     </a>
                   </td>
                   
                 </div>
-            </td>
-            <td></td>
-          </tr>-->
+            </td> 
+          </tr>
         </tbody>
       </table>
-      <!--Pagination
-        <div class="row mt-4">
-          <div class="col-lg-3 col-md-3 col-sm-12">
-            <nav aria-label="Page navigation example ">
-              <ul class="pagination">
-                <li class="page-item">
-                  <button
-                    class="text-bg2"
-                    [disabled]="disablePrevious || totalPage === 1"
-                    ngClass="
-                      disablePrevious || totalPage === 1
-                        ? ' page-link'
-                        : 'page-link'
-                    "
-                    (click)="precedent()"
-                  >
-                    Précédent
-                  </button>
-                </li>
-                &nbsp;
-                <li class="page-item">
-                  <button
-                    class="text-bg"
-                    [disabled]="disableNext || totalPage === 1"
-                    ngClass="
-                      disableNext || totalPage === 1 ? ' page-link' : 'page-link'
-                    "
-                    (click)="suivant()"
-                  >
-                    Suivant
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-12">
+      <!--PAGINATION-->
+      
+      <div class="row mt-4 align-items-center justify-content-between">
+        <!-- Pagination boutons -->
+        <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center justify-content-md-start">
+          <nav aria-label="Navigation des pages">
+            <ul class="pagination mb-0">
+              <li class="page-item" [class.disabled]="disablePrevious || totalPage === 1">
+                <button class="page-link" (click)="precedent()" [disabled]="disablePrevious || totalPage === 1">
+                  <i class="bi bi-arrow-left-circle"></i> Précédent
+                </button>
+              </li>
+              <li class="page-item ms-2" [class.disabled]="disableNext || totalPage === 1">
+                <button class="page-link" (click)="suivant()" [disabled]="disableNext || totalPage === 1">
+                  Suivant <i class="bi bi-arrow-right-circle"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      
+        <!-- Sélecteur nombre d’éléments -->
+        <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
+          <div class="input-group" style="max-width: 200px;">
+            <label class="input-group-text" for="pageSize">Afficher</label>
             <select
+              id="pageSize"
               class="form-select"
-              id="pageSize "
               (change)="onSelectedPageSize($event)"
             >
-              <option value="1 ">1</option>
-              <option value="5 ">5</option>
-              <option value="10 ">10</option>
-              <option value="15 ">15</option>
-              <option value="20 ">20</option>
-              <option value="50 ">50</option>
-              <option value="100 ">100</option>
+              <option value="2">2</option>
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
             </select>
           </div>
-        </div>-->
-      <!---->
+        </div>
+      </div>
+      
+</div>
+  </div>
+  </div>
+
+  <!-- MODAL DÉTAILS COMMANDE -->
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content shadow-lg rounded-4 border-0">
+        <div class="modal-header bg-hearder text-white">
+          <h5 class="modal-title">
+            <i class="material-icons me-2">receipt_long</i>
+            Détails de la commande #{{ selectedCommande?.numero }}
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <p><strong>Date : </strong> {{ selectedCommande?.date | date: 'dd/MM/yyyy HH:mm' }}</p>
+              <p><strong>Statut : </strong> 
+                <span class="badge bg-primary">{{ selectedCommande?.status | statutCommande }}</span>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Numéro : </strong> {{ selectedCommande?.numero }}</p>
+              <span class="text-success fw-bold"><p><strong>Prix Total :</strong> {{ selectedCommande?.prixTotal | formatPrixFCFA }}</p></span>
+              
+            </div>
+          </div>
+        
+          <hr />
+        
+          <h6 class="text-primary"><i class="material-icons">inventory_2</i> Détails des articles</h6>
+          <div *ngIf="selectedCommande?.detailsCommande?.length > 0; else noDetails">
+            <table class="table table-sm edit-table table-striped mt-3">
+              <thead>
+                <tr>
+                  <th>Article ID</th>
+                  <th>Fournisseur</th>
+                  <th>Quantité</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detail of selectedCommande.detailsCommande">
+                  <td>{{ detail.article?.id }}</td>
+                  <td>{{ detail.fournisseur?.nom }}</td>
+                  <td>{{ detail.nombre }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+          <ng-template #noDetails>
+            <p class="text-muted mt-3">Aucun article dans cette commande.</p>
+          </ng-template>
+        </div>
+        
+        <div class="modal-footer">
+          <button 
+            class="btn edit-btn-gen"
+            (click)="generateBonDeCommande()">
+            Générer bon de commande
+          </button>
+          <button type="button" class="btn  btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
+  

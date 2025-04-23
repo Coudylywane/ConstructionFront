@@ -32,7 +32,9 @@
             ],
             "scripts": [
               "src/assets/dist/vendors/@coreui/coreui/js/coreui.bundle.min.js",
-              "src/assets/dist/vendors/simplebar/js/simplebar.min.js"
+              "src/assets/dist/vendors/simplebar/js/simplebar.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+
             ]
           },
           "configurations": {
