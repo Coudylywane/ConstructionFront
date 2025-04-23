@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <div class="mt-4">
-      <a class="add style-button d-flex" [routerLink]="'/gestion-article/add-user'">
+      <a class="add style-button d-flex" [routerLink]="'/gestion-utilisateur/add-user'">
         <span class="material-icons">
           {{ "add" }}
         </span>
@@ -28,55 +28,10 @@
         </span>
         <span class="ml-2"> Nouveau </span>
       </a>
-      <h4 class="justify-content-center text-center" style="margin-left: 16px">
+      <h4 class="" style="margin-left: 16px">
         Liste des utilisateurs
       </h4>
     </div>
-   <!--  <div class="col-md-12 col-lg-12 col-sm-12" style="margin-top: 40px">
-      <form formGroup="searchForm" (ngSubmit)="onSearch()">
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="row">
-              <div class="col-md-4 col-lg-4 col-sm-12">
-                <label class="form-label" for="">Filtrer par:</label>
-              </div>
-              <div class="col-md-8 col-lg-8 col-sm-12">
-                <select
-                  formControlName="filterType"
-                  class="form-select"
-                  id="filter"
-                >
-                  <option value="nom">Nom</option>
-                  <option value="prenom">Prenom</option>
-                  <option value="cin">CIN</option>
-                  <option value="prix">Prix</option>
-                          <option value="seuil">Seuil</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <input
-              class="form-control"
-              id="search"
-              formControlName="searchTerm"
-              type="text"
-              placeholder="Tapez votre recherche...."
-            />
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <button type="submit" class="btn btn-outline-rechercher text-black">
-              Rechercher
-            </button>
-            &nbsp;&nbsp;
-            <button type="button" class="btn btn-outline-secondary text-black">
-              Annuler
-            </button>
-          </div>
-        </div>
-      </form>
-    </div> -->
-
     <div class="container-fluid content-table">
       <h2
         *ngIf="!utilisateurs || utilisateurs.length <= 0"
@@ -87,7 +42,7 @@
       <div *ngIf="utilisateurs && utilisateurs.length > 0" class="mt-4">
         <table class="table table-hover">
           <thead>
-            <tr style="text-align: center">
+            <tr style="text-align: center" class="style-text-table">
               <th scope="col">#</th>
               <th scope="col">
                 Nom & Prénom
@@ -144,33 +99,48 @@
             <button type="button " class="btn btn-outline-dark " [disabled]="!patientForm.valid ">oui</button>
           </div>
         </ng-template>
-       Pagination
-        <div class="card-footer justify-content-between">
-          <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-12">
-              <nav aria-label="Page navigation example ">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <button>Précédent</button>
-                  </li>
-                  &nbsp;
-                  <li class="page-item">
-                    <button>Suivant</button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-12">
-              <select class="form-select" id="pageSize ">
-                <option value="5 ">5</option>
-                <option value="10 ">10</option>
-                <option value="15 ">15</option>
-                <option value="20 ">20</option>
-                <option value="50 ">50</option>
-                <option value="100 ">100</option>
-              </select>
-            </div>
-          </div>
+
+
+      </div>
+
+
+      <!--PAGINATION --->
+      <div class="row mt-4">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <nav aria-label="Page navigation example ">
+            <ul class="pagination">
+              <li class="page-item">
+                <button [disabled]="disablePrevious || totalPage === 1" [ngClass]="
+            disablePrevious || totalPage === 1
+              ? 'text-bg-secondary page-link'
+              : 'page-link'
+          " (click)="precedent()">
+                  Précédent
+                </button>
+              </li>
+              &nbsp;
+              <li class="page-item">
+                <button [disabled]="disableNext || totalPage === 1" [ngClass]="
+            disableNext || totalPage === 1
+              ? 'text-bg-secondary page-link'
+              : 'page-link'
+          " (click)="suivant()">
+                  Suivant
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <select class="form-select" id="pageSize " (change)="onSelectedPageSize($event)">
+            <option value="1 ">1</option>
+            <option value="5 ">5</option>
+            <option value="10 ">10</option>
+            <option value="15 ">15</option>
+            <option value="20 ">20</option>
+            <option value="50 ">50</option>
+            <option value="100 ">100</option>
+          </select>
         </div>
       </div>
 

@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+
 registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [AppComponent],

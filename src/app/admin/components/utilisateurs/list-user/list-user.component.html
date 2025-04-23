@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <div class="mt-4">
-    <a class="add style-button d-flex" [routerLink]="'/gestion-article/addArticle'">
+    <a class="add style-button d-flex" [routerLink]="'/admin/ajoutUser'">
       <span class="material-icons">
         {{ "add" }}
       </span>
@@ -23,7 +23,7 @@
   <div class="mt-4">
     <a
       class="add d-flex"
-      routerLink="'/admin/ajoutUser'"
+      [routerLink]="'/admin/ajoutUser'"
       style="cursor: pointer; text-decoration: none"
     >
       <span class="material-icons">

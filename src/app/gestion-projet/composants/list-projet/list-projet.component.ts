@@ -11,7 +11,7 @@ import { ProjectService } from '../../services/project.service';
 @Component({
   selector: 'app-list-projet',
   templateUrl: './list-projet.component.html',
-  styleUrls: ['./list-projet.component.css'],
+  styleUrls: ['./list-projet.component.scss'],
 })
 export class ListProjetComponent {
   projets: any[] = [];

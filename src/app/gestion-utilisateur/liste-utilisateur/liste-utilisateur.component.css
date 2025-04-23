@@ -3,9 +3,17 @@
 .content-table {
     padding: 28px;
   }
-
+  .style-text-table th{
+    color: var(--Text-Colors-secondary, #8590A1);
+    /* Body/B-12-12-600 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 12px; /* 100% */
+  }
   .table thead {
-    color: #eb71ac;
+    color: #8590A1;
   }
 
   .form-container .btn:hover,

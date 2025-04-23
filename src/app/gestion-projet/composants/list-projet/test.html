@@ -1,0 +1,125 @@
+<div *ngIf="projets.length > 0" class="mt-4">
+    <table class="table table-hover">
+      <thead>
+        <tr style="text-align: center" class="style-text-table">
+          <th scope="col">ID</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Date de debut</th>
+          <th scope="col">Date de fin</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody style="text-align: center">
+        <!-- Dynamically generate rows for each project -->
+        <tr *ngFor="let projet of projets">
+          <th scope="row">{{ projet.id }}</th>
+          <td>{{ projet.name }}</td>
+          <td>{{ projet.startDate | date : "dd-MM-yyyy" }}</td>
+          <td>{{ projet.endDate | date : "dd-MM-yyyy" }}</td>
+          <td>{{ projet.status }}</td>
+          <td>
+            <div class="d-flex justify-content-center">
+              <!-- Generate Devis or Download Devis Button -->
+              <ng-container *ngIf="projet.status === 'VALIDATED'">
+                 <!-- Telecharger devis -->
+                <!-- <a
+                  *ngIf="devisExistant[projet.id]"
+                  class="nav-link m-nav-link buttons"
+                  (click)="telechargerDevis(projet.id)"
+                  style="margin-left: 10px"
+              >
+                  <span class="material-icons">download</span>
+              </a> -->
+               <!-- Visualiser devis -->
+                <a
+                  *ngIf="devisExistant[projet.id]"
+                  class="nav-link m-nav-link buttons"
+                  [routerLink]="[
+                    '/gestion-projet/visualiserDevis',projet.id]"
+                  style="margin-left: 10px"
+                >
+                  <span class="material-icons">visibility</span>
+                </a>
+              <!-- Generer devis -->
+                <a
+                  *ngIf="!devisExistant[projet.id]"
+                  class="nav-link m-nav-link buttons"
+                  [routerLink]="['/gestion-projet/genererDevis', projet.id]"
+                  style="margin-left: 10px"
+                >
+                  <span class="material-icons">description</span>
+                </a>
+
+                <!-- Bouton pour visualiser le devis si existant -->
+                <a
+                  class="nav-link m-nav-link buttons"
+                  style="margin-left: 10px"
+                  [routerLink]="['/gestion-projet/detailProjet', projet.id]"
+                >
+                  <span class="material-icons">info</span>
+                </a>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="row mt-4">
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <!-- Previous Button -->
+            <li class="page-item">
+              <button
+                class="text-bg2"
+                [disabled]="disablePrevious || totalPage === 1"
+                [ngClass]="
+                  disablePrevious || totalPage === 1
+                    ? 'page-link disabled'
+                    : 'page-link'
+                "
+                (click)="precedent()"
+              >
+                Précédent
+              </button>
+            </li>
+            &nbsp;
+            <!-- Next Button -->
+            <li class="page-item">
+              <button
+                class="text-bg"
+                [disabled]="disableNext || totalPage === 1"
+                [ngClass]="
+                  disableNext || totalPage === 1
+                    ? 'page-link disabled'
+                    : 'page-link'
+                "
+                (click)="suivant()"
+              >
+                Suivant
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Page Size Selector -->
+      <div class="col-lg-2 col-md-2 col-sm-12">
+        <select
+          class="form-select"
+          id="pageSize"
+          (change)="onSelectedPageSize($event)"
+        >
+          <option value="1">1</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </div>
+  </div>
