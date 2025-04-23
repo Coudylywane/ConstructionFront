@@ -54,9 +54,7 @@ export class AuthService {
                 });
             }
            //}
-
             //}
-
             //if (user.passwordChanged) {
               /* if (this.hasAuthority(['SUPER_ADMIN','ADMIN'], user)) {
                 this.storeUser(user)
@@ -116,7 +114,6 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('mdd_user');
-   // this.socketService?._disconnect();
     this.router.navigate(['/login']);
   }
 
@@ -124,6 +121,7 @@ export class AuthService {
     console.log('[AuthService] Appel de identity()');
     return this.http.get<any>('/api/connected-user');
   }
+
   // public isLoggedIn() {
   //   return moment().isBefore(this.getExpiration());
   // }
@@ -142,6 +140,7 @@ export class AuthService {
   //     }
   //   }
   // }
+  
   convertText(conversion: string, user: any) {
     if (conversion === 'encrypt') {
       return CryptoJS.AES.encrypt(JSON.stringify(user).trim(), this.SECRET.trim()).toString();
@@ -161,4 +160,5 @@ export class AuthService {
     }
     return false;
   }
+
 }
