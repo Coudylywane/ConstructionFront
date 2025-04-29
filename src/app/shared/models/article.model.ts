@@ -15,7 +15,7 @@ export class ArticleModel {
   public prixDevis: number | undefined;
   public prixReel: number | undefined;
   public quantity: number | undefined;
-  public status: number | undefined;
+  public status: string | undefined;
   public zoneStock: ZoneStockModel | undefined;
   public uniteMesure: UniteMesureModel | undefined;
   public typeArticle: TypeArticleModel | undefined; 

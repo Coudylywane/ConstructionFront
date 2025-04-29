@@ -13,6 +13,9 @@ import { UniteMesureAddComponent } from './composants/unite-mesure-add/unite-mes
 import { UniteMesureListComponent } from './composants/unite-mesure-list/unite-mesure-list.component';
 import { CommandeAddComponent } from './composants/commande-add/commande-add.component';
 import { CommandeListComponent } from './composants/commande-list/commande-list.component';
+import { StatutCommandePipe } from './composants/commande-list/statut-commande.pipe';
+import { FormatPrixFCFAPipe } from './composants/commande-list/format-prix-fcfa.pipe';
+import { DashboardComponent } from './composants/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { CommandeListComponent } from './composants/commande-list/commande-list.
     TypeArticleListComponent,
     TypeArticleAddComponent,
     CommandeAddComponent,
-    CommandeListComponent
+    CommandeListComponent,
+    StatutCommandePipe,
+    FormatPrixFCFAPipe,
+    DashboardComponent
   ],
   imports: [GestionArticleRoutingModule, SharedModule, BlockUIModule.forRoot()],
 })

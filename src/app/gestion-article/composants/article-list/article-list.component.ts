@@ -61,7 +61,7 @@ export class ArticleListComponent implements OnInit {
     this.subscriptions.push(
       this.articleService.getAllArticles(page, size).subscribe(
         (data:any) => {
-          console.log('Articles récupérés:', data);
+          //console.log('Articles récupérés:', data);
 
           this.page = data.currentPage;
           this.totalPage = data.totalPages;

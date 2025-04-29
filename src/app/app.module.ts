@@ -31,6 +31,7 @@ registerLocaleData(localeFr, 'fr-FR');
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 3000,
+      
     }),
   ],
   providers: [

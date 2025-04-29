@@ -25,7 +25,7 @@ export class CommandeAddComponent {
 
     // Initialisation du formulaire avec FormBuilder
     this.commandeForm = this.fb.group({
-      numero: ['', Validators.required],
+     // numero: ['', Validators.required],
       date: ['', Validators.required],
       prixTotal: [0, [Validators.required, Validators.min(0)]]
     });
@@ -44,10 +44,11 @@ export class CommandeAddComponent {
       }));
   
       const commande: CommandeModel = {
-        numero: this.commandeForm.value.numero,
+        //numero: this.commandeForm.value.numero,
         date: this.commandeForm.value.date,
         prixTotal: this.commandeForm.value.prixTotal,
-        detailsCommande: detailsCommande
+        detailsCommande: detailsCommande,
+        status: 'EN_COURS',
       };
         console.log(commande);
       this.commandeService.passerCommande(commande).subscribe({
@@ -69,7 +70,7 @@ export class CommandeAddComponent {
   private initForms(type: CommandeModel){
     if (type){
       this.commandeForm = this.fb.group({
-        numero: new FormControl(type.numero,[Validators.required]),
+        //numero: new FormControl(type.numero,[Validators.required]),
         date: new FormControl(type.date,[Validators.required]),
         prixTotal: new FormControl(type.prixTotal,[Validators.required]),
         
@@ -94,7 +95,7 @@ export class CommandeAddComponent {
 
     this.initForms(new CommandeModel());
     this.commandeForm = this.fb.group({
-      numero: ['', Validators.required],
+      //numero: ['', Validators.required],
       date: ['', Validators.required],
       prixTotal: ['', Validators.required],
     });
@@ -107,15 +108,17 @@ export class CommandeAddComponent {
     }
   
     const commande: CommandeModel = {
-      numero: this.commandeForm.value.numero,
+      //numero: this.commandeForm.value.numero,
       date: this.commandeForm.value.date,
       prixTotal: this.commandeForm.value.prixTotal,
+      status: 'EN_COURS',
       detailsCommande: this.selectedArticles.map(article => ({
         article: { id: article.id },
-        fournisseur: article.fournisseur, // 👈 doit être un objet avec au moins un `id`
-        nombre: article.quantity || 1     // 👈 correspond au champ attendu par ton backend
+        fournisseur: { id: article.fournisseur.id }, // 👈 assure-toi que c’est bien un objet
+        nombre: article.quantity || 1
       }))
     };
+    
     
     
   

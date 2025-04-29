@@ -11,11 +11,11 @@ export class UtilisateurService {
   _api = '/api';
   constructor(private http: HttpClient) { }
 
-  getAllUsers(structureID: number, page: number = 0, size: number = 5) {
+  getAllUsers( page: number = 0, size: number = 5) {
     const options = {
       params: new HttpParams().set('page', page).set('size', size)
     }
-    return this.http.get("/api/admin/users/structure/" + structureID, options);
+    return this.http.get("/api/users", options);
   }
   addUtilisateur(utilisateur: UtilisateurModel): Observable<UtilisateurModel> {
 console.log(utilisateur);

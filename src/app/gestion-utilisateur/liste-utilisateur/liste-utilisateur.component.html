@@ -1,1 +1,148 @@
-<p>liste-utilisateur works!</p>
+<div class="container-fluid">
+
+    <div class="mt-4">
+      <a class="add style-button d-flex" [routerLink]="'/gestion-utilisateur/add-user'">
+        <span class="material-icons">
+          {{ "add" }}
+        </span>
+        <span class="ml-2 style-text"> Nouvel Utilisateur</span>
+      </a>
+    </div>
+
+    <div class="container mt-4">
+      <h2 class="text-center mt-4 text-dispo" *ngIf="">
+        Pas de d'utilisateur Disponible!!!
+      </h2>
+    </div>
+
+  </div>
+  <div class="container">
+    <div class="mt-4">
+      <a
+        class="add d-flex"
+        routerLink="'/gestion-article/add-user'"
+        style="cursor: pointer; text-decoration: none"
+      >
+        <span class="material-icons">
+          {{ "add" }}
+        </span>
+        <span class="ml-2"> Nouveau </span>
+      </a>
+      <h4 class="" style="margin-left: 16px">
+        Liste des utilisateurs
+      </h4>
+    </div>
+    <div class="container-fluid content-table">
+      <h2
+        *ngIf="!utilisateurs || utilisateurs.length <= 0"
+        class="text-center mt-4"
+      >
+        Aucun utilisateur sur la liste
+      </h2>
+      <div *ngIf="utilisateurs && utilisateurs.length > 0" class="mt-4">
+        <table class="table table-hover">
+          <thead>
+            <tr style="text-align: center" class="style-text-table">
+              <th scope="col">#</th>
+              <th scope="col">
+                Nom & Prénom
+              </th>
+              <th scope="col">Téléphone</th>
+              <th scope="col">Role</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody style="text-align: center">
+            <tr *ngFor="let utilisateur of utilisateurs" @fadeSlide>
+              <th style="text-align: center" scope="row ">
+                {{ utilisateurs.indexOf(utilisateur) + 1 }}
+              </th>
+              <td>{{ utilisateur?.nom }} {{ utilisateur?.prenom }}</td>
+              <td>{{ utilisateur?.telephoneString }}</td>
+              <td>{{ utilisateur?.role?.libelle }}</td>
+              <td>
+                <div
+                  class="col-6 col-sm-4 col-md-2 d-flex justify-content-between"
+                >
+                  <a class="btn-transparent btn p-2 mr-2">
+                    <span class="material-icons-outlined">
+                      {{ "create" }}
+                    </span>
+                  </a>
+
+                  <a
+                    class="btn-transparent btn p-2 mr-2"
+                    (click)="onDeleteUser(content, utilisateur)"
+                  >
+                    <span class="material-icons-outlined clear">
+                      {{ "clear" }}
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-basic-title ">
+              Souhaitez-vous supprimer cet utilisateur?
+            </h5>
+            <button
+              type="button "
+              class="btn-close"
+              aria-label="Close "
+              (click)="modal.dismiss('Cross click')"
+            ></button>
+          </div>
+          <div class="modal-footer">
+            <button type="button " class="btn btn-outline-dark " [disabled]="!patientForm.valid ">oui</button>
+          </div>
+        </ng-template>
+
+
+      </div>
+
+
+      <!--PAGINATION --->
+      <div class="row mt-4">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <nav aria-label="Page navigation example ">
+            <ul class="pagination">
+              <li class="page-item">
+                <button [disabled]="disablePrevious || totalPage === 1" [ngClass]="
+            disablePrevious || totalPage === 1
+              ? 'text-bg-secondary page-link'
+              : 'page-link'
+          " (click)="precedent()">
+                  Précédent
+                </button>
+              </li>
+              &nbsp;
+              <li class="page-item">
+                <button [disabled]="disableNext || totalPage === 1" [ngClass]="
+            disableNext || totalPage === 1
+              ? 'text-bg-secondary page-link'
+              : 'page-link'
+          " (click)="suivant()">
+                  Suivant
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <select class="form-select" id="pageSize " (change)="onSelectedPageSize($event)">
+            <option value="1 ">1</option>
+            <option value="5 ">5</option>
+            <option value="10 ">10</option>
+            <option value="15 ">15</option>
+            <option value="20 ">20</option>
+            <option value="50 ">50</option>
+            <option value="100 ">100</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>

@@ -145,3 +145,30 @@
   .material-icons.material{
     color: #996F05;
   }
+
+  /* styles.css ou component.scss */
+.badges-blue {
+  background-color: #007bff;  /* Bleu personnalisé */
+  color: white;
+}
+
+.badge-yellow {
+  background-color: #ffc107;  /* Jaune personnalisé */
+  color: black;
+}
+.bg-hearder{
+  background-color: #996F05;
+ // background-color: #d2cdb3;
+  color: white;
+}
+.edit-table th{
+  color: #996F05;
+}
+
+.edit-btn-gen{
+  border-radius: var(--Container-Radius-radius-2, 8px);
+  background: #ffffff;
+  border-color: #996F05;
+  color: #996F05;
+
+}

@@ -1,0 +1,235 @@
+
+
+.content-table {
+    padding: 28px;
+  }
+  .style-text-table th{
+    color: var(--Text-Colors-secondary, #8590A1);
+    /* Body/B-12-12-600 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 12px; /* 100% */
+  }
+  .table thead {
+    color: #8590A1;
+  }
+
+  .form-container .btn:hover,
+  .open-button:hover {
+    opacity: 1;
+  }
+
+  .fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 20px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .clear {
+    color: #d92d2d;
+  }
+
+  .bi {
+    background-color: #eb71ac;
+    justify-content: center;
+    color: white;
+  }
+
+  .btn-outline-rechercher {
+    background-color: #ebb071;
+  }
+
+  .row-mere {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    box-sizing: border-box;
+    /*stacking fieldsets above each other*/
+    position: relative;
+  }
+
+  .cin {
+    width: 82px;
+    color: black;
+    border-color: black;
+  }
+  /*test card */
+
+  img{
+    height: 180px;
+    width: 215px;
+  }
+
+  div [class^="col-"]{
+    padding-left:4px;
+    padding-right:4px;
+  }
+  .card {
+    transition: transform 0.2s, box-shadow 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .card-title{
+    font-size:15px;
+    transition:1s;
+    cursor:pointer;
+  }
+  .card-title i{
+    font-size:15px;
+    transition:1s;
+    cursor:pointer;
+    color:#ffa710
+  }
+  .card-title i:hover{
+    transform: scale(1.25) rotate(100deg);
+    color:#18d4ca;
+
+  }
+  .card:hover{
+    transform: scale(1.05);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+  }
+  .card-text{
+    height:80px;
+  }
+
+  .card::before, .card::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: scale3d(0, 0, 1);
+    transition: transform .3s ease-out 0s;
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    pointer-events: none;
+  }
+  .card::before {
+    transform-origin: left top;
+  }
+  .card::after {
+    transform-origin: right bottom;
+  }
+  .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+    transform: scale3d(1, 1, 1);
+  }
+
+
+  .btn-outline-primary {
+    --cui-btn-color: #fcf258;
+    --cui-btn-border-color: #fcf258;
+    --cui-btn-hover-color: rgba(255, 255, 255, 0.87);
+    --cui-btn-hover-bg: #fcf258;
+    --cui-btn-hover-border-color: #fcf258;
+    --cui-btn-focus-shadow-rgb: 50, 31, 219;
+    --cui-btn-active-color: rgba(255, 255, 255, 0.87);
+    --cui-btn-active-bg: #fcf258;
+    --cui-btn-active-border-color: #fcf258;
+    --cui-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 21, 0.125);
+    --cui-btn-disabled-color: #fcf258;
+    --cui-btn-disabled-bg: transparent;
+    --cui-gradient: none;
+  }
+
+  .cin .btn-outline {
+    background-color: #fcf258;
+    color: #000;
+  }
+
+  .passport {
+    margin-left: 7px;
+    color: black;
+    border-color: black;
+  }
+
+  .folder{
+  color:#65b980;
+  border:none;
+  }
+  .create{
+  color:#65b980;
+  }
+  .clear {
+    color: #d92d2d;
+  }
+
+  .add {
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    float: right;
+  }
+  .style-button{
+    display: flex;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: var(--Container-Radius-radius-2, 8px);
+    background: #996F05;
+  }
+  .style-text{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+  .style-text-table th{
+    color: var(--Text-Colors-secondary, #8590A1);
+    /* Body/B-12-12-600 */
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 12px; /* 100% */
+  }
+  .text-dispo{
+    color: var(--Text-Colors-primary, #2D3D5E);
+    font-family: "Zen Dots";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 68.75% */
+    letter-spacing: -0.32px;
+
+  }
+
+  .btn-outline-primary{
+    border-color: #996F05;
+    color: #996F05;
+
+  }
+
+  .material-icons.material{
+    color: #996F05;
+  }
+
+
+
+  .btn-outline-primary.btn-sm.me-2:hover{
+
+  background-color:#bf8b06 ;
+  color:white ;
+
+
+  }

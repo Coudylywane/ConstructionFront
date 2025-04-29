@@ -11,6 +11,7 @@ import { TypeArticleListComponent } from './composants/type-article-list/type-ar
 import { TypeArticleAddComponent } from './composants/type-article-add/type-article-add.component';
 import { CommandeListComponent } from './composants/commande-list/commande-list.component';
 import { CommandeAddComponent } from './composants/commande-add/commande-add.component';
+import { DashboardComponent } from './composants/dashboard/dashboard.component';
 
 const routes: Routes = [];
 
@@ -82,9 +83,21 @@ const routes: Routes = [];
         component: CommandeListComponent,
         canActivate: [AuthGuard],
       },
+      
       {
         path: 'addCommande',
         component: CommandeAddComponent,
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: 'commande-edit/:commandeId',
+        component: CommandeAddComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'Dashboard',
+        component: DashboardComponent,
         canActivate: [AuthGuard],
       },
     ]),
