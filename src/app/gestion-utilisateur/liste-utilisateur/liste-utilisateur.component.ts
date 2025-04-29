@@ -10,7 +10,7 @@ import { UtilisateurModel } from 'src/app/shared/models/utilisateur.model';
 @Component({
   selector: 'app-liste-utilisateur',
   templateUrl: './liste-utilisateur.component.html',
-  styleUrls: ['./liste-utilisateur.component.css']
+  styleUrls: ['./liste-utilisateur.component.scss']
 })
 export class ListeUtilisateurComponent implements OnInit, OnDestroy {
 

@@ -11,7 +11,7 @@ import { UtilisateurModel } from 'src/app/shared/models/utilisateur.model';
 @Component({
   selector: 'app-add-utilisateur',
   templateUrl: './add-utilisateur.component.html',
-  styleUrls: ['./add-utilisateur.component.css']
+  styleUrls: ['./add-utilisateur.component.scss']
 })
 export class AddUtilisateurComponent implements OnInit {
   utilisateurForm!: FormGroup;
@@ -95,6 +95,16 @@ addUtilisateur() {
   });
 }
 
+avatarPreview: string | ArrayBuffer | null = null;
+
+onAvatarChange(event: Event): void {
+  const file = (event.target as HTMLInputElement)?.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => this.avatarPreview = reader.result;
+    reader.readAsDataURL(file);
+  }
+}
 validNom() {
   return this.utilisateurForm.get('nom')?.invalid && this.utilisateurForm.get('nom')?.touched;
 }

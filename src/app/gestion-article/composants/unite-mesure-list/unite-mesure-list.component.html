@@ -1,108 +1,105 @@
-<div class="container-fluid">
-  <div class="mt-4">
-    <a class="add style-button d-flex" [routerLink]="'/gestion-article/addUniteMesure'">
-      <span class="material-icons">
-        {{ "add" }}
-      </span>
-      <span class="ml-2 style-text"> Nouvelle unité de Mesure</span>
+<div class="container-fluid mt-4">
+  <!-- En-tête avec bouton d'ajout d'unité de mesure -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold" style="color: #2D3D5E;">Unité de Mesure</h4>
+    <a class="btn rounded-pill d-flex align-items-center" style="background-color: #996F05; color: white;" [routerLink]="'/gestion-article/addUniteMesure'">
+      <span class="material-icons me-2">add_circle_outline</span> Nouvelle Unité de Mesure
     </a>
-    <h4 class="justify-content-left text-left">
-      Unites de Mesures
-    </h4>
   </div>
 
-  <!--TABLES-->
-  <div class="container-fluid content-table">
-    <h2 class="text-center mt-4 text-dispo" *ngIf="!uniteMesures || uniteMesures.length <= 0">
-      Pas d'unité de mesure disponible!!!
-    </h2>
-    <div class="mt-4">
-      <table class="table table-hover">
-        <thead>
-          <tr style="text-align: center" class="style-text-table">
-            <th scope="col">ID</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Abreviation</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody style="text-align: center">
-          <tr *ngFor="let uniteMesure of uniteMesures">
-            <th style="text-align: center" scope="row">
-              {{ uniteMesures.indexOf(uniteMesure) + 1 }}
-            </th>
-            <td>{{ uniteMesure.nom }}</td>
-            <td>{{ uniteMesure.abreviation }}</td>
-            <td>
-              <div class="d-flex">
-                <td style="margin-left: 180px">
-                  <a class="nav-link m-nav-link" (click)="change(uniteMesure?.id)">
-                    <span class="material-icons material">mode_edit</span>
-                  </a>
-                </td>
-                <td style="margin-left: 20px">
-                  <a class="nav-link m-nav-link" (click)="deleteUniteMesure(uniteMesure?.id)">
-                    <span class="material-icons material">delete</span>
-                  </a>
-                </td>
-              </div>
-          </td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-    <!--Pagination
-      <div class="row mt-4">
-        <div class="col-lg-3 col-md-3 col-sm-12">
-          <nav aria-label="Page navigation example ">
-            <ul class="pagination">
-              <li class="page-item">
-                <button
-                  class="text-bg2"
-                  [disabled]="disablePrevious || totalPage === 1"
-                  ngClass="
-                    disablePrevious || totalPage === 1
-                      ? ' page-link'
-                      : 'page-link'
-                  "
-                  (click)="precedent()"
-                >
-                  Précédent
-                </button>
-              </li>
-              &nbsp;
-              <li class="page-item">
-                <button
-                  class="text-bg"
-                  [disabled]="disableNext || totalPage === 1"
-                  ngClass="
-                    disableNext || totalPage === 1 ? ' page-link' : 'page-link'
-                  "
-                  (click)="suivant()"
-                >
-                  Suivant
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-12">
-          <select
-            class="form-select"
-            id="pageSize "
-            (change)="onSelectedPageSize($event)"
-          >
-            <option value="1 ">1</option>
-            <option value="5 ">5</option>
-            <option value="10 ">10</option>
-            <option value="15 ">15</option>
-            <option value="20 ">20</option>
-            <option value="50 ">50</option>
-            <option value="100 ">100</option>
-          </select>
-        </div>
-      </div>-->
-    <!---->
+  <!-- Message si aucune unité de mesure n'est disponible -->
+  <h2 class="text-center text-dispo" *ngIf="!uniteMesures || uniteMesures.length <= 0">
+    Pas d'unité de mesure disponible !!!
+  </h2>
+
+  <!-- Liste des unités de mesure -->
+  <div *ngIf="uniteMesures && uniteMesures.length > 0" class="card border-0 shadow-sm rounded-4" style="background-color: #ffffff; color: #2D3D5E;">
+    <div class="card-body p-4">
+
+      <!-- Titre de la section des unités de mesure -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0" style="color: #2D3D5E;">📋 Liste des Unités de Mesure</h5>
+      </div>
+
+      <!-- Table des unités de mesure -->
+      <div class="table-responsive">
+        <table class="table table-hover align-middle text-center">
+          <thead style="background-color: #2D3D5E; color: white;">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Abbréviation</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let uniteMesure of uniteMesures; let i = index">
+              <td><strong>{{ i + 1 }}</strong></td>
+              <td>{{ uniteMesure.nom }}</td>
+              <td>{{ uniteMesure.abreviation }}</td>
+              <td>
+                <div class="d-flex justify-content-center gap-2">
+                  <button type="button"
+                          class="btn btn-sm"
+                          style="background-color: #2D3D5E; color: white;"
+                          (click)="change(uniteMesure?.id)"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="Modifier cette unité">
+                    <span class="material-icons">edit</span>
+                  </button>
+                  <button type="button"
+                          class="btn btn-sm"
+                          style="background-color: #996F05; color: white;"
+                          (click)="deleteUniteMesure(uniteMesure?.id)"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="Supprimer cette unité">
+                    <span class="material-icons">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
   </div>
-</div>
+
+  <!-- Pagination -->
+  <div class="row mt-4 align-items-center justify-content-between">
+    <!-- Pagination boutons -->
+    <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center justify-content-md-start">
+      <nav aria-label="Navigation des pages">
+        <ul class="pagination mb-0">
+          <li class="page-item" [class.disabled]="disablePrevious || totalPage === 1">
+            <button class="page-link" (click)="precedent()" [disabled]="disablePrevious || totalPage === 1">
+              <i class="bi bi-arrow-left-circle"></i> Précédent
+            </button>
+          </li>
+          <li class="page-item ms-2" [class.disabled]="disableNext || totalPage === 1">
+            <button class="page-link" (click)="suivant()" [disabled]="disableNext || totalPage === 1">
+              Suivant <i class="bi bi-arrow-right-circle"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Sélecteur nombre d’éléments par page -->
+    <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
+      <div class="input-group" style="max-width: 200px;">
+        <label class="input-group-text" for="pageSize">Afficher</label>
+        <select id="pageSize" class="form-select" (change)="onSelectedPageSize($event)">
+          <option value="2">2</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+  </div>
 </div>

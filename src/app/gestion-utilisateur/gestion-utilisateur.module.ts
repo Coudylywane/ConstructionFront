@@ -5,12 +5,14 @@ import { GestionUtilisateurRoutingModule } from './gestion-utilisateur-routing.m
 import { AddUtilisateurComponent } from './add-utilisateur/add-utilisateur.component';
 import { ListeUtilisateurComponent } from './liste-utilisateur/liste-utilisateur.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
   declarations: [
     AddUtilisateurComponent,
-    ListeUtilisateurComponent
+    ListeUtilisateurComponent,
+    ProfilComponent
   ],
   imports: [
     CommonModule,

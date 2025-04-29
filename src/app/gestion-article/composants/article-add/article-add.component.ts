@@ -34,6 +34,7 @@ export class ArticleAddComponent {
   typeArticles = [] as TypeArticleModel[];
   fournisseurs = [] as FournisseurModel[];
   isEditing: boolean = false;
+  currentStep: number = 1;
  
   constructor(
     private router :Router,
@@ -348,6 +349,21 @@ addArticle() {
     this.articleForm.reset();
   }
 
+
+  /****** CURENT PAGE ****/
+
+
+nextStep() {
+  if (this.currentStep === 1 && this.articleForm.valid) {
+    this.currentStep++;
+  }
+}
+
+previousStep() {
+  if (this.currentStep > 1) {
+    this.currentStep--;
+  }
+}
 
 //////////////////////:::::::Validation des champs::::::::::
 

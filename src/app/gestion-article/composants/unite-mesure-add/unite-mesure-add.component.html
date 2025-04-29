@@ -1,53 +1,61 @@
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div class="brand-logo d-flex align-items-center justify-content-between">
-        <a href="./index.html" class="text-nowrap logo-img">
-          <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+  data-sidebar-position="fixed" data-header-position="fixed" style="background-color: #F9F9F9; min-height: 100vh;">
+  
+  <!-- Body wrapper -->
+  <div class="body-wrapper mt-4">
+    <header class="app-header"></header>
+
+    <div class="container-fluid p-4">
+      <!-- Bouton retour -->
+      <div class="mb-4">
+        <a class="btn d-flex align-items-center" [routerLink]="'/gestion-article/listUniteMesure'"
+          style="background-color: #2D3D5E; color: white; border-radius: 50px; padding: 8px 16px;">
+          <span class="material-icons">arrow_back_ios_new</span>
+          <span class="ms-2"><b>Retour à la Liste</b></span>
         </a>
       </div>
-    </aside>
-    <div class="body-wrapper">
-      <header class="app-header"></header>
-      <div class="container-fluid">
-        <div class="container-fluid">
-          <a class="return d-flex" [routerLink]="'/gestion-article/listUniteMesure'">
-            <span class="material-icons"> arrow_back_ios_new </span>
-            <span class="ml-2"><b>Liste Unite Mesure</b></span>
-          </a>
-          
-            <div class="card-body mt-4">
-              <div class="card">
-                <div class="card-body">
-                  <form [formGroup]="uniteFrom" (ngSubmit)="addUnite()">
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Nom</label>
-                      <input type="text" class="form-control" placeholder="Entrer le nom " name="nom"
-                        formControlName="nom" />
-                      <div *ngIf="validNom()" class="text-danger">
-                        veuillez remplir ce champ
-                      </div>
 
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Abreviation</label>
-                      <input type="text" class="form-control" placeholder="Entrer l'abreviation " name="abreviation"
-                        formControlName="abreviation" />
-                      <div *ngIf="validAbreviation()" class="text-danger">
-                        veuillez remplir ce champ
-                      </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                      <input type="submit" class="btn btn-outline-secondary" [disabled]="!uniteFrom.valid" value="Enregistrer" />
-                    </div>
-                  </form>
+      <!-- Formulaire -->
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+          <h3 class="fw-bold mb-4" style="color: #2D3D5E;">Nouvelle Unité de Mesure</h3>
+
+          <form [formGroup]="uniteFrom" (ngSubmit)="addUnite()">
+            <div class="row g-3">
+              <!-- Nom -->
+              <div class="col-12">
+                <label for="nom" class="form-label fw-semibold" style="color: #2D3D5E;">Nom</label>
+                <input type="text" id="nom" class="form-control rounded-3" placeholder="Entrer le nom"
+                  formControlName="nom" />
+                <div *ngIf="validNom()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
                 </div>
               </div>
-            
-          </div>
+
+              <!-- Abreviation -->
+              <div class="col-12">
+                <label for="abreviation" class="form-label fw-semibold" style="color: #2D3D5E;">Abreviation</label>
+                <input type="text" id="abreviation" class="form-control rounded-3" placeholder="Entrer l'abreviation"
+                  formControlName="abreviation" />
+                <div *ngIf="validAbreviation()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+
+              <!-- Bouton d'enregistrement -->
+              <div class="col-12 d-flex justify-content-center mt-4">
+                <button type="submit" class="btn rounded-pill px-5 py-2" 
+                        [disabled]="!uniteFrom.valid"
+                        style="background-color: #996F05; color: white; font-weight: bold;">
+                  Enregistrer
+                </button>
+              </div>
+            </div>
+          </form>
+
         </div>
       </div>
+
     </div>
   </div>
+</div>
