@@ -8,4 +8,5 @@ export interface Tache {
   dateFin?: string;
   pourcentageExecution?: number;
   selected?: boolean;
+
 }

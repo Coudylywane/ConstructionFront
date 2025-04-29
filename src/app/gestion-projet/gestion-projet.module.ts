@@ -24,6 +24,7 @@ import { GenererPlanningComponent } from './composants/generer-planning/generer-
 import { VisualiserDevisComponent } from './composants/visualiser-devis/visualiser-devis.component';
 import { CfaCurrencyPipe } from './cfa-currency.pipe';
 import { VisualiserPlanningComponent } from './composants/visualiser-planning/visualiser-planning.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { VisualiserPlanningComponent } from './composants/visualiser-planning/vi
     ToastModule,
     TabViewModule, // Pour p-tabView et p-tabPanel
     DividerModule, // Pour p-divider
+    DragDropModule,
   ],
   providers: [
     MessageService,

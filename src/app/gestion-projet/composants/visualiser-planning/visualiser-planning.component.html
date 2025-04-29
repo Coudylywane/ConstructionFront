@@ -1,32 +1,78 @@
 <div class="container-fluid">
   <div class="mt-4">
-    <h4 class="justify-content-left text-left">Liste des tâches du planning</h4>
+    <h4 class="justify-content-left text-left">Planning - Tableau Kanban</h4>
   </div>
 
   <div class="container-fluid content-table">
-    <h2 *ngIf="taches.length === 0" class="text-center text-dispo mt-4">
+    <h2 *ngIf="backlog.length === 0 && todo.length === 0 && inProgress.length === 0 && done.length === 0" 
+        class="text-center text-dispo mt-4">
       Aucune tâche disponible pour ce planning !
     </h2>
 
-    <div *ngIf="taches.length > 0" class="mt-4">
-      <table class="table table-hover">
-        <thead>
-          <tr style="text-align: center" class="style-text-table">
-            <th scope="col">ID</th>
-            <th scope="col">Nom de la tâche</th>
-            <th scope="col">Date de début</th>
-            <th scope="col">Date de fin</th>
-          </tr>
-        </thead>
-        <tbody style="text-align: center">
-          <tr *ngFor="let tache of taches">
-            <th scope="row">{{ tache.id }}</th>
-            <td>{{ tache.nom }}</td>
-            <td>{{ tache.dateDebut | date : 'dd-MM-yyyy' }}</td>
-            <td>{{ tache.dateFin | date : 'dd-MM-yyyy' }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf="backlog.length > 0 || todo.length > 0 || inProgress.length > 0 || done.length > 0" 
+         class="mt-4 kanban-board d-flex justify-content-between">
+      
+      <!-- Colonne Backlog -->
+      <div class="kanban-column">
+        <h5 class="text-center">Backlog</h5>
+        <div cdkDropList id="backlogList" [cdkDropListData]="backlog" 
+             (cdkDropListDropped)="drop($event)" class="kanban-list">
+          <div class="kanban-card" *ngFor="let tache of backlog" cdkDrag>
+            <strong>{{ tache.nom }}</strong><br>
+            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br>
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+            Exécution: {{ tache.pourcentageExecution }}%
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne À faire -->
+      <div class="kanban-column">
+        <h5 class="text-center">À faire</h5>
+        <div cdkDropList id="todoList" [cdkDropListData]="todo" 
+             (cdkDropListDropped)="drop($event)" class="kanban-list">
+          <div class="kanban-card" *ngFor="let tache of todo" cdkDrag>
+            <strong>{{ tache.nom }}</strong><br>
+            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br>
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+            Exécution: {{ tache.pourcentageExecution }}%
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne En cours -->
+      <div class="kanban-column">
+        <h5 class="text-center">En cours</h5>
+        <div cdkDropList id="inProgressList" [cdkDropListData]="inProgress" 
+             (cdkDropListDropped)="drop($event)" class="kanban-list">
+          <div class="kanban-card" *ngFor="let tache of inProgress" cdkDrag>
+            <strong>{{ tache.nom }}</strong><br>
+            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br>
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+            Exécution: {{ tache.pourcentageExecution }}%
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne Terminé -->
+      <div class="kanban-column">
+        <h5 class="text-center">Terminé</h5>
+        <div cdkDropList id="doneList" [cdkDropListData]="done" 
+             (cdkDropListDropped)="drop($event)" class="kanban-list">
+          <div class="kanban-card" *ngFor="let tache of done" cdkDrag>
+            <strong>{{ tache.nom }}</strong><br>
+            Début: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+            Exécution: {{ tache.pourcentageExecution }}%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bouton Télécharger le planning -->
+    <div *ngIf="backlog.length > 0 || todo.length > 0 || inProgress.length > 0 || done.length > 0" 
+         class="mt-4 text-center">
+      <button (click)="downloadPdf()" class="btn btn-primary">Télécharger le planning</button>
     </div>
   </div>
 </div>

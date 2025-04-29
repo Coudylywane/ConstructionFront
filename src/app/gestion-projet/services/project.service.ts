@@ -101,12 +101,19 @@ export class ProjectService {
   }
 
   getPlanningByDevisId(devisId: number): Observable<any> {
-    return this.http.get<any>(`${this._api}/planning/devis/${devisId}`).pipe(
-      catchError((error) => {
-        console.error('Error fetching planning:', error);
-        return of(null);
-      })
-    );
+    return this.http
+      .get(`${this._api}/planning/devis/${devisId}`, { responseType: 'text' })
+      .pipe(
+        map((response) => {
+          console.log('Réponse brute:', response);
+          try {
+            return JSON.parse(response); // Tente de parser manuellement
+          } catch (e) {
+            console.error('Erreur de parsing JSON:', e);
+            throw new Error('Réponse JSON invalide');
+          }
+        })
+      );
   }
 
   generatePlanning(devisId: number, taches: any[]): Observable<any> {
@@ -119,6 +126,24 @@ export class ProjectService {
         })
       );
   }
+
+  downloadPlanningPdf(devisId: number): Observable<Blob> {
+    return this.http.get(`${this._api}/planning/devis/${devisId}/pdf`, {
+      responseType: 'blob', // Indique que la réponse est un fichier binaire (PDF)
+    });
+  }
+
+  getTachesByStatus(planningId: number, status: string): Observable<Tache[]> {
+    return this.http.get<Tache[]>(
+      `${this._api}/taches/planning/${planningId}/status/${status}`
+    );
+  }
+
+  updateTache(id: number, tache: Tache): Observable<Tache> {
+    return this.http.put<any>(`${this._api}/taches/${id}`, tache);
+  }
+
+
 
   // getPlanningByDevisId(devisId: number): Observable<any> {
   //   return this.http.get<any>(`${this._api}/planning/devis/${devisId}`);
