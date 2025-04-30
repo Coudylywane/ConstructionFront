@@ -18,7 +18,7 @@ export class ArticleListComponent implements OnInit {
   searchForm: any;
   subscriptions = [] as Subscription[];
   page = 0;
-  pageSize = 5;
+  pageSize = 4;
   totalPage = 0;
   disablePrevious = true;
   disableNext = false;

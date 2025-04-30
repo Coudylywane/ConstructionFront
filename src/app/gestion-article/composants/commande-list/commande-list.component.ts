@@ -123,10 +123,8 @@ onSelectedPageSize(event: any) {
 /***** GENERER BON DE COMMANDE ******/
 generateBonDeCommande() {
   //if (this.selectedCommande) {
-    // Vous pouvez ici envoyer une requête au backend pour générer le bon de commande
     console.log('Générer le bon de commande pour la commande:', this.selectedCommande);
     
-    // Exemple d'appel au service pour générer un bon de commande
     //this.commandeService.generateBonDeCommande(this.selectedCommande.id)
       //.subscribe(response => {
         //}, error => {

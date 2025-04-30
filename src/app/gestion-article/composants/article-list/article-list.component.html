@@ -1,159 +1,162 @@
 <div class="container-fluid">
 
- <div class="textTitle mt-4">
-    <h4 class="justify-content-left text-left">
-      Articles
-    </h4>
- </div>
-
-  <div class="row">
-    <div class="col-sm-6">
-      <!--<div class="text-center mt-4">
-        <a class="btn btn-success style-button" [routerLink]="'/gestion-article/addCommande'" style="width: 35%;text-transform: uppercase;font-size: 12px;">
-          <i class="material-icons">shopping_cart</i> <b>Commander</b>
-          <i class="material-icons">shopping_cart</i> Commander les articles sélectionnés
-        </a>-->
-        <button 
-          class="btn btn-success style-button" 
-          style="width: 36%; text-transform: uppercase; font-size: 12px;margin-top:21px;"
-          [disabled]="selectedArticles.length === 0"
-          (click)="commanderSelection()">
-          <i class="material-icons">shopping_cart</i> <b>Commander ({{ selectedArticles.length }})</b>
-        </button>
-      </div>
-
-    
-    <div class=" col-sm-6 mt-4">
-      <a class="add style-button d-flex" [routerLink]="'/gestion-article/addArticle'">
-        <span class="material-icons">
-          {{ "add" }}
-        </span>
-        <span class="ml-2 style-text"> Nouvel Article</span>
-      </a>
+  <div class="textTitle mt-4">
+     <h4 class="justify-content-left text-left">
+       Articles
+     </h4>
+  </div>
+ 
+   <div class="row">
+     <div class="col-sm-6">
+       <!--<div class="text-center mt-4">
+         <a class="btn btn-success style-button" [routerLink]="'/gestion-article/addCommande'" style="width: 35%;text-transform: uppercase;font-size: 12px;">
+           <i class="material-icons">shopping_cart</i> <b>Commander</b>
+           <i class="material-icons">shopping_cart</i> Commander les articles sélectionnés
+         </a>-->
+         <button 
+           class="btn btn-success style-button" 
+           style="width: 36%; text-transform: uppercase; font-size: 12px;margin-top:21px;"
+           [disabled]="selectedArticles.length === 0"
+           (click)="commanderSelection()">
+           <i class="material-icons">shopping_cart</i> <b>Commander ({{ selectedArticles.length }})</b>
+         </button>
+       </div>
+ 
      
-    </div>
-
-  </div>
-
-  
-
-  <div class="container mt-4">
-    <h2 class="text-center mt-4 text-dispo" *ngIf="!articles || articles.length <= 0">
-      Pas de d'article Disponible!!!
-    </h2>
-
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-md-6" *ngFor="let article of articles">
-          <div class="card shadow-lg rounded">
-            <div class="row g-0">
-
-              <!-- IMAGE -->
-              <div class="col-md-5 d-flex align-items-center">
-                <img
-                  src=" https://images.pexels.com/photos/159358/construction-site-build-construction-work-159358.jpeg"
-                  alt="Image de l'article"
-                  class="img-fluid rounded-start"
-                  style="height: 100%; width: 100%; object-fit: cover;"
-                />
-              </div>
-
-              <!-- CONTENU -->
-              <div class="col-md-7">
-                <div class="card-body position-relative">
-
-                   <!-- CHECKBOX EN HAUT À DROITE -->
-                  <div class="form-check position-absolute top-0 end-0 m-2">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      [checked]="isSelected(article.id!)"
-                      (change)="toggleSelection(article)"
-                      [id]="'check-' + article.id"
-                    />
-                  </div>
-                  
-                  <!-- TITRE -->
-                  <h4 class="card-title ">
-                    <i class="fas fa-box-open"></i> <b>Désignation:</b> {{ article.designation }}
-                  </h4>
-
-                  <!-- QUANTITÉ -->
-                  <p class="mb-1">
-                    <i class="fas fa-cubes text-warning"></i> <b>Quantité:</b> {{ article.quantity }}
-                  </p>
-
-                  <!-- STATUT AVEC COULEUR DYNAMIQUE -->
-                  <span class="badge bg-success">
-
-                    {{ article.status }}
-                  </span>
-
-                  <hr />
-
-                  <!-- BOUTONS D'ACTION -->
-                  <div class="d-flex justify-content-end">
-                    <button class="btn btn-outline-primary btn-sm me-2" (click)="change(article?.id)">
-                      <i class="material-icons material"></i> Modifier
-                    </button>
-
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-lg-3 col-md-3 col-sm-12">
-          <nav aria-label="Page navigation example ">
-            <ul class="pagination">
-              <li class="page-item">
-                <button [disabled]="disablePrevious || totalPage === 1" [ngClass]="
-            disablePrevious || totalPage === 1
-              ? 'text-bg-secondary page-link'
-              : 'page-link'
-          " (click)="precedent()">
-                  Précédent
-                </button>
-              </li>
-              &nbsp;
-              <li class="page-item">
-                <button [disabled]="disableNext || totalPage === 1" [ngClass]="
-            disableNext || totalPage === 1
-              ? 'text-bg-secondary page-link'
-              : 'page-link'
-          " (click)="suivant()">
-                  Suivant
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-12">
-          <select class="form-select" id="pageSize " (change)="onSelectedPageSize($event)">
-            <option value="1 ">1</option>
-            <option value="5 ">5</option>
-            <option value="10 ">10</option>
-            <option value="15 ">15</option>
-            <option value="20 ">20</option>
-            <option value="50 ">50</option>
-            <option value="100 ">100</option>
-          </select>
-        </div>
-      </div>
-  </div>
-
-  <div class="mt-4">
-
-  </div>
-
-
-
-
-
-</div>
-
-</div>
+     <div class=" col-sm-6 mt-4">
+       <a class="add style-button d-flex" [routerLink]="'/gestion-article/addArticle'">
+         <span class="material-icons">
+           {{ "add" }}
+         </span>
+         <span class="ml-2 style-text"> Nouvel Article</span>
+       </a>
+      
+     </div>
+ 
+   </div>
+ 
+   
+ 
+   <div class="container mt-4">
+     <h2 class="text-center mt-4 text-dispo" *ngIf="!articles || articles.length <= 0">
+       Pas de d'article Disponible!!!
+     </h2>
+ 
+     <div class="container">
+       <div class="row g-4">
+         <div class="col-md-6" *ngFor="let article of articles">
+           <div class="card shadow-lg rounded">
+             <div class="row g-0">
+ 
+               <!-- IMAGE -->
+               <div class="col-md-5 d-flex align-items-center">
+                 <img
+                   src=" https://images.pexels.com/photos/159358/construction-site-build-construction-work-159358.jpeg"
+                   alt="Image de l'article"
+                   class="img-fluid rounded-start"
+                   style="height: 100%; width: 100%; object-fit: cover;"
+                 />
+               </div>
+ 
+               <!-- CONTENU -->
+               <div class="col-md-7">
+                 <div class="card-body position-relative">
+ 
+                    <!-- CHECKBOX EN HAUT À DROITE -->
+                   <div class="form-check position-absolute top-0 end-0 m-2">
+                     <input
+                       type="checkbox"
+                       class="form-check-input"
+                       [checked]="isSelected(article.id!)"
+                       (change)="toggleSelection(article)"
+                       [id]="'check-' + article.id"
+                     />
+                   </div>
+                   
+                   <!-- TITRE -->
+                   <h4 class="card-title ">
+                     <i class="fas fa-box-open"></i> <b>Désignation:</b> {{ article.designation }}
+                   </h4>
+ 
+                   <!-- QUANTITÉ -->
+                   <p class="mb-1">
+                     <i class="fas fa-cubes text-warning"></i> <b>Quantité:</b> {{ article.quantity }}
+                   </p>
+ 
+                   <!-- STATUT AVEC COULEUR DYNAMIQUE -->
+                   <span class="badge bg-success">
+ 
+                     {{ article.status }}
+                   </span>
+ 
+                   <hr />
+ 
+                   <!-- BOUTONS D'ACTION -->
+                   <div class="d-flex justify-content-end">
+                     <button class="btn btn-outline-primary btn-sm me-2" (click)="change(article?.id)">
+                       <i class="material-icons material"></i> Modifier
+                     </button>
+ 
+                   </div>
+ 
+                 </div>
+               </div>
+ 
+             </div>
+           </div>
+         </div>
+       </div>
+  <!--PAGINATION-->
+       
+  <div class="row mt-4 align-items-center justify-content-between">
+   <!-- Pagination boutons -->
+   <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center justify-content-md-start">
+     <nav aria-label="Navigation des pages">
+       <ul class="pagination mb-0">
+         <li class="page-item" [class.disabled]="disablePrevious || totalPage === 1">
+           <button class="page-link" style="color: #2D3D5E;" (click)="precedent()" [disabled]="disablePrevious || totalPage === 1">
+             <i class="bi bi-arrow-left-circle"></i> Précédent
+           </button>
+         </li>
+         <li class="page-item ms-2" [class.disabled]="disableNext || totalPage === 1">
+           <button class="page-link" (click)="suivant()" [disabled]="disableNext || totalPage === 1" style="color: #996F05;">
+             Suivant <i class="bi bi-arrow-right-circle"></i>
+           </button>
+         </li>
+       </ul>
+     </nav>
+   </div>
+ 
+   <!-- Sélecteur nombre d’éléments -->
+   <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
+     <div class="input-group" style="max-width: 200px;">
+       <label class="input-group-text" for="pageSize">Afficher</label>
+       <select
+         id="pageSize"
+         class="form-select"
+         (change)="onSelectedPageSize($event)"
+       >
+         <option value="2">2</option>
+         <option value="4" selected>4</option>
+         <option value="6" >6</option>
+         <option value="10" >10</option>
+         <option value="20">20</option>
+         <option value="50">50</option>
+       </select>
+     </div>
+   </div>
+ </div>
+   </div>
+ 
+   <div class="mt-4">
+ 
+   </div>
+ 
+ 
+ 
+ 
+ 
+ </div>
+ 
+ </div>
+ 

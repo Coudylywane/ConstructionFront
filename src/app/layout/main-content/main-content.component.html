@@ -21,13 +21,8 @@
       <feBlend mode="normal" in2="shape" result="effect1_innerShadow_4004_2578"/>
       </filter>
       </defs>
-      </svg>
-    <!-- <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-      <use href="assets/dist/assets/brand/coreui.svg#full"></use>
     </svg>
-    <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
-      <use href="assets/dist/assets/brand/coreui.svg#signet"></use>
-    </svg> -->
+  
   </div>
   <ul class="sidebar-nav sidebar-navs" data-coreui="navigation" id="" data-simplebar="">
 
@@ -278,7 +273,7 @@
             <div class="dropdown-header bg-light py-2">
               <div class="fw-semibold">Settings</div>
             </div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" [routerLink]="'/gestion-utilisateur/profil'">
               <svg class="icon me-2">
                 <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
               </svg>
@@ -293,7 +288,7 @@
 
             <div class="dropdown-divider"></div>
 
-            <a class="dropdown-item" (click)="logout()" href="javascript:void(0);">
+            <a class="dropdown-item text-danger" (click)="logout()" href="javascript:void(0);">
               <svg class="icon me-2">
                 <use href="assets/dist/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
               </svg>

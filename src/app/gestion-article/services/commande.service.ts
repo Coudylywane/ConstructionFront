@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CommandeModel } from 'src/app/shared/models/commande.model';
 
 @Injectable({
@@ -35,8 +35,13 @@ export class CommandeService {
     };
     return this.http.get<CommandeModel>( this._api+'/commandes', options);
 
-    }
-  
+  }
+
+  getCommandes(): Observable<any[]> {
+    return this.http.get<any>(this._api + '/commande-list').pipe(
+      map(response => response.data)
+    );
+  }
 
 
   

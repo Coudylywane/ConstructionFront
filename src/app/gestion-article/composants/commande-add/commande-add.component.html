@@ -1,15 +1,24 @@
-<div class="container-fluid">
-    <div class="container">
-       <div>
-            <a class="return d-flex mt-4" [routerLink]="'/gestion-article/listCommande'">
-                <span class="material-icons"> arrow_back_ios_new </span>
-                <span class="ml-2"><b>Liste des Commandes</b></span>
-            </a>
-       </div>
-       <div class="mb-4" *ngIf="selectedArticles.length > 0">
-        <h5 class="mb-3 articleSelected mt-4">Articles sélectionnés</h5>
-        <table class="table table-striped">
-          <thead>
+<div class="container-fluid mt-4">
+
+  <!-- Lien retour -->
+   
+  <div class="container">
+
+    <div class="mb-4">
+      <a class="d-flex align-items-center text-decoration-none mb-4"
+         [routerLink]="'/gestion-article/listCommande'" 
+         style="background-color: #2D3D5E; color: white; border-radius: 50px; padding: 8px 16px;">
+        <span class="material-icons">arrow_back_ios_new</span>
+        <span class="ms-2"><b>Retour à la Liste</b></span>
+      </a>
+    </div>
+
+    <!-- Table des articles sélectionnés -->
+    <div class="mb-4" *ngIf="selectedArticles.length > 0">
+      <h5 class="mb-3 mt-4 fw-bold" style="color: #2D3D5E;">Articles sélectionnés</h5>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+          <thead class="table-primary text-center" style="background-color: #2D3D5E; color: white;">
             <tr>
               <th>Nom</th>
               <th>Prix unitaire (FCFA)</th>
@@ -17,13 +26,15 @@
               <th>Total (FCFA)</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-center">
             <tr *ngFor="let article of selectedArticles">
               <td>{{ article.designation }}</td>
               <td>{{ article.prixAchatUnitaire }}</td>
               <td>
-                <input type="number" min="1" [(ngModel)]="article.quantity"
-                       class="form-control"
+                <input type="number"
+                       class="form-control text-center"
+                       min="1"
+                       [(ngModel)]="article.quantity"
                        [ngModelOptions]="{standalone: true}"
                        (ngModelChange)="recalculerPrixTotal()" />
               </td>
@@ -32,41 +43,44 @@
           </tbody>
         </table>
       </div>
-      
-        <div class="mt-4">
-            <div class="card-body">
-                <div class="card">
-                    <div class="card-body">
-                        <form [formGroup]="commandeForm" (ngSubmit)="onSubmit()">
-                        
-            
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Date de la commande</label>
-                                <input type="date" class="form-control" placeholder="Entrer la date de la commande "
-                                    name="date" formControlName="date" />
-                            </div>
-                            
-                                
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Prix Total</label>
-                                <input type="number" class="form-control" placeholder="Entrer le prix total de la commande" name="prixTotal" formControlName="prixTotal" />
-
-                            </div>
-
-                          
-                              
-                            <div class="d-flex justify-content-center">
-
-                                <input type="submit" class="btn btn-outline-secondary" [disabled]=""
-                                    value="Enregistrer" />
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
+    <!-- Formulaire de commande -->
+    <div class="mt-4">
+      <div class="card shadow-sm rounded-4 border-0">
+        <div class="card-body">
+          <form [formGroup]="commandeForm" (ngSubmit)="onSubmit()">
+
+            <div class="mb-3">
+              <label for="date" class="form-label fw-bold" style="color: #2D3D5E;">Date de la commande</label>
+              <input type="date"
+                     class="form-control"
+                     id="date"
+                     placeholder="Entrer la date de la commande"
+                     formControlName="date" />
+            </div>
+
+            <div class="mb-4">
+              <label for="prixTotal" class="form-label fw-bold" style="color: #2D3D5E;">Prix Total</label>
+              <input type="number"
+                     class="form-control"
+                     id="prixTotal"
+                     placeholder="Entrer le prix total de la commande"
+                     formControlName="prixTotal" />
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <button type="submit"
+                      class="btn px-4 py-2 rounded-pill shadow-sm"
+                      style="background-color: #996F05; color: white;"
+                      [disabled]="commandeForm.invalid">
+                Enregistrer
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

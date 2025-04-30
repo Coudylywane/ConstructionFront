@@ -1,216 +1,174 @@
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-        <!-- Sidebar scroll-->
-       
-    </aside>
-    <div class="body-wrapper">
-        <header class="app-header"></header>
+    data-sidebar-position="fixed" data-header-position="fixed" style="background-color: #F9F9F9; min-height: 100vh;">
+  
+  
 
-        <div class="container">
-            <a class="return d-flex mt-4" [routerLink]="'/gestion-article/listArticle'">
-                <span class="material-icons"> arrow_back_ios_new </span>
-                <span class="ml-2"><b>Liste des Articles</b></span>
-            </a>
-            <div class="mt-4">
-                <div class="card-body">
-                    <div class="card">
-                        <div class="card-body">
-                            <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Désignation</label>
-                                            <input type="text" class="form-control" placeholder="Entrer la désignation "
-                                                name="designation" formControlName="designation" />
-                                            <div *ngIf="validDesignation()" class="text-danger"> Veuillez renseigner le designation</div> 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Description</label>
-                                            <input type="text" class="form-control" placeholder="Entrer la description "
-                                                name="description" formControlName="description" />
-                                            <div *ngIf="validDescription()" class="text-danger"> Veuillez renseigner la description</div>
-                                               
-                                        </div>
+  <!-- Main Content Start -->
+  <div class="body-wrapper mt-4">
+    <header class="app-header"></header>
 
-                                    </div>
-                                </div>
-                               
+    <!-- Retour à la Liste des Articles -->
+    <div class="container-fluid p-4">
+      <div class="mb-4">
+        <a class="btn d-flex align-items-center" [routerLink]="'/gestion-article/listArticle'"
+          style="background-color: #2D3D5E; color: white; border-radius: 50px; padding: 8px 16px;">
+          <span class="material-icons">arrow_back_ios_new</span>
+          <span class="ms-2"><b>Retour à la Liste des Articles</b></span>
+        </a>
+      </div>
 
-                               
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Quantité Seuil</label>
-                                            <input type="number" formControlName="quantiteSeuil" class="form-control" />
-                                            <div *ngIf="articleForm.get('quantiteSeuil')?.touched && articleForm.get('quantiteSeuil')?.hasError('required')">
-                                              <small class="text-danger">La quantité seuil est requise si la quantité est inférieure à 2.</small>
-                                            </div>
-                                        </div>
+      <!-- Formulaire pour ajouter un article -->
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4">
+          <h3 class="fw-bold mb-4" style="color: #2D3D5E;">Ajouter un Article</h3>
 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Poids</label>
-                                            <input type="number" class="form-control" placeholder="Entrer le poids "
-                                                name="poids" formControlName="poids" />
-                                                <div *ngIf="validPoids()" class="text-danger"> Veuillez renseigner le poids</div>
-
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Prix du Devis</label>
-                                            <input type="number" class="form-control"
-                                                placeholder="Entrer le prix du devis " name="prixDevis"
-                                                formControlName="prixDevis" />
-                                                <div *ngIf="validPrixDevis()" class="text-danger"> Veuillez renseigner le prix du Devis</div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Prix Reel</label>
-                                            <input type="number" class="form-control" placeholder="Entrer le prix reel "
-                                                name="prixReel" formControlName="prixReel" />
-                                                <div *ngIf="validPrixReel()" class="text-danger"> Veuillez renseigner le prix reel</div>
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Prix d'Achat
-                                                Unitaire</label>
-                                            <input type="number" class="form-control"
-                                            placeholder="Entrer le prix d'achat unitaire" name="prixAchatUnitaire"
-                                            formControlName="prixAchatUnitaire" />
-                                            <div *ngIf="validPrixAchatUnitaire()" class="text-danger"> Veuillez renseigner le prix d'achat unitaire</div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Prix de Reviens
-                                                Unitaire</label>
-                                            <input type="number" class="form-control"
-                                            placeholder="Entrer le prix de reviens unitaire "
-                                            name="prixReviensUnitaire" formControlName="prixReviensUnitaire" />
-                                            <div *ngIf="validPrixReviens()" class="text-danger"> Veuillez renseigner le prix de reviens</div>
-
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Quantité</label>
-                                            <input type="number" class="form-control" placeholder="Entrer la quantité "
-                                            name="quantity" formControlName="quantity" />
-                                            <div *ngIf="validQuantite()" class="text-danger"> Veuillez renseigner la quantité</div>
-
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Prix de Vente
-                                                Unitaire</label>
-                                            <input type="number" class="form-control"
-                                            placeholder="Entrer le prix de vente unitaire " name="prixVenteUnitaire"
-                                            formControlName="prixVenteUnitaire" />
-                                            <div *ngIf="validPrixVente()" class="text-danger"> Veuillez renseigner le prix de vente</div>
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                
-                                <div class="mb-3" *ngIf="zoneStocks.length > 0">
-                                    <label class="form-label">Zone de Stock</label>
-                                    <select class="form-select" formControlName="zoneStock">
-                                        <option value="" disabled selected>Choisir une zone de stock</option>
-                                        <option *ngFor="let zone of zoneStocks" [ngValue]="zone">{{ zone.designation }}
-                                        </option>
-                                    </select>
-                                </div>
-
-                               <div class="row md-4">
-                                <div class="col-md-6">
-                                    <div class="mb-3" *ngIf="uniteMesures.length > 0">
-                                        <label class="form-label">Unité de Mesure</label>
-                                        <select class="form-select" formControlName="uniteMesure">
-                                            <option value="" disabled selected>Choisir une unité de mesure</option>
-                                            <option *ngFor="let unite of uniteMesures" [ngValue]="unite">{{ unite.abreviation }}</option>
-                                        </select>
-                                    </div>
-    
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3" *ngIf="typeArticles">
-                                        <label class="form-label">Type d'Article</label>
-                                        <select class="form-select" formControlName="typeArticle">
-                                            <option value="" disabled selected>Choisir un type d'Article</option>
-                                            <option *ngFor="let type of typeArticles" [ngValue]="type">{{ type.designation }}</option>
-                                        </select>
-                                        </div>
-                                    </div>
-                                  
-                                </div>
-
-                                <div class="mb-3" *ngIf="fournisseurs.length > 0">
-                                    <label class="form-label">Fournisseurs</label>
-                                    <select class="form-select" formControlName="fournisseur">
-                                        <option value="" disabled selected>Choisir un fournisseur</option>
-                                        <option *ngFor="let fournisseur of fournisseurs" [ngValue]="fournisseurs">{{ fournisseur.nom }}</option>
-                                    </select>
-                                </div>
-
-                                <!-- <div class="mb-3">
-                                    <label for="typeFournisseurId" class="form-label">Unité de mesure</label>
-                                    <select class="form-select" formControlName="" required>
-                                        <option value="" disabled selected>Choisir une unité de mesure</option>
-                                    </select>
-
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="categorieFournisseurId" class="form-label">Zone de Stock</label>
-                                    <select class="form-select" formControlName="" required>
-                                        <option value="" disabled selected>Choisir une zone de Stock</option>
-                                        <option></option>
-                                    </select>
-                                </div>-->
-
-                                <div class="d-flex justify-content-center">
-
-                                    <input type="submit" class="btn btn-outline-secondary" [disabled]="!articleForm.valid"
-                                        value="Enregistrer" />
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
+          <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="designation" class="form-label fw-semibold" style="color: #2D3D5E;">Désignation</label>
+                <input type="text" id="designation" class="form-control rounded-3" placeholder="Entrer la désignation"
+                  formControlName="designation" />
+                <div *ngIf="validDesignation()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
                 </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="description" class="form-label fw-semibold" style="color: #2D3D5E;">Description</label>
+                <input type="text" id="description" class="form-control rounded-3" placeholder="Entrer la description"
+                  formControlName="description" />
+                <div *ngIf="validDescription()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
             </div>
 
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="quantiteSeuil" class="form-label fw-semibold" style="color: #2D3D5E;">Quantité Seuil</label>
+                <input type="number" id="quantiteSeuil" class="form-control rounded-3" placeholder="Entrer la quantité seuil"
+                  formControlName="quantiteSeuil" />
+              </div>
+
+              <div class="col-md-6">
+                <label for="poids" class="form-label fw-semibold" style="color: #2D3D5E;">Poids</label>
+                <input type="number" id="poids" class="form-control rounded-3" placeholder="Entrer le poids"
+                  formControlName="poids" />
+                <div *ngIf="validPoids()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="prixDevis" class="form-label fw-semibold" style="color: #2D3D5E;">Prix du Devis</label>
+                <input type="number" id="prixDevis" class="form-control rounded-3" placeholder="Entrer le prix du devis"
+                  formControlName="prixDevis" />
+                <div *ngIf="validPrixDevis()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="prixReel" class="form-label fw-semibold" style="color: #2D3D5E;">Prix Réel</label>
+                <input type="number" id="prixReel" class="form-control rounded-3" placeholder="Entrer le prix réel"
+                  formControlName="prixReel" />
+                <div *ngIf="validPrixReel()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="prixAchatUnitaire" class="form-label fw-semibold" style="color: #2D3D5E;">Prix d'Achat Unitaire</label>
+                <input type="number" id="prixAchatUnitaire" class="form-control rounded-3" placeholder="Entrer le prix d'achat unitaire"
+                  formControlName="prixAchatUnitaire" />
+                <div *ngIf="validPrixAchatUnitaire()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="prixReviensUnitaire" class="form-label fw-semibold" style="color: #2D3D5E;">Prix de Reviens Unitaire</label>
+                <input type="number" id="prixReviensUnitaire" class="form-control rounded-3" placeholder="Entrer le prix de revient unitaire"
+                  formControlName="prixReviensUnitaire" />
+                <div *ngIf="validPrixReviens()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="quantity" class="form-label fw-semibold" style="color: #2D3D5E;">Quantité</label>
+                <input type="number" id="quantity" class="form-control rounded-3" placeholder="Entrer la quantité"
+                  formControlName="quantity" />
+                <div *ngIf="validQuantite()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="prixVenteUnitaire" class="form-label fw-semibold" style="color: #2D3D5E;">Prix de Vente Unitaire</label>
+                <input type="number" id="prixVenteUnitaire" class="form-control rounded-3" placeholder="Entrer le prix de vente unitaire"
+                  formControlName="prixVenteUnitaire" />
+                <div *ngIf="validPrixVente()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="color: #2D3D5E;">Zone de Stock</label>
+                <select class="form-select" formControlName="zoneStock">
+                  <option value="" disabled selected>Choisir une zone de stock</option>
+                  <option *ngFor="let zone of zoneStocks" [ngValue]="zone">{{ zone.designation }}</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="color: #2D3D5E;">Unité de Mesure</label>
+                <select class="form-select" formControlName="uniteMesure">
+                  <option value="" disabled selected>Choisir une unité de mesure</option>
+                  <option *ngFor="let unite of uniteMesures" [ngValue]="unite">{{ unite.abreviation }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="color: #2D3D5E;">Type d'Article</label>
+                <select class="form-select" formControlName="typeArticle">
+                  <option value="" disabled selected>Choisir un type d'article</option>
+                  <option *ngFor="let type of typeArticles" [ngValue]="type">{{ type.designation }}</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold" style="color: #2D3D5E;">Fournisseur</label>
+                <select class="form-select" formControlName="fournisseur">
+                  <option value="" disabled selected>Choisir un fournisseur</option>
+                  <option *ngFor="let fournisseur of fournisseurs" [ngValue]="fournisseur">{{ fournisseur.nom }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-center mt-4">
+              <button type="submit" class="btn rounded-pill px-5 py-2" 
+                      [disabled]="!articleForm.valid"
+                      style="background-color: #996F05; color: white; font-weight: bold;">
+                Enregistrer
+              </button>
+            </div>
+
+          </form>
+
         </div>
+      </div>
+
     </div>
+  </div>
 </div>
