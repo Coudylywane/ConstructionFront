@@ -4,23 +4,47 @@
   </div>
 
   <div class="container-fluid content-table">
-    <h2 *ngIf="backlog.length === 0 && todo.length === 0 && inProgress.length === 0 && done.length === 0" 
-        class="text-center text-dispo mt-4">
+    <h2
+      *ngIf="
+        backlog.length === 0 &&
+        todo.length === 0 &&
+        inProgress.length === 0 &&
+        done.length === 0
+      "
+      class="text-center text-dispo mt-4"
+    >
       Aucune tâche disponible pour ce planning !
     </h2>
 
-    <div *ngIf="backlog.length > 0 || todo.length > 0 || inProgress.length > 0 || done.length > 0" 
-         class="mt-4 kanban-board d-flex justify-content-between">
-      
+    <div
+      *ngIf="
+        backlog.length > 0 ||
+        todo.length > 0 ||
+        inProgress.length > 0 ||
+        done.length > 0
+      "
+      class="mt-4 kanban-board d-flex justify-content-between"
+    >
       <!-- Colonne Backlog -->
       <div class="kanban-column">
         <h5 class="text-center">Backlog</h5>
-        <div cdkDropList id="backlogList" [cdkDropListData]="backlog" 
-             (cdkDropListDropped)="drop($event)" class="kanban-list">
-          <div class="kanban-card" *ngFor="let tache of backlog" cdkDrag>
-            <strong>{{ tache.nom }}</strong><br>
-            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br>
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+        <div
+          cdkDropList
+          id="backlogList"
+          [cdkDropListData]="backlog"
+          [cdkDropListConnectedTo]="['todoList', 'inProgressList', 'doneList']"
+          (cdkDropListDropped)="drop($event)"
+          class="kanban-list"
+        >
+          <div
+            class="kanban-card"
+            *ngFor="let tache of backlog"
+            cdkDrag
+            (click)="openEditModal(tache)"
+          >
+            <strong>{{ tache.nom }}</strong><br />
+            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
             Exécution: {{ tache.pourcentageExecution }}%
           </div>
         </div>
@@ -29,12 +53,23 @@
       <!-- Colonne À faire -->
       <div class="kanban-column">
         <h5 class="text-center">À faire</h5>
-        <div cdkDropList id="todoList" [cdkDropListData]="todo" 
-             (cdkDropListDropped)="drop($event)" class="kanban-list">
-          <div class="kanban-card" *ngFor="let tache of todo" cdkDrag>
-            <strong>{{ tache.nom }}</strong><br>
-            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br>
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+        <div
+          cdkDropList
+          id="todoList"
+          [cdkDropListData]="todo"
+          [cdkDropListConnectedTo]="['backlogList', 'inProgressList', 'doneList']"
+          (cdkDropListDropped)="drop($event)"
+          class="kanban-list"
+        >
+          <div
+            class="kanban-card"
+            *ngFor="let tache of todo"
+            cdkDrag
+            (click)="openEditModal(tache)"
+          >
+            <strong>{{ tache.nom }}</strong><br />
+            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
             Exécution: {{ tache.pourcentageExecution }}%
           </div>
         </div>
@@ -43,12 +78,23 @@
       <!-- Colonne En cours -->
       <div class="kanban-column">
         <h5 class="text-center">En cours</h5>
-        <div cdkDropList id="inProgressList" [cdkDropListData]="inProgress" 
-             (cdkDropListDropped)="drop($event)" class="kanban-list">
-          <div class="kanban-card" *ngFor="let tache of inProgress" cdkDrag>
-            <strong>{{ tache.nom }}</strong><br>
-            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br>
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+        <div
+          cdkDropList
+          id="inProgressList"
+          [cdkDropListData]="inProgress"
+          [cdkDropListConnectedTo]="['backlogList', 'todoList', 'doneList']"
+          (cdkDropListDropped)="drop($event)"
+          class="kanban-list"
+        >
+          <div
+            class="kanban-card"
+            *ngFor="let tache of inProgress"
+            cdkDrag
+            (click)="openEditModal(tache)"
+          >
+            <strong>{{ tache.nom }}</strong><br />
+            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
             Exécution: {{ tache.pourcentageExecution }}%
           </div>
         </div>
@@ -57,12 +103,23 @@
       <!-- Colonne Terminé -->
       <div class="kanban-column">
         <h5 class="text-center">Terminé</h5>
-        <div cdkDropList id="doneList" [cdkDropListData]="done" 
-             (cdkDropListDropped)="drop($event)" class="kanban-list">
-          <div class="kanban-card" *ngFor="let tache of done" cdkDrag>
-            <strong>{{ tache.nom }}</strong><br>
-            Début: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br>
+        <div
+          cdkDropList
+          id="doneList"
+          [cdkDropListData]="done"
+          [cdkDropListConnectedTo]="['backlogList', 'todoList', 'inProgressList']"
+          (cdkDropListDropped)="drop($event)"
+          class="kanban-list"
+        >
+          <div
+            class="kanban-card"
+            *ngFor="let tache of done"
+            cdkDrag
+            (click)="openEditModal(tache)"
+          >
+            <strong>{{ tache.nom }}</strong><br />
+            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
             Exécution: {{ tache.pourcentageExecution }}%
           </div>
         </div>
@@ -70,9 +127,80 @@
     </div>
 
     <!-- Bouton Télécharger le planning -->
-    <div *ngIf="backlog.length > 0 || todo.length > 0 || inProgress.length > 0 || done.length > 0" 
-         class="mt-4 text-center">
-      <button (click)="downloadPdf()" class="btn btn-primary">Télécharger le planning</button>
+    <div
+      *ngIf="
+        backlog.length > 0 ||
+        todo.length > 0 ||
+        inProgress.length > 0 ||
+        done.length > 0
+      "
+      class="mt-4 text-center"
+    >
+      <button (click)="downloadPdf()" class="btn btn-primary">
+        Télécharger le planning
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal personnalisé pour modifier la tâche -->
+  <div *ngIf="showModal" class="custom-modal">
+    <div class="custom-modal-dialog">
+      <div class="custom-modal-content">
+        <div class="custom-modal-header">
+          <h5 class="custom-modal-title">
+            Modifier la tâche: {{ selectedTache?.nom }}
+          </h5>
+          <button
+            type="button"
+            class="custom-modal-close"
+            (click)="closeModal()"
+          >
+            ×
+          </button>
+        </div>
+        <div class="custom-modal-body">
+          <div class="form-group">
+            <label>Pourcentage d'exécution (%)</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="pourcentageExecution"
+              min="0"
+              max="100"
+            />
+          </div>
+          <div class="form-group">
+            <label>Articles utilisés</label>
+            <div *ngFor="let article of articles" class="input-group">
+              <input
+                type="number"
+                class="form-control"
+                [value]="getArticleQuantity(article.id)"
+                (input)="updateArticleQuantity(article.id, $event)"
+                min="0"
+                placeholder="Quantité"
+              />
+              <span class="input-group-text">{{ article.nom }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="custom-modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeModal()"
+          >
+            Annuler
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="saveTache()"
+          >
+            Enregistrer
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
