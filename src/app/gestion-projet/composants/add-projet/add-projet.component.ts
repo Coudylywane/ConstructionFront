@@ -13,6 +13,7 @@ import { Projet } from 'src/app/shared/models/projet';
 })
 export class AddProjetComponent {
   projetForm!: FormGroup;
+  users: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +29,22 @@ export class AddProjetComponent {
       description: ['', Validators.required],
       startDate: ['', Validators.required],
       endDateProvisioning: ['', Validators.required],
+      clientId: ['', Validators.required],
       endDate: [''],
+    });
+    this.getClients();
+  }
+
+  getClients(): void {
+    this.projectService.getClient().subscribe({
+      next: (page) => {
+        console.log('page', page);
+        
+        this.users = page;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la récupération des utilisateur:', error);
+      },
     });
   }
 
@@ -57,7 +73,8 @@ export class AddProjetComponent {
       endDateProvisioning: new Date(projet.endDateProvisioning),
       endDate: new Date(projet.endDate),
       startDate: new Date(projet.startDate),
-      status: "ENATENTE" 
+      clientId: projet.clientId,
+      status: 'ENATENTE',
     };
 
     // Préparation du corps de la requête

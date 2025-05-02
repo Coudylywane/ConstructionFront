@@ -9,8 +9,8 @@
 <!-- En-tête de la page -->
 <div class="page-header">
   <h1>Détails du Projet</h1>
-  <div class="actions" *ngIf="projet?.status === 'ENATENTE'">
-    <button
+  <div  class="actions" *ngIf="projet?.status === 'ENATENTE'">
+    <button *appHasAnyAuthority="['CLIENT']"
       (click)="validateProject('REFUSER')"
       pButton
       pRipple
@@ -18,7 +18,7 @@
       class="btn btn-danger"
       label="Rejeter le projet"
     ></button>
-    <button
+    <button  *appHasAnyAuthority="['CLIENT']"
       (click)="validateProject('VALIDATED')"
       pButton
       pRipple

@@ -38,7 +38,12 @@ export class AddTacheComponent {
       nom: tache.nom,
       description: tache.description,
       dureeEstimee: tache.dureeEstimee,
-      statut: 'ENATENTE',
+      status: 'BACKLOG',
+      id: 0,
+      dateDebut: '',
+      dateFin: '',
+      pourcentageExecution: 0,
+      articles: []
     };
 
     // Préparation du corps de la requête

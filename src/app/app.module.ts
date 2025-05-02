@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { GestionProjetModule } from './gestion-projet/gestion-projet.module';
 import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
-
+import localeFr from '@angular/common/locales/fr'; // Import fr-FR locale data
+import { DragDropModule } from '@angular/cdk/drag-drop';
 registerLocaleData(localeFr, 'fr-FR');
 @NgModule({
   declarations: [AppComponent],
@@ -26,14 +26,11 @@ registerLocaleData(localeFr, 'fr-FR');
     BlockUIModule.forRoot(),
     InputTextModule,
     InputTextModule,
-    GestionProjetModule,
     BrowserAnimationsModule, // 👈 obligatoire
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 3000,
-      
     }),
-
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' }, // Set fr-FR as the default locale

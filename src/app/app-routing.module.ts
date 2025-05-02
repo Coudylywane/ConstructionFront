@@ -71,7 +71,6 @@ const routes: Routes = [
       loadChildren: () => import('./gestion-utilisateur/gestion-utilisateur.module').then(m => m.GestionUtilisateurModule)
     },
   ]
-
 }
 ];
 

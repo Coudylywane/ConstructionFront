@@ -1,84 +1,81 @@
 <div class="container-fluid">
-  <div class="mt-4">
+  <div class="mt-4 d-flex justify-content-between align-items-center">
     <!-- Button to add a new project -->
-    <a
-      class="add style-button d-flex"
-      [routerLink]="'/gestion-projet/addProjet'"
-    >
-      <span class="material-icons">add</span>
-      <span class="ml-2 style-text">Nouveau projet</span>
-    </a>
-     <!--<h4 class="justify-content-left text-left">Liste des projets</h4>-->
+      <a *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN']"
+          class="add style-button d-flex align-items-center"
+          [routerLink]="'/gestion-projet/addProjet'"
+        >
+          <span class="material-icons">add</span>
+          <span class="ml-2 style-text">Nouveau projet</span>
+        </a>
+    
+    <h4 class="section-title">Liste des projets</h4>
   </div>
 
   <!-- Table Section -->
   <div class="container-fluid content-table">
     <!-- Conditional message when no projects are available -->
     <h2 *ngIf="projets.length === 0" class="text-center text-dispo mt-4">
-      Pas de projets Disponible!!!
+      Pas de projets disponibles !
     </h2>
 
-    <!-- Projects Table -->
-    <section id="team" class="pb-5 mt-4" >
+    <!-- Projects Cards -->
+    <section id="projects" class="pb-5 mt-4">
       <div class="container">
-          <h5 class="section-title h1">Liste des projets</h5>
-          <div class="row">
-              <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let projet of projets">
-                  <div class="image-flip" >
-                    
-                      <div class="mainflip flip-0">
-                          <div class="frontside">
-                              <div class="card">
-                                  <div class="card-body text-center">
-                                    <span class="id-tiltle"> <b>ID-</b> <b>#{{ projet.id }}</b> </span>
-                                      <h4 class="card-title">{{ projet.name }}</h4>
-                                      <p class="card-text">{{ projet.description }} </p>
-                                      <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="backside">
-                              <div class="card">
-                                  <div class="card-body text-center mt-4">
-                                      <h4 class="card-title">{{ projet.name }}</h4>
-                                      <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                      <ul class="list-inline">
-                                          <li class="list-inline-item">
-                                            <a
-                                              *ngIf="devisExistant[projet.id]"
-                                              class="nav-link m-nav-link buttons"
-                                              [routerLink]="[
-                                                '/gestion-projet/visualiserDevis',projet.id]"
-                                              style="margin-left: 10px"
-                                              >
-                                              <span class="material-icons">visibility</span>
-                                            </a>
-                                          </li>
-                                          <li class="list-inline-item">
-                                              <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                  <i class="fa fa-twitter"></i>
-                                              </a>
-                                          </li>
-                                          <li class="list-inline-item">
-                                              <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                  <i class="fa fa-skype"></i>
-                                              </a>
-                                          </li>
-                                          <li class="list-inline-item">
-                                              <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
-                                                  <i class="fa fa-google"></i>
-                                              </a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+        <div class="row">
+          <div
+            class="col-xs-12 col-sm-6 col-md-4 mb-4"
+            *ngFor="let projet of projets"
+          >
+            <div class="project-card">
+              <div class="card-header">
+                <span class="id-title"
+                  ><b>ID #{{ projet.id }}</b></span
+                >
               </div>
-           
+              <div class="card-body">
+                <h4 class="card-title">{{ projet.name }}</h4>
+                <p class="card-description">{{ projet.description }}</p>
+                <div class="card-actions">
+                  <a
+                    class="btn btn-outline-primary btn-sm"
+                    [routerLink]="['/gestion-projet/detailProjet', projet.id]"
+                    title="Détails du projet"
+                  >
+                    <span class="material-icons">info</span>
+                  </a>
+                </div>
+
+                <div class="card-actions" *ngIf="projet.status === 'VALIDATED'">
+                  <div *ngIf="devisExistant[projet.id]">
+                    <a
+                    class="btn btn-outline-primary btn-sm"
+                    [routerLink]="[
+                      '/gestion-projet/visualiserDevis',
+                      projet.id
+                    ]"
+                    title="Visualiser le devis"
+                  >
+                    <span class="material-icons">visibility</span>
+                  </a>
+                  </div>
+                  <div *ngIf="!devisExistant[projet.id]">
+                  <a 
+                    *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN']"
+                    class="btn btn-outline-primary btn-sm"
+                    [routerLink]="['/gestion-projet/genererDevis', projet.id]"
+                    title="Générer le devis"
+                  >
+                    <span class="material-icons">description</span>
+                  </a>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
-  </section>
+    </section>
   </div>
 </div>

@@ -29,19 +29,19 @@
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody> 
+          <tbody>
             <tr *ngFor="let utilisateur of utilisateurs">
               <th scope="row ">
                 {{ utilisateurs.indexOf(utilisateur) + 1 }}
               </th>
               <td class="d-flex align-items-center justify-content-center gap-3">
                 <img src="assets/dist/assets/img/avatars/femme.png" class="rounded-circle" alt="Avatar" />
-               
+
                 <div class="fw-semibold" >
                   <td>{{ utilisateur?.nom }} {{ utilisateur?.prenom }}</td>
 
                 </div>
-                
+
               </td>
               <td>{{ utilisateur?.login }}</td>
               <td>{{ utilisateur?.telephoneString }}</td>
@@ -51,7 +51,7 @@
                   <button type="button"
                           class="btn btn-sm"
                           style="background-color: #2D3D5E; color: white;"
-                          
+
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
                           title="Modifier cette zone">
@@ -85,7 +85,7 @@
             ></button>
           </div>
           <div class="modal-footer">
-            <button type="button " class="btn btn-outline-dark " [disabled]="!patientForm.valid ">oui</button>
+            <button type="button " class="btn btn-outline-dark " (click)="confirmDelete(selectedUserArchive); modal.close()">oui</button>
           </div>
         </ng-template>
 
@@ -94,7 +94,7 @@
   </div>
 
    <!--PAGINATION-->
-      
+
    <div class="row mt-4 align-items-center justify-content-between">
     <!-- Pagination boutons -->
     <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center justify-content-md-start">
@@ -113,7 +113,7 @@
         </ul>
       </nav>
     </div>
-  
+
     <!-- Sélecteur nombre d’éléments -->
     <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
       <div class="input-group" style="max-width: 200px;">

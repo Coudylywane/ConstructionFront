@@ -85,8 +85,8 @@ addUtilisateur() {
   this.utilisateurService.addUtilisateur(this.utilisateur).subscribe({
     next: (res : any) => {
       console.log(res);
-      this.toastService.showSuccess("Utilisateur ajouté avec succès !");
-      this.router.navigate(['/gestion-utilisateur/listUtilisateur']);
+     // this.toastService.showSuccess("Utilisateur ajouté avec succès !");
+      this.router.navigate(['/gestion-utilisateur/liste-user']);
     },
     error: (err : any) => {
       console.error(err);

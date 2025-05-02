@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Tache } from 'src/app/shared/models/Tache.model';
 import { ProjectService } from '../../services/project.service';
+import { Tache } from 'src/app/shared/models/Tache.model';
 
 @Component({
   selector: 'app-list-tache',
@@ -11,7 +11,7 @@ export class ListTacheComponent {
   taches: Tache[] = [];
   errorMessage: string = '';
 
-  constructor(private projectService : ProjectService) {}
+  constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
     this.chargerTaches();

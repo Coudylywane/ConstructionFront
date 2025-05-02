@@ -24,6 +24,12 @@ import { GenererPlanningComponent } from './composants/generer-planning/generer-
 import { VisualiserDevisComponent } from './composants/visualiser-devis/visualiser-devis.component';
 import { CfaCurrencyPipe } from './cfa-currency.pipe';
 import { VisualiserPlanningComponent } from './composants/visualiser-planning/visualiser-planning.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { EditTacheComponent } from './composants/edit-tache/edit-tache.component';
+import { StatutPipe } from '../shared/pipes/statut.pipe';
+import { HasAnyAuthorityDirective } from '../shared/directives/has-any-authority.directive';
+import { SharedModule } from '../shared/shared.module';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -38,6 +44,8 @@ import { VisualiserPlanningComponent } from './composants/visualiser-planning/vi
     VisualiserDevisComponent,
     CfaCurrencyPipe,
     VisualiserPlanningComponent,
+    EditTacheComponent,
+    StatutPipe,
   ],
   imports: [
     CommonModule,
@@ -54,6 +62,9 @@ import { VisualiserPlanningComponent } from './composants/visualiser-planning/vi
     ToastModule,
     TabViewModule, // Pour p-tabView et p-tabPanel
     DividerModule, // Pour p-divider
+    DragDropModule,
+    SharedModule,
+    DropdownModule,
   ],
   providers: [
     MessageService,

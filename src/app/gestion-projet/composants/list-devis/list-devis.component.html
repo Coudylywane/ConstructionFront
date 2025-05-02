@@ -1,58 +1,61 @@
 <div class="container-fluid">
   <div class="mt-4">
-    <h4 class="justify-content-left text-left">Liste des devis</h4>
+    <h4 class="section-title">Liste des devis</h4>
   </div>
 
   <div class="container-fluid content-table">
     <h2 *ngIf="devisList.length === 0" class="text-center text-dispo mt-4">
-      Pas de devis Disponible!!!
+      Pas de devis disponible !
     </h2>
 
     <div *ngIf="devisList.length > 0" class="mt-4">
-      <table class="table table-hover">
-        <thead>
-          <tr style="text-align: center" class="style-text-table">
-            <th scope="col">ID</th>
-            <th scope="col">Date de creation</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody style="text-align: center">
-          <tr *ngFor="let devis of devisList">
-            <th scope="row">{{ devis.id }}</th>
-            <td>{{ devis.dateCreation | date : "dd-MM-yyyy" }}</td>
-            <td>{{ devis.statut }}</td>
-            <td>
-              <div class="d-flex justify-content-center">
-                <ng-container *ngIf="devis.statut === 'VALIDER'">
-                  <!-- Show 'Visualiser' button if planning exists -->
-                  <button
-                    *ngIf="devis.planningId"
-                    class="btn btn-primary"
-                    [routerLink]="[
-                      '/gestion-projet/visualiserPlanning',
-                      devis.id
-                    ]"
-                    title="Visualiser Planning"
-                  >
-                    <i class="fas fa-eye"></i> Visualiser
-                  </button>
-                  <!-- Show 'Générer Planning' button if no planning exists -->
-                  <button
-                    *ngIf="!devis.planningId"
-                    class="btn btn-success"
-                    [routerLink]="['/gestion-projet/genererPlanning', devis.id]"
-                    title="Générer Planning"
-                  >
-                    <i class="fas fa-calendar-alt"></i> Générer Planning
-                  </button>
-                </ng-container>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Date de création</th>
+              <th scope="col">Statut</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let devis of devisList">
+              <td>{{ devis.id }}</td>
+              <td>{{ devis.dateCreation | date : 'dd-MM-yyyy' }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="getStatusClass(devis.statut)">
+                  {{ devis.statut | statut }}
+                </span>
+              </td>
+              <td>
+                <div class="actions">
+                  <ng-container *ngIf="devis.statut === 'VALIDER'">
+                    <!-- Bouton Visualiser si planning existe -->
+                    <button
+                      *ngIf="devis.planningId"
+                      class="btn btn-primary btn-sm"
+                      [routerLink]="['/gestion-projet/visualiserPlanning', devis.id]"
+                      title="Visualiser le planning"
+                    >
+                      <i class="pi pi-eye"></i> Visualiser
+                    </button>
+                    <!-- Bouton Générer Planning si aucun planning -->
+                    <button
+                      *ngIf="!devis.planningId"
+                      class="btn btn-success btn-sm"
+                      [routerLink]="['/gestion-projet/genererPlanning', devis.id]"
+                      title="Générer un planning"
+                    >
+                      <i class="pi pi-calendar"></i> Générer Planning
+                    </button>
+                  </ng-container>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

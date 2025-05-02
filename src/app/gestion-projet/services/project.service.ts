@@ -101,12 +101,19 @@ export class ProjectService {
   }
 
   getPlanningByDevisId(devisId: number): Observable<any> {
-    return this.http.get<any>(`${this._api}/planning/devis/${devisId}`).pipe(
-      catchError((error) => {
-        console.error('Error fetching planning:', error);
-        return of(null);
-      })
-    );
+    return this.http
+      .get(`${this._api}/planning/devis/${devisId}`, { responseType: 'text' })
+      .pipe(
+        map((response) => {
+          console.log('Réponse brute:', response);
+          try {
+            return JSON.parse(response); // Tente de parser manuellement
+          } catch (e) {
+            console.error('Erreur de parsing JSON:', e);
+            throw new Error('Réponse JSON invalide');
+          }
+        })
+      );
   }
 
   generatePlanning(devisId: number, taches: any[]): Observable<any> {
@@ -120,7 +127,57 @@ export class ProjectService {
       );
   }
 
+  downloadPlanningPdf(devisId: number): Observable<Blob> {
+    return this.http.get(`${this._api}/planning/devis/${devisId}/pdf`, {
+      responseType: 'blob', // Indique que la réponse est un fichier binaire (PDF)
+    });
+  }
+
+  getTachesByStatus(planningId: number, status: string): Observable<Tache[]> {
+    return this.http.get<Tache[]>(
+      `${this._api}/taches/planning/${planningId}/status/${status}`
+    );
+  }
+
+  getTaches(devisId: number, status: string): Observable<Tache[]> {
+    return this.http.get<Tache[]>(
+      `${this._api}/planning/devis/${devisId}/${status}`
+    );
+  }
+
+  getArticlesByDevisId(devisId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this._api}/devis/${devisId}/articles`);
+  }
+
+  updateTache(id: number, tache: Tache): Observable<Tache> {
+    const tacheDTO = {
+      id: tache.id,
+      nom: tache.nom,
+      description: tache.description,
+      dureeEstimee: tache.dureeEstimee,
+      dateDebut: tache.dateDebut,
+      dateFin: tache.dateFin,
+      status: tache.status,
+      pourcentageExecution: tache.pourcentageExecution,
+      articles: tache.articles,
+    };
+    console.log('Requête PUT envoyée:', tacheDTO);
+    return this.http.put<Tache>(`${this._api}/taches/update/${id}`, tacheDTO);
+  }
+
   // getPlanningByDevisId(devisId: number): Observable<any> {
   //   return this.http.get<any>(`${this._api}/planning/devis/${devisId}`);
   // }
+
+  getClient(): Observable<any> {
+    return this.http.get<any>(`${this._api}/user/role`);
+  }
+
+  // getProjetByClient(): Observable<any> {
+  //   return this.http.get<any>(`${this._api}projets/client/`);
+  // }
+
+  getProjetsByClientId(clientId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this._api}/projets/client/${clientId}`);
+  }
 }
