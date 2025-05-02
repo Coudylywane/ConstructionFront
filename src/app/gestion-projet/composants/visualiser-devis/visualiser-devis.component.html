@@ -1,101 +1,89 @@
 <div class="container-fluid mt-4">
-  <h2>Détails du Devis</h2>
+  <h2 class="section-title">Détails du Devis</h2>
 
   <!-- Devis Details -->
-  <div *ngIf="devis" class="card">
+  <div *ngIf="devis" class="styled-card">
     <div class="card-body">
       <h4 class="card-title">
         Devis {{ devis.id }} pour le projet {{ devis.projet?.name }}
       </h4>
-      <p><strong>Statut:</strong> {{ devis.statut }}</p>
-      <p><strong>Date de création:</strong> {{ devis.dateCreation }}</p>
+      <p>
+        <strong>Statut :</strong>
+        <span class="status-badge" [ngClass]="getStatusClass(devis.statut)">
+          {{ devis.statut | statut }}
+        </span>
+      </p>
+      <p><strong>Date de création :</strong> {{ devis.dateCreation }}</p>
 
       <!-- Articles Table -->
-      <table class="table table-bordered mt-3">
-        <thead>
-          <tr>
-            <th>Article</th>
-            <th>Description</th>
-            <th>Quantité</th>
-            <th>Prix Unitaire</th>
-            <th>Montant Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let ligne of devis.lignesDevis">
-            <td>{{ ligne.article.designation }}</td>
-            <td>{{ ligne.article.description || "N/A" }}</td>
-            <td>{{ ligne.quantite }}</td>
-            <td>{{ ligne.article.prixAchatUnitaire | cfaCurrency }}</td>
-            <td>
-              {{
-                ligne.quantite * ligne.article.prixAchatUnitaire
-                  | currency : "XOF" : "symbol" : "1.0-0"
-              }}
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="4" class="text-right"><strong>Total:</strong></td>
-            <td>
-              {{ calculateTotal() | currency : "XOF" : "symbol" : "1.0-0" }}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+      <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Article</th>
+              <th>Description</th>
+              <th>Quantité</th>
+              <th>Prix Unitaire</th>
+              <th>Montant Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ligne of devis.lignesDevis">
+              <td>{{ ligne.article.designation }}</td>
+              <td>{{ ligne.article.description || "N/A" }}</td>
+              <td>{{ ligne.quantite }}</td>
+              <td>{{ ligne.article.prixAchatUnitaire | cfaCurrency }}</td>
+              <td>
+                {{
+                  ligne.quantite * ligne.article.prixAchatUnitaire
+                    | currency : "XOF" : "symbol" : "1.0-0"
+                }}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="text-right"><strong>Total :</strong></td>
+              <td>
+                {{ calculateTotal() | currency : "XOF" : "symbol" : "1.0-0" }}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
 
-      <!-- Action Buttons 
-      <div class="d-flex justify-content-end mt-4">
+      <!-- Actions -->
+      <div *ngIf="devis.statut == 'EN_ATTENTE'" class="actions mt-4">
         <button
-          class="btn btn-success mr-2"
-          (click)="validerDevis()"
-          [disabled]="devis.statut === 'VALIDER'"
-        >
-          Valider
-        </button>
-        <button
-          class="btn btn-danger mr-2"
-          (click)="annulerDevis()"
-          [disabled]="devis.statut === 'REFUSER'"
-        >
-          Annuler
-        </button>
-      </div> -->
-      <div *ngIf="devis.statut == 'EN_ATTENTE'" class="d-flex justify-content-end mt-4 actions ">
-     <!--    <button
-          pButton
-          pRipple
-          icon="pi pi-eye"
-          class="btn btn-info mr-2"
-          label="Visualiser le devis"
-          (click)="visualiserDevis()"
-        ></button> -->
-        <button
+          *appHasAnyAuthority="['CLIENT']"
           pButton
           pRipple
           icon="pi pi-check"
           class="btn btn-success mr-2"
           label="Valider le devis"
+          title="Valider le devis"
           (click)="validerDevis(devis.id)"
         ></button>
         <button
+          *appHasAnyAuthority="['CLIENT']"
           pButton
           pRipple
           icon="pi pi-times"
-          class="btn btn-danger"
+          class="btn btn-danger mr-2"
           label="Annuler le devis"
+          title="Annuler le devis"
           (click)="annulerDevis(devis.id)"
         ></button>
-        <button
-          pButton
-          pRipple
-          icon="pi pi-eye"
-          class="btn btn-info mr-2"
-          label="Telecharger le devis"
-          (click)="telechargerDevis()"
-        ></button>
       </div>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-eye"
+        class="btn btn-primary"
+        label="Télécharger le devis"
+        title="Télécharger le devis"
+        (click)="telechargerDevis()"
+      ></button>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="mt-4">
-    <h4 class="justify-content-left text-left">Planning - Tableau Kanban</h4>
+    <h4 class="section-title">Planning - Tableau Kanban</h4>
   </div>
 
   <div class="container-fluid content-table">
@@ -23,104 +23,128 @@
         inProgress.length > 0 ||
         done.length > 0
       "
-      class="mt-4 kanban-board d-flex justify-content-between"
+      class="mt-4 kanban-board"
     >
       <!-- Colonne Backlog -->
-      <div class="kanban-column">
-        <h5 class="text-center">Backlog</h5>
+      <div class="styled-kanban-column">
+        <h5 class="kanban-column-title">Backlog</h5>
         <div
           cdkDropList
           id="backlogList"
           [cdkDropListData]="backlog"
-          [cdkDropListConnectedTo]="['todoList', 'inProgressList', 'doneList']"
+          [cdkDropListConnectedTo]="isClient ? [] : ['todoList', 'inProgressList', 'doneList']"
+          [cdkDropListDisabled]="isClient"
           (cdkDropListDropped)="drop($event)"
           class="kanban-list"
         >
           <div
-            class="kanban-card"
+            class="styled-kanban-card"
             *ngFor="let tache of backlog"
             cdkDrag
+            [cdkDragDisabled]="isClient || tache.pourcentageExecution === 100"
             (click)="openEditModal(tache)"
+            [title]="tache.pourcentageExecution === 100 ? 'Tâche terminée' : isClient ? 'Visualiser la tâche' : 'Modifier la tâche'"
           >
             <strong>{{ tache.nom }}</strong><br />
-            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
-            Exécution: {{ tache.pourcentageExecution }}%
+            Statut : <span class="badge badge-info">{{ tache.status }}</span><br />
+            Début : {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin : {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
+            Exécution : <span class="execution-badge" [ngClass]="getExecutionClass(tache.pourcentageExecution)">
+              {{ tache.pourcentageExecution }}%
+            </span>
           </div>
         </div>
       </div>
 
       <!-- Colonne À faire -->
-      <div class="kanban-column">
-        <h5 class="text-center">À faire</h5>
+      <div class="styled-kanban-column">
+        <h5 class="kanban-column-title">À faire</h5>
         <div
           cdkDropList
           id="todoList"
           [cdkDropListData]="todo"
-          [cdkDropListConnectedTo]="['backlogList', 'inProgressList', 'doneList']"
+          [cdkDropListConnectedTo]="isClient ? [] : ['backlogList', 'inProgressList', 'doneList']"
+          [cdkDropListDisabled]="isClient"
           (cdkDropListDropped)="drop($event)"
           class="kanban-list"
         >
           <div
-            class="kanban-card"
+            class="styled-kanban-card"
             *ngFor="let tache of todo"
             cdkDrag
+            [cdkDragDisabled]="isClient || tache.pourcentageExecution === 100"
             (click)="openEditModal(tache)"
+            [title]="tache.pourcentageExecution === 100 ? 'Tâche terminée' : isClient ? 'Visualiser la tâche' : 'Modifier la tâche'"
           >
             <strong>{{ tache.nom }}</strong><br />
-            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
-            Exécution: {{ tache.pourcentageExecution }}%
+            Statut : <span class="badge badge-warning">{{ tache.status }}</span><br />
+            Début : {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin : {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
+            Exécution : <span class="execution-badge" [ngClass]="getExecutionClass(tache.pourcentageExecution)">
+              {{ tache.pourcentageExecution }}%
+            </span>
           </div>
         </div>
       </div>
 
       <!-- Colonne En cours -->
-      <div class="kanban-column">
-        <h5 class="text-center">En cours</h5>
+      <div class="styled-kanban-column">
+        <h5 class="kanban-column-title">En cours</h5>
         <div
           cdkDropList
           id="inProgressList"
           [cdkDropListData]="inProgress"
-          [cdkDropListConnectedTo]="['backlogList', 'todoList', 'doneList']"
+          [cdkDropListConnectedTo]="isClient ? [] : ['backlogList', 'todoList', 'doneList']"
+          [cdkDropListDisabled]="isClient"
           (cdkDropListDropped)="drop($event)"
           class="kanban-list"
         >
           <div
-            class="kanban-card"
+            class="styled-kanban-card"
             *ngFor="let tache of inProgress"
             cdkDrag
+            [cdkDragDisabled]="isClient || tache.pourcentageExecution === 100"
             (click)="openEditModal(tache)"
+            [title]="tache.pourcentageExecution === 100 ? 'Tâche terminée' : isClient ? 'Visualiser la tâche' : 'Modifier la tâche'"
           >
             <strong>{{ tache.nom }}</strong><br />
-            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
-            Exécution: {{ tache.pourcentageExecution }}%
+            Statut : <span class="badge badge-warning">{{ tache.status }}</span><br />
+            Début : {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin : {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
+            Exécution : <span class="execution-badge" [ngClass]="getExecutionClass(tache.pourcentageExecution)">
+              {{ tache.pourcentageExecution }}%
+            </span>
           </div>
         </div>
       </div>
 
       <!-- Colonne Terminé -->
-      <div class="kanban-column">
-        <h5 class="text-center">Terminé</h5>
+      <div class="styled-kanban-column">
+        <h5 class="kanban-column-title">Terminé</h5>
         <div
           cdkDropList
           id="doneList"
           [cdkDropListData]="done"
-          [cdkDropListConnectedTo]="['backlogList', 'todoList', 'inProgressList']"
+          [cdkDropListConnectedTo]="isClient ? [] : ['backlogList', 'todoList', 'inProgressList']"
+          [cdkDropListDisabled]="isClient"
           (cdkDropListDropped)="drop($event)"
           class="kanban-list"
         >
           <div
-            class="kanban-card"
+            class="styled-kanban-card"
             *ngFor="let tache of done"
             cdkDrag
+            [cdkDragDisabled]="isClient || tache.pourcentageExecution === 100"
             (click)="openEditModal(tache)"
+            [title]="tache.pourcentageExecution === 100 ? 'Tâche terminée' : isClient ? 'Visualiser la tâche' : 'Modifier la tâche'"
           >
             <strong>{{ tache.nom }}</strong><br />
-            Début: {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
-            Fin: {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
-            Exécution: {{ tache.pourcentageExecution }}%
+            Statut : <span class="badge badge-success">{{ tache.status }}</span><br />
+            Début : {{ tache.dateDebut | date: 'dd-MM-yyyy' }}<br />
+            Fin : {{ tache.dateFin | date: 'dd-MM-yyyy' }}<br />
+            Exécution : <span class="execution-badge" [ngClass]="getExecutionClass(tache.pourcentageExecution)">
+              {{ tache.pourcentageExecution }}%
+            </span>
           </div>
         </div>
       </div>
@@ -136,29 +160,30 @@
       "
       class="mt-4 text-center"
     >
-      <button (click)="downloadPdf()" class="btn btn-primary">
-        Télécharger le planning
+      <button pButton pRipple class="btn btn-primary" (click)="downloadPdf()" title="Télécharger le planning">
+        <i class="pi pi-download"></i> Télécharger le planning
       </button>
     </div>
   </div>
 
   <!-- Modal personnalisé pour modifier la tâche -->
-  <div *ngIf="showModal" class="custom-modal">
-    <div class="custom-modal-dialog">
-      <div class="custom-modal-content">
-        <div class="custom-modal-header">
-          <h5 class="custom-modal-title">
-            Modifier la tâche: {{ selectedTache?.nom }}
+  <div *ngIf="showModal" class="styled-modal">
+    <div class="styled-modal-dialog">
+      <div class="styled-modal-content">
+        <div class="styled-modal-header">
+          <h5 class="styled-modal-title">
+            {{ isClient ? 'Visualiser la tâche' : 'Modifier la tâche' }} : {{ selectedTache?.nom }}
           </h5>
           <button
             type="button"
-            class="custom-modal-close"
+            class="styled-modal-close"
             (click)="closeModal()"
+            title="Fermer"
           >
             ×
           </button>
         </div>
-        <div class="custom-modal-body">
+        <div class="styled-modal-body">
           <div class="form-group">
             <label>Pourcentage d'exécution (%)</label>
             <input
@@ -167,28 +192,45 @@
               [(ngModel)]="pourcentageExecution"
               min="0"
               max="100"
+              (input)="restrictPercentage($event)"
+              [disabled]="isClient"
             />
           </div>
           <div class="form-group">
             <label>Articles utilisés</label>
-            <div *ngFor="let article of articles" class="input-group">
+            <div *ngIf="articles.length === 0" class="text-danger">
+              Aucun article disponible.
+            </div>
+            <div *ngFor="let article of articles" class="article-selection">
+              <label>
+                <input
+                  type="checkbox"
+                  [checked]="isArticleSelected(article.id)"
+                  (change)="toggleArticleSelection(article.id)"
+                  [disabled]="isClient"
+                />
+                {{ article.designation }} (Disponible : {{ article.quantity }})
+              </label>
               <input
+                *ngIf="isArticleSelected(article.id)"
                 type="number"
-                class="form-control"
+                class="form-control quantity-input"
                 [value]="getArticleQuantity(article.id)"
                 (input)="updateArticleQuantity(article.id, $event)"
                 min="0"
-                placeholder="Quantité"
+                [max]="article.quantity"
+                placeholder="Quantité utilisée"
+                [disabled]="isClient"
               />
-              <span class="input-group-text">{{ article.nom }}</span>
             </div>
           </div>
         </div>
-        <div class="custom-modal-footer">
+        <div class="styled-modal-footer" *ngIf="!isClient">
           <button
             type="button"
             class="btn btn-secondary"
             (click)="closeModal()"
+            title="Annuler"
           >
             Annuler
           </button>
@@ -196,11 +238,23 @@
             type="button"
             class="btn btn-primary"
             (click)="saveTache()"
+            title="Enregistrer"
           >
             Enregistrer
+          </button>
+        </div>
+        <div class="styled-modal-footer" *ngIf="isClient">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeModal()"
+            title="Fermer"
+          >
+            Fermer
           </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+

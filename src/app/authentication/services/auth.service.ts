@@ -3,88 +3,50 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoleModel } from 'src/app/shared/models/role.model';
 import { UtilisateurModel } from 'src/app/shared/models/utilisateur.model';
-//import * as moment from 'moment';
-//import { SocketService } from 'src/app/shared/services/socket-service';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  SECRET = 'smartmaskosc2020';
+  private SECRET = 'smartmaskosc2020';
   errCon = false;
-  utilisateur?: UtilisateurModel
+  utilisateur?: UtilisateurModel;
 
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-    //private socketService: SocketService
-   // private storage: LocalStorageService
-  ) { }
+  constructor(private router: Router, private http: HttpClient) {}
 
   async authenticationProcess(url: string, body: any) {
-    console.log(body,url);
-
-    await this.http.post<any>(url, body).toPromise()
-      .then((data) => {
-        console.log('Login réussi:', data);
-        this.setSession(data).then(x => {
-          this.identity().subscribe((user: any) => {
-            console.log('Utilisateur récupéré après login:', user);
-            //if (this.hasAuthority(['SUPER_ADMIN','ADMIN'], user)) {
-           //if (user.passwordChanged) {
-            if (this.hasAuthority(['SUPER_ADMIN'], user)) {
-              this.storeUser(user)
-                .then(() => {
-                  this.router.navigate(['/gestion-article/Dashboard']);
-                });
-            }else if (this.hasAuthority(['ADMIN'], user)) {
-              this.storeUser(user)
-                .then(() => {
-                  this.router.navigate(['/gestion-article/Dashboard']);
-                });
-            } else if (this.hasAuthority(['S'], user)) {
-              this.storeUser(user)
-                .then(() => {
-                  this.router.navigate(['/gestion-article/Dashboard']);
-                });
-            } else if (this.hasAuthority(['GS'], user)) {
-              this.storeUser(user)
-                .then(() => {
-                  this.router.navigate(['/gestion-article/Dashboard']);
-                });
-            }
-           //}
-            //}
-            //if (user.passwordChanged) {
-              /* if (this.hasAuthority(['SUPER_ADMIN','ADMIN'], user)) {
-                this.storeUser(user)
-                  .then(() => {
-                    this.router.navigate(['/gestion-etudiant/liste-etudiant']);
-                  });
-              }else if (this.hasAuthority(['JUGE','OFFICIER_ETAT_CIVIL'],user)) {
-                console.log('dfdff');
-               // this.socketService?._connect();
-                this.storeUser(user)
-                  .then(() => {
-                    this.router.navigate(['/gestion-etudiant/liste-etudiant']);
-                  });
-              } else {
-                this.storeUser(user)
-                  .then(() => {
-                    this.router.navigate(['/gestion-etudiant/liste-etudiant']);
-                  });
-              } */
-            //} else {
-             // this.router.navigate(['/login/reset-password']);
-            //}
-          }, (error: any) => console.error('[AuthService] Erreur dans identity() :', error));
-        });
-      }).catch((error1) => this.errCon = true);
+    console.log(body, url);
+    try {
+      const data = await this.http.post<any>(url, body).toPromise();
+      console.log('Login réussi:', data);
+      await this.setSession(data);
+      const user = await this.identity().toPromise();
+      console.log('Utilisateur récupéré après login:', user);
+      if (
+        this.hasAuthority(
+          ['SUPER_ADMIN', 'ADMIN', 'S', 'GS', 'CP', 'CLIENT'],
+          user
+        )
+      ) {
+        await this.storeUser(user);
+        this.router.navigate(['/gestion-article/Dashboard']);
+      } else {
+        console.error('Rôle non autorisé:', user?.role?.libelle);
+        this.errCon = true;
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'authentification:", error);
+      this.errCon = true;
+    }
     return this.errCon;
   }
 
   async login(credentials: any) {
-    return this.authenticationProcess('/api/login', {login: credentials.login, password: credentials.password});
+    return this.authenticationProcess('/api/login', {
+      login: credentials.login,
+      password: credentials.password,
+    });
   }
 
   async setSession(authResult: any) {
@@ -94,56 +56,45 @@ export class AuthService {
 
   async storeUser(user: any) {
     localStorage.removeItem('mdd_user');
-    localStorage.setItem('mdd_user',JSON.stringify(user));
-    // this.storage.store('mdd_user', this.convertText('encrypt', user));
+    localStorage.setItem('mdd_user', JSON.stringify(user));
   }
 
   token() {
     return localStorage.getItem('id_token')?.toString();
   }
+
   getCurrentUserRoles(): RoleModel[] {
-    const user = JSON.parse(localStorage.getItem('mdd_user')!);
-    return user?.roles || [];
+    const user = JSON.parse(localStorage.getItem('mdd_user') || '{}');
+    return user?.role ? [user.role] : [];
   }
 
-  /*public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
-  }*/
+  isClient(): boolean {
+    const roles = this.getCurrentUserRoles();
+    return roles.some((role) => role.libelle === 'CLIENT');
+  }
+
+  getUserId(): number | null {
+    const user = JSON.parse(localStorage.getItem('mdd_user') || '{}');
+    return user.id || null;
+  }
 
   logout() {
     localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
     localStorage.removeItem('mdd_user');
     this.router.navigate(['/login']);
   }
 
-  public identity() {
+  identity() {
     console.log('[AuthService] Appel de identity()');
     return this.http.get<any>('/api/connected-user');
   }
 
-  // public isLoggedIn() {
-  //   return moment().isBefore(this.getExpiration());
-  // }
-  // getExpiration() {
-  //   const expiration = this.storage.retrieve('expires_at');
-  //   const expiresAt = JSON.parse(expiration);
-  //   return moment(expiresAt);
-  // }
-  // convertText(conversion: string, user: any) {
-  //   if (conversion === 'encrypt') {
-  //     return CryptoJS.AES.encrypt(JSON.stringify(user).trim(), this.SECRET.trim()).toString();
-  //   } else {
-  //     const bytes = CryptoJS.AES.decrypt(user, this.SECRET.trim());
-  //     if (bytes.toString()) {
-  //       return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  //     }
-  //   }
-  // }
-  
   convertText(conversion: string, user: any) {
     if (conversion === 'encrypt') {
-      return CryptoJS.AES.encrypt(JSON.stringify(user).trim(), this.SECRET.trim()).toString();
+      return CryptoJS.AES.encrypt(
+        JSON.stringify(user).trim(),
+        this.SECRET.trim()
+      ).toString();
     } else {
       const bytes = CryptoJS.AES.decrypt(user, this.SECRET.trim());
       if (bytes.toString()) {
@@ -153,12 +104,8 @@ export class AuthService {
   }
 
   hasAuthority(authorities: string[], user: UtilisateurModel): boolean {
-    for (const authority of authorities) {
-      if (user?.role?.libelle === authority) {
-        return true;
-      }
-    }
-    return false;
+    return user.role?.libelle
+      ? authorities.includes(user?.role?.libelle)
+      : false;
   }
-
 }

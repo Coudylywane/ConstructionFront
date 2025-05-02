@@ -1,19 +1,15 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/authentication/services/auth.service';
-import { Projet } from 'src/app/shared/models/projet';
-import { MyEncryptionService } from 'src/app/shared/services/my-encryption.service';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
+import { AuthService } from 'src/app/authentication/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-list-projet',
   templateUrl: './list-projet.component.html',
   styleUrls: ['./list-projet.component.scss'],
+  providers: [MessageService],
 })
-export class ListProjetComponent {
+export class ListProjetComponent implements OnInit {
   projets: any[] = [];
   totalElements: number = 0;
   page: number = 1;
@@ -21,77 +17,110 @@ export class ListProjetComponent {
   disablePrevious: boolean = true;
   disableNext: boolean = false;
   totalPage: number = 1;
-  orderBy: string = 'name'; // Default field to order by
-  direction: string = 'ASC'; // Default sorting direction
-  args: any;
+  orderBy: string = 'name';
+  direction: string = 'ASC';
   devisExistant: { [key: number]: number | null } = {};
+  isClient: boolean = false;
+  userId: number | null = null;
 
-  constructor(private projetService: ProjectService) {}
+  constructor(
+    private projetService: ProjectService,
+    private authService: AuthService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
-    this.getProjects(this.args);
+    this.isClient = this.authService.isClient();
+    this.userId = this.authService.getUserId();
+    this.getProjects();
   }
 
-  getProjects(args: any): void {
-    this.projetService
-      .getAllProjets((this.page = 0), (this.perPage = 50))
-      .subscribe({
+  getProjects(): void {
+    if (this.isClient && this.userId) {
+      // Charger les projets du client
+      this.projetService
+        .getProjetsByClientId(this.userId)
+        .subscribe({
+          next: (page) => {
+            this.projets = page;
+            // this.totalElements = page.totalElements;
+            // this.totalPage = Math.ceil(this.totalElements / this.perPage);
+            this.updatePaginationState();
+            this.verifierDevisExistant();
+           // console.log('Projets du client chargés:', page.content);
+          },
+          error: (error) => {
+            console.error('Erreur lors de la récupération des projets:', error);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erreur',
+              detail: 'Erreur lors du chargement des projets',
+            });
+          },
+        });
+    } else {
+      // Charger tous les projets
+      this.projetService.getAllProjets(this.page - 1, this.perPage).subscribe({
         next: (page) => {
           this.projets = page.content;
           this.totalElements = page.totalElements;
           this.totalPage = Math.ceil(this.totalElements / this.perPage);
           this.updatePaginationState();
-
-          // Vérification des devis existants après le chargement des projets
           this.verifierDevisExistant();
+          console.log('Tous les projets chargés:', page.content);
         },
         error: (error) => {
           console.error('Erreur lors de la récupération des projets:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erreur',
+            detail: 'Erreur lors du chargement des projets',
+          });
         },
       });
+    }
   }
 
   editProjet(id: number): void {
-    // Navigate to the edit page or open a modal
+    // À implémenter : naviguer vers la page d'édition
     console.log('Edit project with ID:', id);
   }
 
   deleteProjet(id: number): void {
-    // Call the API to delete the project
+    // À implémenter : supprimer le projet via API
     console.log('Delete project with ID:', id);
   }
 
   precedent(): void {
     if (this.page > 1) {
       this.page--;
-      this.getProjects(this.args);
+      this.getProjects();
     }
   }
 
   suivant(): void {
     if (this.page < this.totalPage) {
       this.page++;
-      this.getProjects(this.args);
+      this.getProjects();
     }
   }
 
   onSelectedPageSize(event: any): void {
     this.perPage = +event.target.value;
-    this.getProjects(this.args);
+    this.page = 1; // Réinitialiser à la première page
+    this.getProjects();
   }
 
   updatePaginationState(): void {
     this.disablePrevious = this.page === 1;
     this.disableNext = this.page === this.totalPage;
   }
-  verifierDevisExistant() {
+
+  verifierDevisExistant(): void {
     this.projets.forEach((projet) => {
       this.projetService.verifierDevisExistant(projet.id).subscribe({
         next: (devis) => {
-          console.log(devis);
-          // Stocker l'ID du devis si disponible
-          this.devisExistant[projet.id] = devis[0].id || null;
-          console.log('jjj', this.devisExistant[projet.id]);
+          this.devisExistant[projet.id] = devis[0]?.id || null;
         },
         error: (err) => {
           console.error(
@@ -104,26 +133,55 @@ export class ListProjetComponent {
     });
   }
 
-  telechargerDevis(projetId: number) {
-    this.projetService.downloadDevisPdf(projetId).subscribe((blob) => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `devis_${projetId}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    });
+  telechargerDevis(devisId: number): void {
+    if (devisId) {
+      this.projetService.downloadDevisPdf(devisId).subscribe({
+        next: (blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `devis_${devisId}.pdf`;
+          a.click();
+          window.URL.revokeObjectURL(url);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Devis téléchargé avec succès',
+          });
+        },
+        error: (error) => {
+          console.error('Erreur lors du téléchargement du devis:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erreur',
+            detail: 'Erreur lors du téléchargement du devis',
+          });
+        },
+      });
+    }
   }
 
-  visualiserDevis(projetId: number) {
-    this.projetService.downloadDevisPdf(projetId).subscribe(
-      (pdfBlob: Blob) => {
-        const fileURL = URL.createObjectURL(pdfBlob);
-        window.open(fileURL, '_blank'); // Ouvre le PDF dans un nouvel onglet
-      },
-      (error) => {
-        console.error('Erreur lors de la génération du devis : ', error);
-      }
-    );
+  visualiserDevis(devisId: number): void {
+    if (devisId) {
+      this.projetService.downloadDevisPdf(devisId).subscribe({
+        next: (pdfBlob: Blob) => {
+          const fileURL = URL.createObjectURL(pdfBlob);
+          window.open(fileURL, '_blank');
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Devis visualisé avec succès',
+          });
+        },
+        error: (error) => {
+          console.error('Erreur lors de la visualisation du devis:', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erreur',
+            detail: 'Erreur lors de la visualisation du devis',
+          });
+        },
+      });
+    }
   }
 }

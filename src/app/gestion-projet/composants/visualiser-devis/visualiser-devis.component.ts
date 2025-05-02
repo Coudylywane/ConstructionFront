@@ -9,104 +9,78 @@ import { ProjectService } from '../../services/project.service';
 })
 export class VisualiserDevisComponent implements OnInit {
   projetId!: number;
-  devis: any; // Replace with your Devis model/interface
+  devis: any | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private projetService: ProjectService // Inject your service to fetch devis data
+    private projetService: ProjectService
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.projetId = +id;
+      this.loadDevis();
     } else {
       console.error("ID du projet non trouvé dans l'URL");
-      // Rediriger l'utilisateur ou gérer l'erreur
     }
-    this.loadDevis();
   }
 
   loadDevis(): void {
-    this.projetService.getDevisByProjetId(this.projetId).subscribe(
-      (data) => {
-        console.log(data);
+    this.projetService.getDevisByProjetId(this.projetId).subscribe({
+      next: (data) => {
+        console.log('Données reçues:', data);
         this.devis = data && data.length > 0 ? data[0] : null;
-        console.log('Devis assigned:', this.devis);
+        console.log('Devis assigné:', this.devis);
         console.log('Statut:', this.devis?.statut);
       },
-      (error) => {
-        console.error('Error loading devis:', error);
-      }
-    );
-  }
-
-  // validerDevis(): void {
-  //   this.projetService.validerDevis(this.projetId).subscribe(
-  //     () => {
-  //       alert('Devis validé avec succès');
-  //       // Optionally redirect or update UI
-  //     },
-  //     (error) => {
-  //       console.error('Error validating devis:', error);
-  //     }
-  //   );
-  // }
-
-  // annulerDevis(): void {
-  //   this.projetService.annulerDevis(this.projetId).subscribe(
-  //     () => {
-  //       alert('Devis annulé avec succès');
-  //       // Optionally redirect or update UI
-  //     },
-  //     (error) => {
-  //       console.error('Error canceling devis:', error);
-  //     }
-  //   );
-  // }
-
-  visualiserDevis() {
-    this.projetService.downloadDevisPdf(this.projetId).subscribe(
-      (pdfBlob: Blob) => {
-        const fileURL = URL.createObjectURL(pdfBlob);
-        window.open(fileURL, '_blank'); // Ouvre le PDF dans un nouvel onglet
+      error: (error) => {
+        console.error('Erreur lors du chargement du devis:', error);
       },
-      (error) => {
-        console.error('Erreur lors de la génération du devis : ', error);
-      }
-    );
+    });
   }
 
-  validerDevis(id: number) {
+  validerDevis(id: number): void {
     this.projetService.validerDevis(id).subscribe({
       next: (response) => {
-        console.log('Devis validé avec succès :', response);
+        console.log('Devis validé avec succès:', response);
+        if (this.devis) {
+          this.devis.statut = 'VALIDE';
+        }
       },
       error: (error) => {
-        console.error('Erreur lors de la validation du devis :', error);
+        console.error('Erreur lors de la validation du devis:', error);
       },
     });
   }
 
-  annulerDevis(id: number) {
+  annulerDevis(id: number): void {
     this.projetService.annulerDevis(id).subscribe({
       next: (response) => {
-        console.log('Devis validé avec succès :', response);
+        console.log('Devis annulé avec succès:', response);
+        if (this.devis) {
+          this.devis.statut = 'ANNULE';
+        }
       },
       error: (error) => {
-        console.error('Erreur lors de la validation du devis :', error);
+        console.error("Erreur lors de l'annulation du devis:", error);
       },
     });
   }
 
-  telechargerDevis() {
-    this.projetService.downloadDevisPdf(this.projetId).subscribe((blob) => {
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `devis_${this.projetId}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(url);
+  telechargerDevis(): void {
+    this.projetService.downloadDevisPdf(this.projetId).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `devis_${this.projetId}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error) => {
+        console.error('Erreur lors du téléchargement du devis:', error);
+      },
     });
   }
 
@@ -117,5 +91,18 @@ export class VisualiserDevisComponent implements OnInit {
         sum + ligne.quantite * ligne.article.prixAchatUnitaire,
       0
     );
+  }
+
+  getStatusClass(statut: string): string {
+    switch (statut) {
+      case 'EN_ATTENTE':
+        return 'status-en-attente';
+      case 'VALIDE':
+        return 'status-valide';
+      case 'ANNULE':
+        return 'status-annule';
+      default:
+        return '';
+    }
   }
 }

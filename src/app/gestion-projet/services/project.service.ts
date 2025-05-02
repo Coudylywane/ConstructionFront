@@ -139,13 +139,45 @@ export class ProjectService {
     );
   }
 
-  updateTache(id: number, tache: Tache): Observable<Tache> {
-    return this.http.put<any>(`${this._api}/taches/${id}`, tache);
+  getTaches(devisId: number, status: string): Observable<Tache[]> {
+    return this.http.get<Tache[]>(
+      `${this._api}/planning/devis/${devisId}/${status}`
+    );
   }
 
+  getArticlesByDevisId(devisId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this._api}/devis/${devisId}/articles`);
+  }
 
+  updateTache(id: number, tache: Tache): Observable<Tache> {
+    const tacheDTO = {
+      id: tache.id,
+      nom: tache.nom,
+      description: tache.description,
+      dureeEstimee: tache.dureeEstimee,
+      dateDebut: tache.dateDebut,
+      dateFin: tache.dateFin,
+      status: tache.status,
+      pourcentageExecution: tache.pourcentageExecution,
+      articles: tache.articles,
+    };
+    console.log('Requête PUT envoyée:', tacheDTO);
+    return this.http.put<Tache>(`${this._api}/taches/update/${id}`, tacheDTO);
+  }
 
   // getPlanningByDevisId(devisId: number): Observable<any> {
   //   return this.http.get<any>(`${this._api}/planning/devis/${devisId}`);
   // }
+
+  getClient(): Observable<any> {
+    return this.http.get<any>(`${this._api}/user/role`);
+  }
+
+  // getProjetByClient(): Observable<any> {
+  //   return this.http.get<any>(`${this._api}projets/client/`);
+  // }
+
+  getProjetsByClientId(clientId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this._api}/projets/client/${clientId}`);
+  }
 }

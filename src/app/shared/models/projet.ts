@@ -6,6 +6,7 @@ export interface Projet {
   endDateProvisioning?: Date;
   endDate?: Date;
   status?: string;
+  clientId?: number;
 
   //   validationStatuses: string[];
 }

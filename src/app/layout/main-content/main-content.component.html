@@ -27,8 +27,8 @@
   <ul class="sidebar-nav sidebar-navs" data-coreui="navigation" id="" data-simplebar="">
 
         <!--GESTION DE PROJETS-->
-    <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN']">Gestion Projets</li>
-    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP']">
+    <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN','CLIENT']">Gestion Projets</li>
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','CLIENT']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listProjet'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           {{ "assignment_turned_in" }}
@@ -42,7 +42,7 @@
           fill="#2D3D5E" />
       </svg>
     </li>
-    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN']">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN','CLIENT']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listDevis'" href="javascript:void(0);">
         <span class="material-icons style-icon">
           description

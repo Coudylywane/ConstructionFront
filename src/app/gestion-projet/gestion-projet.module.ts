@@ -25,6 +25,11 @@ import { VisualiserDevisComponent } from './composants/visualiser-devis/visualis
 import { CfaCurrencyPipe } from './cfa-currency.pipe';
 import { VisualiserPlanningComponent } from './composants/visualiser-planning/visualiser-planning.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { EditTacheComponent } from './composants/edit-tache/edit-tache.component';
+import { StatutPipe } from '../shared/pipes/statut.pipe';
+import { HasAnyAuthorityDirective } from '../shared/directives/has-any-authority.directive';
+import { SharedModule } from '../shared/shared.module';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -39,6 +44,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     VisualiserDevisComponent,
     CfaCurrencyPipe,
     VisualiserPlanningComponent,
+    EditTacheComponent,
+    StatutPipe,
   ],
   imports: [
     CommonModule,
@@ -56,6 +63,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TabViewModule, // Pour p-tabView et p-tabPanel
     DividerModule, // Pour p-divider
     DragDropModule,
+    SharedModule,
+    DropdownModule,
   ],
   providers: [
     MessageService,

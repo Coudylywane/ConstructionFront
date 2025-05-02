@@ -26,12 +26,10 @@ registerLocaleData(localeFr, 'fr-FR');
     BlockUIModule.forRoot(),
     InputTextModule,
     InputTextModule,
-    GestionProjetModule,
     BrowserAnimationsModule, // 👈 obligatoire
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       timeOut: 3000,
-      
     }),
   ],
   providers: [

@@ -8,7 +8,6 @@ import { ProjectService } from '../../services/project.service';
 })
 export class ListDevisComponent {
   devisList: any;
-  
 
   constructor(private projetService: ProjectService) {}
 
@@ -23,4 +22,18 @@ export class ListDevisComponent {
         console.error('Erreur lors de la récupération des devis', err),
     });
   }
+  getStatusClass(statut: string): string {
+    switch (statut) {
+      case 'EN_ATTENTE':
+        return 'status-en-attente';
+      case 'VALIDE':
+      case 'VALIDER':
+        return 'status-valide';
+      case 'ANNULE':
+        return 'status-annule';
+      default:
+        return '';
+    }
+  }
 }
+
