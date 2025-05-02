@@ -1,14 +1,15 @@
 <div class="container-fluid mt-4">
-  <h2 class="section-title">Détails du Devis</h2>
+
+  <h2 class="section-title mt-4">Détails du Devis</h2>
 
   <!-- Devis Details -->
   <div *ngIf="devis" class="styled-card">
     <div class="card-body">
-      <h4 class="card-title">
-        Devis {{ devis.id }} pour le projet {{ devis.projet?.name }}
+      <h4 class="card-title text-center">
+       # Devis {{ devis.id }} pour le projet {{ devis.projet?.name }} 
       </h4>
       <p>
-        <strong>Statut :</strong>
+        <strong>Statut : </strong>
         <span class="status-badge" [ngClass]="getStatusClass(devis.statut)">
           {{ devis.statut | statut }}
         </span>

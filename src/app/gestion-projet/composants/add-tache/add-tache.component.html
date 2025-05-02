@@ -7,26 +7,27 @@
   data-sidebar-position="fixed"
   data-header-position="fixed"
 >
-  <!-- Sidebar Start -->
-  <aside class="left-sidebar">
-    <!-- Sidebar scroll-->
-    <div class="brand-logo d-flex align-items-center justify-content-between">
-      <a href="./index.html" class="text-nowrap logo-img">
-        <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
-      </a>
-    </div>
-  </aside>
+
+
   <div class="body-wrapper">
     <header class="app-header"></header>
-    <div class="container-fluid">
-      <div class="container-fluid">
-        <a class="return d-flex" [routerLink]="'/gestion-projet/listTache'">
-          <span class="material-icons"> arrow_back_ios_new </span>
-          <span class="ml-2"><b>Liste des Tâches 
-          </b></span>
-        </a>
 
+    <div class="container-fluid mt-4">
+
+       <!-- Bouton retour -->
+       <div class="mb-4 mt-4">
+        <a class="btn d-flex align-items-center" [routerLink]="'/gestion-projet/listTache'"
+          style="background-color: #2D3D5E; color: white; border-radius: 50px; padding: 8px 16px;">
+          <span class="material-icons">arrow_back_ios_new</span>
+          <span class="ms-2"><b>Retour à la Liste</b></span>
+        </a>
+      </div>
+
+      <div class="card shadow-sm border-0 rounded-4">
+        
         <div class="card-body mt-4">
+          <h3 class="fw-bold mb-4" style="color: #2D3D5E;"> Nouvelle tâche</h3>
+          
           <div class="card">
             <div class="card-body">
               <form [formGroup]="tacheForm">

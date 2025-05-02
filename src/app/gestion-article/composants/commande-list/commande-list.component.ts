@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/services/auth.service';
 import { MyEncryptionService } from 'src/app/shared/services/my-encryption.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-commande-list',
@@ -42,7 +43,38 @@ export class CommandeListComponent implements OnInit {
   setSelectedCommande(commande: any): void {
     
     this.selectedCommande = commande;
+    this.openDetailsModal();
+    console.log("Commande sélectionnée :", this.selectedCommande);
+  
+    if (commande.detailsCommande?.length > 0) {
+      console.log("Détails de commande :", commande.detailsCommande);
+      commande.detailsCommande.forEach((detail: any, index: number) => {
+        console.log(`Détail ${index + 1} :`, detail);
+      });
+    } else {
+      console.warn("Aucun détail de commande !");
+    }
   }
+
+  openDetailsModal() {
+    const modalElement = document.getElementById('detailsModal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    }
+  }
+
+
+  closeDetailsModal() {
+    const modalElement = document.getElementById('detailsModal');
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide(); 
+      }
+    }
+  }
+   
   
 
   ngOnInit(): void {

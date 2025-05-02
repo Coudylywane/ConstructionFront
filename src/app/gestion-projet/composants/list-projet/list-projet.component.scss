@@ -184,3 +184,13 @@
 .project-card {
   animation: fadeIn 0.5s ease-in;
 }
+.text-dispo{
+  color: var(--Text-Colors-primary, #2D3D5E);
+  font-family: "Zen Dots";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px; /* 68.75% */
+  letter-spacing: -0.32px;
+
+}
