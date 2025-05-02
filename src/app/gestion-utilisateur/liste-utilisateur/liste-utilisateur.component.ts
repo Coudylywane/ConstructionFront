@@ -15,6 +15,7 @@ import { UtilisateurModel } from 'src/app/shared/models/utilisateur.model';
 export class ListeUtilisateurComponent implements OnInit, OnDestroy {
 
   closeResult = '';
+  userId: number | undefined;
   page = 0;
   pageSize = 5;
   totalPage = 0;
@@ -99,6 +100,36 @@ export class ListeUtilisateurComponent implements OnInit, OnDestroy {
   }
 
   onSearch() {}
+  deleteUser() {
+    if (this.userId) {
+      this.utilisateurService.deleteUser(this.userId).subscribe(
+        (response: any) => {
+          console.log('User deleted', response);
+        },
+        (error: any) => {
+          console.error('Error deleting user', error);
+        }
+      );
+    } else {
+      console.error('User ID is required');
+    }
+  }
+  confirmDelete(utilisateur: UtilisateurModel): void {
+    if (!utilisateur || !utilisateur.id) {
+      console.error('Utilisateur invalide');
+      return;
+    }
+
+    this.utilisateurService.deleteUser(utilisateur.id).subscribe({
+      next: () => {
+        this.getUsers(this.page, this.pageSize); 
+        console.log('Utilisateur supprimé avec succès');
+      },
+      error: (error) => {
+        console.error('Erreur lors de la suppression', error);
+      }
+    });
+  }
 
   getUsers(page: number = 0, size: number = 5) {
 
@@ -149,10 +180,10 @@ export class ListeUtilisateurComponent implements OnInit, OnDestroy {
     this.getUsers(this.page, this.pageSize);
   }
 
- 
 
 
- 
+
+
 
 
 }
