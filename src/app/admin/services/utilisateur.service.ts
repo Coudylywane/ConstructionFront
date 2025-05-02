@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { UtilisateurModel } from 'src/app/shared/models/utilisateur.model';
 
 @Injectable({
@@ -25,5 +25,15 @@ console.log(utilisateur);
   }
   getUtilisateurById(id: number) {
     throw new Error('Method not implemented.');
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${this._api}/user/delete/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+  private handleError(error: HttpErrorResponse) {
+    // Handle error accordingly
+    return throwError('Something went wrong; please try again later.');
   }
 }
