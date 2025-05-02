@@ -31,24 +31,44 @@ export class ListDevisComponent implements OnInit {
       return;
     }
 
-    if (!this.authService.isClient()) {
-      this.errorMessage = 'Accès réservé aux clients.';
-      this.devisList = [];
-      return;
+    if (this.authService.isClient()) {
+      // Utilisateur CLIENT : charger les devis liés à son clientId
+      this.projectService.getDevisByClientId(userId).subscribe({
+        next: (data) => {
+          this.devisList = data;
+          this.errorMessage = null;
+          console.log('Devis chargés pour client ID ' + userId + ':', data);
+        },
+        error: (err) => {
+          console.error(
+            'Erreur lors de la récupération des devis du client',
+            err
+          );
+          this.errorMessage = 'Erreur lors du chargement des devis.';
+          this.devisList = [];
+        },
+      });
+    } else {
+      // Utilisateur non-CLIENT (ex. ADMIN) : charger tous les devis
+      this.projectService.obtenirTousLesDevis().subscribe({
+        next: (data) => {
+          this.devisList = data;
+          this.errorMessage = null;
+          console.log(
+            'Tous les devis chargés pour utilisateur ID ' + userId + ':',
+            data
+          );
+        },
+        error: (err) => {
+          console.error(
+            'Erreur lors de la récupération de tous les devis',
+            err
+          );
+          this.errorMessage = 'Erreur lors du chargement des devis.';
+          this.devisList = [];
+        },
+      });
     }
-
-    this.projectService.getDevisByClientId(userId).subscribe({
-      next: (data) => {
-        this.devisList = data;
-        this.errorMessage = null;
-        console.log('Devis chargés pour client ID ' + userId + ':', data);
-      },
-      error: (err) => {
-        console.error('Erreur lors de la récupération des devis', err);
-        this.errorMessage = 'Erreur lors du chargement des devis.';
-        this.devisList = [];
-      },
-    });
   }
 
   getStatusClass(statut: string): string {
