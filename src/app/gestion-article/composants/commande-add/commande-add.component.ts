@@ -114,7 +114,7 @@ export class CommandeAddComponent {
       status: 'EN_COURS',
       detailsCommande: this.selectedArticles.map(article => ({
         article: { id: article.id },
-        fournisseur: { id: article.fournisseur.id }, // 👈 assure-toi que c’est bien un objet
+        fournisseur: { id: article.fournisseur.id }, 
         nombre: article.quantity || 1
       }))
     };

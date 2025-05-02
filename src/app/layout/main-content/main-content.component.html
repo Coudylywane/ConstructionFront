@@ -27,8 +27,8 @@
   <ul class="sidebar-nav sidebar-navs" data-coreui="navigation" id="" data-simplebar="">
 
         <!--GESTION DE PROJETS-->
-    <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN']">Construction & Projet</li>
-    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP']">
+    <li class="nav-title" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN','CLIENT']">Construction & Projet</li>
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','CLIENT']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listProjet'" href="javascript:void(0);" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
         <span class="material-icons style-icon">
@@ -43,7 +43,7 @@
           fill="#2D3D5E" />
       </svg>
     </li>
-    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN']">
+    <li class="nav-item m-nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN','CLIENT']">
       <a class="nav-link m-nav-link" [routerLink]="'/gestion-projet/listDevis'" href="javascript:void(0);" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
         <span class="material-icons style-icon">
@@ -241,7 +241,7 @@
       </a>
       <!-- Left links -->
       <ul class="navbar-nav header-nav ms-auto-nav">
-        <li class="nav-item" *appHasAnyAuthority="['SUPER_ADMIN','ADMIN']">
+        <li class="nav-item" *appHasAnyAuthority="['SUPER_ADMIN','ADMIN','CLIENT']">
           <a class="nav-link custom-link"
              [routerLink]="'/gestion-article/Dashboard'"
              routerLinkActive="active-nav-link"
@@ -249,7 +249,7 @@
             Dashboards
           </a>
         </li>
-      <li class="nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN']">
+      <li class="nav-item" *appHasAnyAuthority="['SUPER_ADMIN','S','CP','ADMIN','CLIENT']">
           <a class="nav-link custom-link"
              [routerLink]="'/gestion-projet/listProjet'"
              routerLinkActive="active-nav-link"

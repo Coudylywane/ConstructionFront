@@ -43,16 +43,17 @@
                             <span *ngIf="commande.status === 'ANNULEE'" class="badge bg-danger">Annulée</span>
                         </td>
                         <td>
-                            <div class="d-flex justify-content-center">
-                                <a class="nav-link m-nav-link"
-                                  title="Voir les détails de la commande"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#detailsModal"
-                                  (click)="selectedCommande = commande"
-                                  style="color: #2D3D5E;">
-                                    <span class="material-icons">visibility</span>
-                                </a>
-                            </div>
+                          <div class="d-flex justify-content-center">
+                            <a class="nav-link m-nav-link"
+                               title="Voir les détails de la commande"
+                               data-bs-toggle="modal"
+                               data-bs-target="#detailsModal"
+                               (click)="setSelectedCommande(commande)"
+                               style="color: #2D3D5E;">
+                              <span class="material-icons">visibility</span>
+                            </a>
+                          </div>
+                          
                         </td>
                     </tr>
                 </tbody>
@@ -108,7 +109,7 @@
                       <i class="material-icons me-2">receipt_long</i>
                       Détails de la commande #{{ selectedCommande?.numero }}
                   </h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"  aria-label="Fermer"></button>
               </div>
               <div class="modal-body" style="color: #2D3D5E;">
                   <div class="row mb-3">

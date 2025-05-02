@@ -1,18 +1,27 @@
-<div class="container-fluid">
-  <h2 class="section-title">Sélection des articles pour le devis</h2>
+<div class="container-fluid mt-4">
+ <!-- Bouton retour -->
+ <div class="mb-4 mt-4">
+  <a class="btn d-flex align-items-center" [routerLink]="'/gestion-projet/listProjet'"
+    style="background-color: #2D3D5E; color: white; border-radius: 50px; padding: 8px 16px;">
+    <span class="material-icons">arrow_back_ios_new</span>
+    <span class="ms-2"><b>Retour aux projets</b></span>
+  </a>
+</div>
+
+  <h2 class="section-title mt-4" >Sélection des Articles pour le Dévis</h2>
 
   <!-- Liste des articles disponibles -->
   <div *ngIf="articles.length > 0" class="mt-4">
-    <h3 class="section-subtitle">Articles disponibles</h3>
+    <h3 class="section-subtitle mt-4 text-center" >Articles disponibles</h3>
     <div class="table-container">
       <table class="styled-table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>#ID</th>
             <th>Nom</th>
             <th>Prix unitaire</th>
             <th>Quantité</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
