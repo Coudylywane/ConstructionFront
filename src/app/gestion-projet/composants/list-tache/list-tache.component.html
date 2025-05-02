@@ -56,4 +56,43 @@
       </table>
     </div>
   </div>
+  <!--PAGINATION-->
+
+  <div class="row mt-4 align-items-center justify-content-between">
+    <!-- Pagination boutons -->
+    <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center justify-content-md-start">
+      <nav aria-label="Navigation des pages">
+        <ul class="pagination mb-0">
+          <li class="page-item" [class.disabled]="disablePrevious || totalPage === 1">
+            <button class="page-link" (click)="precedent()" [disabled]="disablePrevious || totalPage === 1">
+               Précédent
+            </button>
+          </li>
+          <li class="page-item ms-2" [class.disabled]="disableNext || totalPage === 1">
+            <button class="page-link" (click)="suivant()" [disabled]="disableNext || totalPage === 1">
+              Suivant 
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Sélecteur nombre d’éléments -->
+    <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center justify-content-md-end mt-3 mt-md-0">
+      <div class="input-group" style="max-width: 200px;">
+        <label class="input-group-text" for="pageSize">Afficher</label>
+        <select
+          id="pageSize"
+          class="form-select"
+          (change)="onSelectedPageSize($event)"
+        >
+          <option value="2">2</option>
+          <option value="5"selected>4</option>
+          <option value="10" >10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+  </div>
 </div>

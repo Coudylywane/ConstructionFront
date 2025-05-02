@@ -48,15 +48,7 @@
               <td>{{ utilisateur?.role?.libelle }}</td>
               <td>
                 <div class="d-flex justify-content-center gap-2">
-                  <button type="button"
-                          class="btn btn-sm"
-                          style="background-color: #2D3D5E; color: white;"
-
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Modifier cette zone">
-                    <span class="material-icons">edit</span>
-                  </button>
+                
                   <a type="button"
                           class="btn btn-sm"
                           style="background-color: #996F05; color: white;"
@@ -64,7 +56,7 @@
                           data-bs-toggle="tooltip"
                           data-bs-placement="top"
                           title="Supprimer cette zone">
-                    <span class="material-icons">delete</span>
+                    <span class="material-icons">archive</span>
                   </a>
                 </div>
               </td>
@@ -75,7 +67,7 @@
         <ng-template #content let-modal>
           <div class="modal-header">
             <h5 class="modal-title" id="modal-basic-title ">
-              Souhaitez-vous supprimer cet utilisateur?
+              Souhaitez-vous archiver cet utilisateur?
             </h5>
             <button
               type="button "
