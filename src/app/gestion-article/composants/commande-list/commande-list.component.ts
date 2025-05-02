@@ -40,6 +40,7 @@ export class CommandeListComponent implements OnInit {
   ) {}
 
   setSelectedCommande(commande: any): void {
+    
     this.selectedCommande = commande;
   }
   

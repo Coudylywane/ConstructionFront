@@ -180,4 +180,8 @@ export class ProjectService {
   getProjetsByClientId(clientId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this._api}/projets/client/${clientId}`);
   }
+
+  getDevisByClientId(clientId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this._api}/devis/client/${clientId}`);
+  }
 }
