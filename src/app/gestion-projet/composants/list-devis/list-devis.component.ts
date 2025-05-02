@@ -15,6 +15,8 @@ export class ListDevisComponent {
   totalPage = 0;
   disablePrevious = true;
   disableNext = false;
+  errorMessage: string |null =null;
+
 
   constructor(
     private projectService: ProjectService,
