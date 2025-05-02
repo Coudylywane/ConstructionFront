@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/authentication/services/auth.service';
 
 @Component({
   selector: 'app-list-devis',
@@ -14,19 +16,65 @@ export class ListDevisComponent {
   disablePrevious = true;
   disableNext = false;
 
-  constructor(private projetService: ProjectService) {}
+  constructor(
+    private projectService: ProjectService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getDevis();
   }
 
   getDevis(): void {
-    this.projetService.obtenirTousLesDevis().subscribe({
-      next: (data) => (this.devisList = data),
-      error: (err) =>
-        console.error('Erreur lors de la récupération des devis', err),
-    });
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      this.errorMessage = 'Veuillez vous connecter pour voir vos devis.';
+      this.devisList = [];
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    if (this.authService.isClient()) {
+      // Utilisateur CLIENT : charger les devis liés à son clientId
+      this.projectService.getDevisByClientId(userId).subscribe({
+        next: (data) => {
+          this.devisList = data;
+          this.errorMessage = null;
+          console.log('Devis chargés pour client ID ' + userId + ':', data);
+        },
+        error: (err) => {
+          console.error(
+            'Erreur lors de la récupération des devis du client',
+            err
+          );
+          this.errorMessage = 'Erreur lors du chargement des devis.';
+          this.devisList = [];
+        },
+      });
+    } else {
+      // Utilisateur non-CLIENT (ex. ADMIN) : charger tous les devis
+      this.projectService.obtenirTousLesDevis().subscribe({
+        next: (data) => {
+          this.devisList = data;
+          this.errorMessage = null;
+          console.log(
+            'Tous les devis chargés pour utilisateur ID ' + userId + ':',
+            data
+          );
+        },
+        error: (err) => {
+          console.error(
+            'Erreur lors de la récupération de tous les devis',
+            err
+          );
+          this.errorMessage = 'Erreur lors du chargement des devis.';
+          this.devisList = [];
+        },
+      });
+    }
   }
+
   getStatusClass(statut: string): string {
     switch (statut) {
       case 'EN_ATTENTE':

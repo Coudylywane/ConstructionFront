@@ -4,10 +4,17 @@
   </div>
 
   <div class="container-fluid content-table">
-    <h2 *ngIf="devisList.length === 0" class="text-center text-dispo mt-4">
+    <!-- Afficher le message d'erreur -->
+    <div *ngIf="errorMessage" class="alert alert-danger text-center mt-4">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Message si aucun devis -->
+    <h2 *ngIf="devisList.length === 0 && !errorMessage" class="text-center text-dispo mt-4">
       Pas de devis disponible !
     </h2>
 
+    <!-- Tableau des devis -->
     <div *ngIf="devisList.length > 0" class="mt-4">
       <div class="table-container">
         <table class="styled-table">
@@ -16,6 +23,8 @@
               <th scope="col">ID</th>
               <th scope="col">Date de création</th>
               <th scope="col">Statut</th>
+              <th scope="col">Projet ID</th>
+              <th scope="col">Client ID</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -28,6 +37,8 @@
                   {{ devis.statut | statut }}
                 </span>
               </td>
+              <td>{{ devis.projet.id }}</td>
+              <td>{{ devis.projet.clientId }}</td>
               <td>
                 <div class="actions">
                   <ng-container *ngIf="devis.statut === 'VALIDER'">

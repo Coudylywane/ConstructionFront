@@ -41,6 +41,7 @@ export class CommandeListComponent implements OnInit {
   ) {}
 
   setSelectedCommande(commande: any): void {
+    
     this.selectedCommande = commande;
     this.openDetailsModal();
     console.log("Commande sélectionnée :", this.selectedCommande);
