@@ -191,11 +191,10 @@ export class FournisseurAddComponent {
       typeFournisseur.id = this.fourniFrom.value.typeFournisseurId; // Assurez-vous que l'ID est correct et non undefined
       fournisseur.typeFournisseur = typeFournisseur;
 
-      console.log(this.fourniFrom.value.categorieFournisseurId);
 
-      const categorieFournisseur: CategorieFournisseurModel = new CategorieFournisseurModel();
-      categorieFournisseur.id = this.fourniFrom.value.categorieFournisseurId;
-      fournisseur.categorieFournisseur = categorieFournisseur;
+      //const categorieFournisseur: CategorieFournisseurModel = new CategorieFournisseurModel();
+      //categorieFournisseur.id = this.fourniFrom.value.categorieFournisseurId;
+      //fournisseur.categorieFournisseur = categorieFournisseur;
 
       this.subscriptions.push(
         this.fournisseurService.addFournisseur(fournisseur).subscribe(
@@ -228,7 +227,7 @@ export class FournisseurAddComponent {
           solde: typeDetails.solde,
           totalVersement: typeDetails.totalVersement,
           typeFournisseurId: typeDetails.typeFournisseurId,
-          categorieFournisseurId: typeDetails.categorieFournisseurId,
+          //categorieFournisseurId: typeDetails.categorieFournisseurId,
         });
       });
   }
@@ -247,9 +246,9 @@ export class FournisseurAddComponent {
         typeFournisseurId: new FormControl(type.typeFournisseur, [
           Validators.required,
         ]),
-        categorieFournisseurId: new FormControl(type.categorieFournisseur, [
-          Validators.required,
-        ]),
+        //categorieFournisseurId: new FormControl(type.categorieFournisseur, [
+          //Validators.required,
+        //]),
       });
     } else {
       this.fourniFrom = this.fb.group({
@@ -259,7 +258,7 @@ export class FournisseurAddComponent {
         telephone: new FormControl(null, [Validators.required]),
         solde: new FormControl(null, [Validators.required]),
         totalVersement: new FormControl(null, [Validators.required]),
-        categorieFournisseur: new FormControl(null, [Validators.required]),
+        //categorieFournisseur: new FormControl(null, [Validators.required]),
       });
     }
   }
@@ -296,7 +295,7 @@ export class FournisseurAddComponent {
       solde: ['', Validators.required],
       totalVersement: ['', Validators.required],
       typeFournisseurId: ['', Validators.required],
-      categorieFournisseurId: ['', Validators.required],
+      //categorieFournisseurId: ['', Validators.required],
     });
 
     const fournisseurId = this.route.snapshot.params['fournisseurId']; // Récupérez l'ID de la zone depuis les paramètres de route

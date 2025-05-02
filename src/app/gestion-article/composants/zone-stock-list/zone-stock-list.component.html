@@ -18,13 +18,14 @@
         <h5 class="fw-bold mb-0" style="color: #2D3D5E;">📋 Liste des Zones</h5>
       </div>
 
-      <div class="table-responsive">
+      <div class="table-responsive mt-4">
         <table class="table table-hover align-middle text-center">
           <thead style="background-color: #2D3D5E; color: white;">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">#ID</th>
               <th scope="col">Désignation</th>
               <th scope="col">Description</th>
+              <th scope="col">Adresse</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -33,6 +34,7 @@
               <td><strong>{{ i + 1 }}</strong></td>
               <td>{{ zone.designation }}</td>
               <td>{{ zone.description }}</td>
+              <td>{{ zone.adresse }}</td>
               <td>
                 <div class="d-flex justify-content-center gap-2">
                   <button type="button"
@@ -72,12 +74,12 @@
             <ul class="pagination mb-0">
               <li class="page-item" [class.disabled]="disablePrevious || totalPage === 1">
                 <button class="page-link" (click)="precedent()" [disabled]="disablePrevious || totalPage === 1">
-                  <i class="bi bi-arrow-left-circle"></i> Précédent
+                   Précédent
                 </button>
               </li>
               <li class="page-item ms-2" [class.disabled]="disableNext || totalPage === 1">
                 <button class="page-link" (click)="suivant()" [disabled]="disableNext || totalPage === 1">
-                  Suivant <i class="bi bi-arrow-right-circle"></i>
+                  Suivant 
                 </button>
               </li>
             </ul>

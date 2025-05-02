@@ -3,4 +3,5 @@ export class ZoneStockModel {
   public designation: string | undefined;
   public description: string | undefined;
   public status: number | undefined;
+  public adresse: string  | undefined;
 }

@@ -43,12 +43,17 @@ export class TypeArticleListComponent {
     // this.loadZones();
   }
 
-  change(id?: Number) {
-    this.router.navigate([
-      '/gestion-article/typeArticle-edit/',
-      this.encryptService.encryptText(Number(id) + ''),
-    ]);
+  change(id?: number) {
+    if (id === undefined) {
+      console.warn("ID de typeArticle est undefined !");
+      return;
+    }
+  
+    const encryptedId = this.encryptService.encryptText(id.toString());
+    this.router.navigate(['/gestion-article/typeArticle-edit', encryptedId]);
   }
+  
+  
 
  
 

@@ -13,10 +13,10 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
   styleUrls: ['./article-list.component.scss'],
 })
 export class ArticleListComponent implements OnInit {
-  articles = [] as ArticleModel[];
+  articles: ArticleModel[] = [];
   newarticle: ArticleModel = new ArticleModel();
   searchForm: any;
-  subscriptions = [] as Subscription[];
+  subscriptions: Subscription[] = [];
   page = 0;
   pageSize = 4;
   totalPage = 0;
@@ -24,11 +24,9 @@ export class ArticleListComponent implements OnInit {
   disableNext = false;
   closeResult = '';
   article: any;
-  @BlockUI()
-  blockUI!: NgBlockUI;
+  @BlockUI() blockUI!: NgBlockUI;
   show: boolean = false;
   selectedArticles: any[] = [];
-
 
   constructor(
     private articleService: ArticleService,
@@ -55,70 +53,58 @@ export class ArticleListComponent implements OnInit {
     }
   }
 
-
-
-  getArticles(page = 0, size = 2) {
+  getArticles(page: number = 0, size: number = 2) {
+    this.blockUI.start('Chargement des articles...');
     this.subscriptions.push(
       this.articleService.getAllArticles(page, size).subscribe(
-        (data:any) => {
-          //console.log('Articles récupérés:', data);
-
+        (data: any) => {
+          // Mise à jour de la pagination
           this.page = data.currentPage;
           this.totalPage = data.totalPages;
           this.articles = data.article;
         },
         (error: any) => {
-          this.blockUI.stop();
-          //this.router.navigate(['/gestion-article/listArticle']);
+          console.error('Erreur lors de la récupération des articles', error);
         },
         () => {
-          this.blockUI.stop();
+          this.blockUI.stop(); // Assure-toi que le blocage soit arrêté
         }
       )
     );
   }
 
   precedent() {
-    if ((this.page - 1) >= 0) {
+    if (this.page > 0) {
       this.page--;
       this.getArticles(this.page, this.pageSize);
       this.disableNext = false;
     } else {
       this.disablePrevious = true;
     }
-
-    if (this.page == 0) {
-      this.disablePrevious = true;
-    }
   }
 
   suivant() {
-    if ((this.page + 1) < this.totalPage) {
+    if (this.page + 1 < this.totalPage) {
       this.page++;
       this.getArticles(this.page, this.pageSize);
       this.disablePrevious = false;
     } else {
       this.disableNext = true;
     }
-
-    if (this.page + 1 >= this.totalPage) {
-      this.disableNext = true;
-      this.disablePrevious = false;
-    }
   }
 
   onSelectedPageSize(event: any) {
-    this.page = 0;
-    this.pageSize = Number(event.target.value);
-    this.getArticles(this.page, this.pageSize);
+    const selectedPageSize = Number(event.target.value);
+    if (!isNaN(selectedPageSize)) {
+      this.pageSize = selectedPageSize;
+      this.page = 0; // Réinitialise la page pour la nouvelle taille
+      this.getArticles(this.page, this.pageSize);
+    }
   }
-
- 
-
 
   toggleSelection(article: any) {
     if (!article.id) return;
-  
+
     const index = this.selectedArticles.findIndex(a => a.id === article.id);
     if (index > -1) {
       this.selectedArticles.splice(index, 1);
@@ -126,13 +112,12 @@ export class ArticleListComponent implements OnInit {
       this.selectedArticles.push(article);
     }
   }
-  
-  
+
   isSelected(id?: number): boolean {
     if (!id) return false;
     return this.selectedArticles.some(a => a.id === id);
   }
-  
+
   commanderSelection() {
     console.log('Articles à commander :', this.selectedArticles);
     // Exemple : redirection ou appel d’un service
@@ -140,8 +125,4 @@ export class ArticleListComponent implements OnInit {
       state: { articles: this.selectedArticles }
     });
   }
-
 }
-
-
-

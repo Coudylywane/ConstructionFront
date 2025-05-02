@@ -1,12 +1,16 @@
+/* HOVER general */
 .m-nav-item:hover, .m-nav-link:hover, .m-nav-icon:hover {
   color: #996F05 !important;
-  background-color: rgb(247, 247, 247)!important;
+  background-color: #FFF8E1 !important;
+  transition: all 0.3s ease;
 }
 
-
+/* Par défaut (non hover) */
 .m-nav-item, .m-nav-link, .m-nav-icon {
-  color: rgb(0, 0, 0)!important;
+  color: rgb(0, 0, 0) !important;
 }
+
+/* Scrollbar wrapper */
 [data-simplebar] {
   position: relative;
   flex-direction: column;
@@ -18,62 +22,72 @@
   border-color: #D8DBE0;
   padding: 10px;
 }
-.titre
-{
+
+/* Titre */
+.titre {
   font-size: 12px;
   margin: 0;
   padding: 0;
-  margin-left:23px;
+  margin-left: 23px;
 }
-//Update////
-.sidebar-ide{
+
+/* Sidebar principale */
+.sidebar-ide {
   background-color: #ffffff !important; 
   width: 257px; 
   color: #000000;
   border-right: 1px solid var(--Borders-main, #030303);
-  
 }
-.simplebar-content{
-  border-radius: 1px solid ;
+
+/* Scrollbar interne */
+.simplebar-content {
+  border-radius: 1px solid;
   border-color: #8590A1;
 }
-.style-text{
+
+/* Texte des liens */
+.style-text {
   margin-left: 10px; 
   color: var(--Text-Colors-primary, #2D3D5E);
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 26px; /* 185.714% */
+  line-height: 26px;
 }
-.style-icon{
+
+/* Icônes */
+.style-icon {
   color: #2D3D5E;
 }
-///Update////
-.ms-auto-nav{
+
+/* Marges dynamiques */
+.ms-auto-nav {
   margin-right: auto !important;
 }
+
+/* Logo / Marque */
 .sidebar-brand {
   color: var(--Text-Colors-primary, #2D3D5E);
   font-family: "Inter Display";
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
-  line-height: 16px; 
+  line-height: 16px;
   text-align: center; 
   margin-top: 23px;
   background: #ffffff;
 }
-.sidebar-toggler{
+
+/* Bouton toggler */
+.sidebar-toggler {
   color: #000000;
   background: #ffffff;
-
-
 }
-.nav-title{
-  
+
+/* Titres des sections */
+.nav-title {
   color: var(--Text-Colors-placeholder, #8590A1);
-  //text-align: center;
   font-family: Inter;
   font-size: 15px;
   font-style: normal;
@@ -82,17 +96,33 @@
   letter-spacing: 1.44px;
   text-transform: capitalize;
 }
-.nav-item{
+
+/* Conteneur d'item */
+.nav-item {
   display: flex;
   align-items: center;
-  
-}
-.sidebar-nav .nav-link:hover {
-  
-  color: #996F05;
- 
 }
 
+/* Hover sur nav-link */
+.sidebar-nav .nav-link:hover,
+.nav-item:hover {
+  color: #996F05 !important;
+  background-color: #FFF8E1 !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Lien actif (après clic) */
+.sidebar-nav .nav-link.active,
+.nav-item.active,
+.active-nav-link {
+  background-color: #f6e7c3 !important;
+  color: #996F05 !important;
+  font-weight: 600;
+  border-left: 4px solid #996F05;
+  border-radius: 6px;
+}
+
+/* Liens personnalisés */
 .custom-link {
   border-radius: 6px;
   border: 1px solid transparent;
@@ -107,9 +137,16 @@
   border-color: #ccc;
 }
 
-.active-nav-link {
-  border: 1px solid #996f05;
+.custom-link.active {
   background-color: #f6e7c3;
-  color: #996f05;
+  color: #996F05;
+  border-color: #996F05;
   font-weight: bold;
+}
+
+/* Responsive sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
 }

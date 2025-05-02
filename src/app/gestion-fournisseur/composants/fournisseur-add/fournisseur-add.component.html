@@ -1,27 +1,25 @@
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div class="brand-logo d-flex align-items-center justify-content-between">
-        <a href="./index.html" class="text-nowrap logo-img">
-          <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
-        </a>
-      </div>
-    </aside>
-    <div class="body-wrapper">
-      <header class="app-header"></header>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+  data-sidebar-position="fixed" data-header-position="fixed">
+   
+  <div class="body-wrapper">
+    <header class="app-header"></header>
 
-      <div class="container">
-        <a class="return d-flex mt-4" [routerLink]="'/gestion-fournisseur/listFournisseur'">
-          <span class="material-icons"> arrow_back_ios_new </span>
-          <span class="ml-2"><b>Liste Type Fournisseur</b></span>
-        </a>
-        <div class="mt-4">
-          <div class="card-body">
-            <div class="card">
-              <div class="card-body">
-                <form [formGroup]="fourniFrom" (ngSubmit)="addFournisseur()">
+    <div class="container-fluid p-4">
+      <!-- Bouton retour -->
+       <div class="mb-4">
+          <a class="btn d-flex align-items-center" [routerLink]="'/gestion-fournisseur/listFournisseur'"
+          style="background-color: #2D3D5E; color: white; border-radius: 50px; padding: 8px 16px;">
+            <span class="material-icons"> arrow_back_ios_new </span>
+            <span class="ml-2"><b>Retour à la Liste</b></span>
+          </a>
+       </div>
+
+      <!-- Formulaire -->
+      <div class="card shadow-sm border-0 rounded-4">
+       
+        <div class="card-body p-4">
+          <h3 class="fw-bold mb-4" style="color: #2D3D5E;"> Nouveau Fournisseur</h3>
+          <form [formGroup]="fourniFrom" (ngSubmit)="addFournisseur()">
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Nom</label>
                     <input type="text" class="form-control" placeholder="Entrer Nom " name="nom"
@@ -94,24 +92,18 @@
                     </select>
                   </div>
 
-                  <div class="mb-3" *ngIf="categorieFournisseurs.length > 0">
-                    <label for="categorieFournisseurId" class="form-label">Categorie de Fournisseur</label>
-                    <select class="form-select" formControlName="categorieFournisseurId" required>
-                      <option value="" disabled selected>Choisir un categorie de fournisseur</option>
-                      <option *ngFor="let categorie of categorieFournisseurs" [value]="categorie.id">{{
-                        categorie.designation }}</option>
-                    </select>
-                  </div>
+                
 
                   <div class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-outline-secondary" [disabled]="!fourniFrom.valid" value="Enregistrer" />
                   </div>
-                </form>
-              </div>
-            </div>
-          </div>
+          </form>
+            
         </div>
+     
 
       </div>
+
     </div>
   </div>
+</div>

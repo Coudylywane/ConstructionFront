@@ -1,7 +1,7 @@
 <div class="container-fluid mt-4">
 
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold" style="color: #2D3D5E;">Zone de Stock</h4>
+    <h4 class="fw-bold" style="color: #2D3D5E;">Fournisseurs</h4>
     <a class="btn rounded-pill d-flex align-items-center" style="background-color: #996F05; color: white;"[routerLink]="'/gestion-fournisseur/addFournisseur'">
       <span class="material-icons me-2">add_circle_outline</span> Nouveau Fournisseur
     </a>
@@ -31,7 +31,6 @@
             <th scope="col">Total Versé</th>
             <th scope="col">Telephone</th>
             <th scope="col">Type Fournisseur</th>
-            <th scope="col">Categorie Fournisseur</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -47,7 +46,6 @@
             <td>{{ fournisseur.totalVersement}}F</td>
             <td>{{ fournisseur.telephone}}</td>
             <td>{{ fournisseur.typeFournisseur?.designation}}</td>
-            <td>{{ fournisseur.categorieFournisseur?.designation}}</td>
             <td>
               
               <div class="d-flex justify-content-center gap-2">
@@ -90,12 +88,12 @@
             <ul class="pagination mb-0">
               <li class="page-item" [class.disabled]="disablePrevious || totalPage === 1">
                 <button class="page-link" (click)="precedent()" [disabled]="disablePrevious || totalPage === 1">
-                  <i class="bi bi-arrow-left-circle"></i> Précédent
+                   Précédent
                 </button>
               </li>
               <li class="page-item ms-2" [class.disabled]="disableNext || totalPage === 1">
                 <button class="page-link" (click)="suivant()" [disabled]="disableNext || totalPage === 1">
-                  Suivant <i class="bi bi-arrow-right-circle"></i>
+                  Suivant
                 </button>
               </li>
             </ul>

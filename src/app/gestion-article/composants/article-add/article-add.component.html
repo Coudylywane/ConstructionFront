@@ -1,8 +1,5 @@
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed" style="background-color: #F9F9F9; min-height: 100vh;">
-  
-  
-
   <!-- Main Content Start -->
   <div class="body-wrapper mt-4">
     <header class="app-header"></header>
@@ -22,7 +19,12 @@
         <div class="card-body p-4">
           <h3 class="fw-bold mb-4" style="color: #2D3D5E;">Ajouter un Article</h3>
 
-          <form [formGroup]="articleForm" (ngSubmit)="addArticle()">
+          <form *ngIf="articleForm" [formGroup]="articleForm" (ngSubmit)="addArticle()">
+            <div class="">
+              <label for="designation" class="form-label fw-semibold" style="color: #2D3D5E;">Code</label>
+              <input type="text" formControlName="code" class="form-control" [readonly]="isEditing" />
+                  
+            </div>
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="designation" class="form-label fw-semibold" style="color: #2D3D5E;">Désignation</label>
@@ -31,6 +33,7 @@
                 <div *ngIf="validDesignation()" class="text-danger mt-1">
                   Veuillez remplir ce champ
                 </div>
+              
               </div>
 
               <div class="col-md-6">
@@ -119,12 +122,12 @@
                 </div>
               </div>
             </div>
-
+           
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label fw-semibold" style="color: #2D3D5E;">Zone de Stock</label>
-                <select class="form-select" formControlName="zoneStock">
-                  <option value="" disabled selected>Choisir une zone de stock</option>
+                <select class="form-select" formControlName="zoneStock" [compareWith]="compareById">
+                  <option [ngValue]="null" disabled selected>-- Sélectionner une zone de stock --</option>
                   <option *ngFor="let zone of zoneStocks" [ngValue]="zone">{{ zone.designation }}</option>
                 </select>
               </div>
@@ -132,7 +135,7 @@
               <div class="col-md-6">
                 <label class="form-label fw-semibold" style="color: #2D3D5E;">Unité de Mesure</label>
                 <select class="form-select" formControlName="uniteMesure">
-                  <option value="" disabled selected>Choisir une unité de mesure</option>
+                  <option value="" disabled selected>-- Sélectionner une unité de mesure --</option>
                   <option *ngFor="let unite of uniteMesures" [ngValue]="unite">{{ unite.abreviation }}</option>
                 </select>
               </div>
@@ -142,17 +145,19 @@
               <div class="col-md-6">
                 <label class="form-label fw-semibold" style="color: #2D3D5E;">Type d'Article</label>
                 <select class="form-select" formControlName="typeArticle">
-                  <option value="" disabled selected>Choisir un type d'article</option>
+                  <option value="" disabled selected>-- Sélectionner un type d'article --</option>
                   <option *ngFor="let type of typeArticles" [ngValue]="type">{{ type.designation }}</option>
                 </select>
               </div>
 
               <div class="col-md-6">
                 <label class="form-label fw-semibold" style="color: #2D3D5E;">Fournisseur</label>
-                <select class="form-select" formControlName="fournisseur">
-                  <option value="" disabled selected>Choisir un fournisseur</option>
-                  <option *ngFor="let fournisseur of fournisseurs" [ngValue]="fournisseur">{{ fournisseur.nom }}</option>
-                </select>
+                <select class="form-select" id="fournisseur" formControlName="fournisseur">
+                <option Value="" disabled selected>-- Sélectionner un fournisseur --</option>
+                <option *ngFor="let fournisseur of fournisseurs" [ngValue]="fournisseur">
+                   {{ fournisseur.nom }}
+                </option>
+              </select>
               </div>
             </div>
 

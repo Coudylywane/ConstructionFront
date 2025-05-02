@@ -28,7 +28,9 @@
               "src/styles.css",
               "src/assets/dist/css/style.min.css",
               "src/assets/dist/vendors/simplebar/css/simplebar.css",
-              "src/assets/dist/css/vendors/simplebar.css"
+              "src/assets/dist/css/vendors/simplebar.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+
             ],
             "scripts": [
               "src/assets/dist/vendors/@coreui/coreui/js/coreui.bundle.min.js",

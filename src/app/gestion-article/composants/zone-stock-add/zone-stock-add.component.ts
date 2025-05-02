@@ -77,18 +77,7 @@ export class ZoneStockAddComponent {
       throw invalidPipeArgumentError(DatePipe, (error as Error).message);
     }
   }
-  ///Validation des champs////////////////::::::
-
-  validDesignation() {
-    const designation = this.zoneFrom.controls['designation'];
-    return designation.touched && designation.hasError('required');
-  }
-
-  validDescription() {
-    const description = this.zoneFrom.controls['description'];
-    return description.touched && description.hasError('required');
-  }
-
+ 
   ////////////////Ajout Zone///////////////////////
 
   addZone() {
@@ -96,6 +85,7 @@ export class ZoneStockAddComponent {
       this.blockUI.start('Veuillez patienter....');
       this.zone.designation = this.zoneFrom.value.designation;
       this.zone.description = this.zoneFrom.value.description;
+      this.zone.adresse = this.zoneFrom.value.adresse;
 
       this.subscriptions.push(
         this.zoneStockService.addZone(this.zone).subscribe(
@@ -121,6 +111,7 @@ export class ZoneStockAddComponent {
       this.zoneFrom.patchValue({
         designation: zoneDetails.designation,
         description: zoneDetails.description,
+        adresse: zoneDetails.adresse,
       });
     });
   }
@@ -132,11 +123,13 @@ export class ZoneStockAddComponent {
       this.zoneFrom = this.fb.group({
         designation: new FormControl(zone.designation, [Validators.required]),
         description: new FormControl(zone.description, [Validators.required]),
+        adresse: new FormControl(zone.adresse, [Validators.required]),
       });
     } else {
       this.zoneFrom = this.fb.group({
         designation: new FormControl(null, [Validators.required]),
         description: new FormControl(null, [Validators.required]),
+        adresse: new FormControl(null, [Validators.required]),
       });
     }
   }
@@ -146,6 +139,7 @@ export class ZoneStockAddComponent {
     this.zoneFrom = this.fb.group({
       designation: ['', Validators.required],
       description: ['', Validators.required],
+      adresse: ['', Validators.required],
     });
 
     const zoneId = this.route.snapshot.params['zoneId']; // Récupérez l'ID de la zone depuis les paramètres de route
@@ -168,27 +162,7 @@ export class ZoneStockAddComponent {
       ))
     }
 
-    // const routeParam = this.route.snapshot.paramMap.get('patientId');
-    // if (routeParam) {
-    //   const patientIdFromRoute = Number(
-    //     this.encryptService.decryptText(routeParam)
-    //   );
-    //   this.subscriptions.push(
-    //     this.patientService.getPatientById(patientIdFromRoute).subscribe(
-    //       (patient) => {
-    //         this.patient = patient;
-    //       },
-    //       (error) =>
-    //         this.toastService.showErrorToast(
-    //           'Erreur',
-    //           "Ce patient n'existe pas"
-    //         ),
-    //       () => {
-    //         this.initForms(this.patient);
-    //       }
-    //     )
-    //   );
-    // }
+  
   }
 
   onSubmit() {
@@ -198,6 +172,23 @@ export class ZoneStockAddComponent {
   clear() {
     this.zoneFrom.reset();
   }
+
+///Validation des champs////////////////::::::
+
+  validDesignation() {
+    const designation = this.zoneFrom.controls['designation'];
+    return designation.touched && designation.hasError('required');
+  }
+
+  validDescription() {
+    const description = this.zoneFrom.controls['description'];
+    return description.touched && description.hasError('required');
+  }
+  validAdresse() {
+    const adresse = this.zoneFrom.controls['adresse'];
+    return adresse.touched && adresse.hasError('required');
+  }
+
 }
 
 
@@ -206,3 +197,4 @@ function invalidPipeArgumentError(DatePipe: any, message: string) {
 }
 
 
+ 

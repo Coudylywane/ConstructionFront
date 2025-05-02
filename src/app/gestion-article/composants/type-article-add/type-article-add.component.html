@@ -21,7 +21,7 @@
         <div class="card-body p-4">
           <h3 class="fw-bold mb-4" style="color: #2D3D5E;">Nouvelle Type d'Article</h3>
 
-          <form [formGroup]="typeFrom" (ngSubmit)="addType()">
+          <form [formGroup]="typeFrom" (ngSubmit)="addOrUpdateType()">
             <div class="row g-3">
               <div class="col-12">
                 <label for="designation" class="form-label fw-semibold" style="color: #2D3D5E;">Désignation</label>
@@ -45,7 +45,7 @@
                 <button type="submit" class="btn rounded-pill px-5 py-2" 
                         [disabled]="!typeFrom.valid"
                         style="background-color: #996F05; color: white; font-weight: bold;">
-                  Enregistrer
+                    {{ isEditing ? 'Modifier' : 'Enregistrer' }}
                 </button>
               </div>
             </div>

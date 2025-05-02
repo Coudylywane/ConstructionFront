@@ -39,6 +39,14 @@
                   Veuillez remplir ce champ
                 </div>
               </div>
+              <div class="col-12">
+                <label for="description" class="form-label fw-semibold" style="color: #2D3D5E;">Adresse</label>
+                <input type="text" id="description" class="form-control rounded-3" placeholder="Entrer la description"
+                  formControlName="adresse" />
+                <div *ngIf="validAdresse()" class="text-danger mt-1">
+                  Veuillez remplir ce champ
+                </div>
+              </div>
 
               <div class="col-12 d-flex justify-content-center mt-4">
                 <button type="submit" class="btn rounded-pill px-5 py-2" 
